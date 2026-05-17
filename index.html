@@ -421,8 +421,11 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
         <div class="wrow"><span class="wn" id="wn">6</span><span class="wu">أسابيع</span><span class="dn" id="dn">3</span><span class="du">أيام</span></div>
         <button class="edit-preg-btn" onclick="openModal()">✏️ تعديل عمر الحمل</button>
         <div class="bgs"><span class="bg" id="mbg">الشهر الثاني</span><span class="bg" id="tbg">الثلث الأول</span><span class="bg" id="fbg">🍓 فراولة</span></div>
-        <div class="pb"><div class="pf" id="pf" style="width:16%"></div></div>
-        <div class="pl"><span>أسبوع 1</span><span id="pcurr">أسبوع 6</span><span>أسبوع 40</span></div>
+        <div style="display:flex;align-items:center;gap:8px;position:relative;z-index:1;">
+          <div class="pb" style="flex:1;"><div class="pf" id="pf" style="width:16%"></div></div>
+          <div id="pct-label" style="font-size:11px;font-weight:700;color:#fff;white-space:nowrap;min-width:36px;text-align:left;">16%</div>
+        </div>
+        <div class="pl"><span>بداية الحمل</span><span></span><span>الولادة</span></div>
       </div>
       <div class="g3">
         <div class="ic ic1"><div class="ie">💊</div><div class="iv" id="doses-today-count">0/0</div><div class="il">جرعات اليوم</div></div>
@@ -818,8 +821,10 @@ function updateUI(){
   const w=Math.floor(totalDays/7), d=totalDays%7, dw=w+1;
   document.getElementById('wn').textContent=w;
   document.getElementById('dn').textContent=d;
-  document.getElementById('pf').style.width=Math.min(100,Math.round(totalDays/280*100))+'%';
-  document.getElementById('pcurr').textContent='أسبوع '+w;
+  const pct = Math.min(100,Math.round(totalDays/280*100));
+  document.getElementById('pf').style.width=pct+'%';
+  const pctEl = document.getElementById('pct-label');
+  if(pctEl) pctEl.textContent = pct+'%';
   document.getElementById('wlbl').textContent='الأسبوع '+(ORDS[dw-1]||dw);
   document.getElementById('disp-name').textContent=userName||'حاملة';
   const mo=Math.ceil(dw/4.3);
