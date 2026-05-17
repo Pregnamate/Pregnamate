@@ -244,6 +244,35 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .edit-med-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:60;display:none;align-items:flex-end;justify-content:center;}
 .edit-med-overlay.show{display:flex;}
 .edit-med-modal{background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;}
+ 
+/* FORUM */
+.forum-post{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:13px;margin-bottom:10px;box-shadow:0 2px 8px rgba(233,30,140,.06);}
+.forum-post-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.forum-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#1976d2);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:700;flex-shrink:0;}
+.forum-meta{flex:1;}
+.forum-username{font-size:11px;font-weight:700;color:#1a1a2e;}
+.forum-time{font-size:9px;color:#aaa;margin-top:1px;}
+.forum-week-badge{background:#fce4ec;color:#c2185b;font-size:8px;font-weight:700;padding:2px 7px;border-radius:8px;}
+.forum-content{font-size:11px;color:#333;line-height:1.7;margin-bottom:10px;}
+.forum-actions{display:flex;align-items:center;gap:8px;}
+.forum-like-btn{display:flex;align-items:center;gap:4px;background:#fce4ec;border:none;border-radius:10px;padding:4px 10px;font-size:10px;font-weight:700;color:#c2185b;cursor:pointer;font-family:'Cairo',sans-serif;}
+.forum-like-btn.liked{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;}
+.forum-comment-btn{display:flex;align-items:center;gap:4px;background:#e3f2fd;border:none;border-radius:10px;padding:4px 10px;font-size:10px;font-weight:700;color:#1565c0;cursor:pointer;font-family:'Cairo',sans-serif;}
+.forum-comments{margin-top:10px;padding-top:10px;border-top:1px dashed #fce4ec;}
+.forum-comment{background:#fdf4f9;border-radius:10px;padding:8px 10px;margin-bottom:6px;}
+.forum-comment-user{font-size:9px;font-weight:700;color:#c2185b;margin-bottom:2px;}
+.forum-comment-text{font-size:10px;color:#444;line-height:1.5;}
+.forum-comment-input{display:flex;gap:6px;margin-top:8px;}
+.forum-comment-input input{flex:1;font-size:10px;padding:7px 11px;border:1.5px solid #f8bbd0;border-radius:20px;background:#fff;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;}
+.forum-add-box{background:#fff;border:1.5px dashed #f48fb1;border-radius:18px;padding:14px;margin-bottom:14px;}
+.forum-add-title{font-size:11px;font-weight:700;color:#c2185b;margin-bottom:10px;}
+.forum-add-input{width:100%;font-size:11px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;resize:none;min-height:70px;display:block;margin-bottom:8px;}
+.forum-send-btn{background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;}
+.forum-empty{text-align:center;padding:24px;color:#aaa;font-size:11px;}
+.forum-filter{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;}
+.forum-filter::-webkit-scrollbar{display:none;}
+.ftag{padding:4px 12px;border-radius:16px;font-size:10px;font-weight:700;border:1.5px solid #f8bbd0;background:#fff;color:#c2185b;cursor:pointer;white-space:nowrap;font-family:'Cairo',sans-serif;}
+.ftag.active{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;border-color:transparent;}
 /* PROFILE */
 .profile-icon{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;flex-shrink:0;}
 .profile-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:60;display:none;align-items:flex-end;justify-content:center;}
@@ -653,12 +682,16 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
           <option value="4">4 مرات يومياً</option>
         </select>
       </div>
-      <div class="add-field" style="margin-bottom:14px;">
+      <div class="add-field" style="margin-bottom:10px;">
         <label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📊 الحالة</label>
-        <select id="edit-med-status" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;">
+        <select id="edit-med-status" onchange="toggleStopDate()" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;">
           <option value="on">مستمر ✅</option>
           <option value="off">موقوف ❌</option>
         </select>
+      </div>
+      <div class="add-field" id="stop-date-field" style="margin-bottom:14px;display:none;">
+        <label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📅 تاريخ الوقف</label>
+        <input type="date" id="edit-med-stopdate" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/>
       </div>
       <button onclick="saveEditMed()" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;">✅ حفظ التعديل</button>
       <button onclick="closeEditMed()" style="background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;">إلغاء</button>
@@ -738,6 +771,43 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
   </div>
  
  
+ 
+    <!-- FORUM -->
+    <div class="scr" id="s-forum">
+      <div style="height:14px"></div>
+      <div style="background:linear-gradient(135deg,#e91e8c,#1976d2);border-radius:18px;padding:14px;margin-bottom:14px;text-align:center;">
+        <div style="font-size:15px;font-weight:700;color:#fff;">💬 مجتمع Pregnamate</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.85);margin-top:3px;">شاركي تجربتك مع أمهات زيك 🌸</div>
+      </div>
+ 
+      <!-- Filters -->
+      <div class="forum-filter">
+        <button class="ftag active" onclick="filterForum('all',this)">🌸 الكل</button>
+        <button class="ftag" onclick="filterForum('question',this)">❓ سؤال</button>
+        <button class="ftag" onclick="filterForum('tip',this)">💡 نصيحة</button>
+        <button class="ftag" onclick="filterForum('experience',this)">📖 تجربة</button>
+        <button class="ftag" onclick="filterForum('symptom',this)">🤒 عرض</button>
+      </div>
+ 
+      <!-- Add post -->
+      <div class="forum-add-box">
+        <div class="forum-add-title">✍️ شاركي مع المجتمع</div>
+        <select id="forum-type" style="width:100%;font-size:10px;padding:7px 11px;border:1.5px solid #f8bbd0;border-radius:10px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;margin-bottom:8px;">
+          <option value="question">❓ سؤال</option>
+          <option value="tip">💡 نصيحة</option>
+          <option value="experience">📖 تجربة</option>
+          <option value="symptom">🤒 عرض</option>
+        </select>
+        <textarea class="forum-add-input" id="forum-input" placeholder="اكتبي هنا... (هويتك هتبقى مخفية)"></textarea>
+        <button class="forum-send-btn" onclick="addForumPost()">📤 نشر</button>
+      </div>
+ 
+      <!-- Posts list -->
+      <div id="forum-posts">
+        <div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>
+      </div>
+    </div>
+ 
   <div class="bnav-wrap">
     <div class="bnav-drag"></div>
     <div class="bnav">
@@ -747,6 +817,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
     <button class="nb" onclick="go('appts',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>مواعيد</button>
     <button class="nb" onclick="go('track',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>الوزن</button>
     <button class="nb" id="nb-syms" onclick="go('syms',this,true)"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>أعراض</button>
+    <button class="nb" onclick="go('forum',this)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="14" x2="13" y2="14"/></svg>مجتمع</button>
     <button class="nb" id="nb-ai" onclick="go('ai',this)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>AI</button>
     </div>
   </div>
@@ -897,6 +968,15 @@ function addMed(){
 }
  
  
+function editStopDate(id){
+  const m=customMeds.find(x=>x.id===id);
+  if(!m)return;
+  document.getElementById('emd-title').textContent='تعديل تاريخ الوقف: '+m.name;
+  document.getElementById('emd-input').value=m.stopDate||new Date().toISOString().split('T')[0];
+  document.getElementById('emd-id').value='stop_'+id;
+  document.getElementById('emd-overlay').style.display='flex';
+}
+ 
 function editMedDate(id){
   const m=customMeds.find(x=>x.id===id);
   if(!m)return;
@@ -906,11 +986,20 @@ function editMedDate(id){
   document.getElementById('emd-overlay').style.display='flex';
 }
 function saveEditMedDate(){
-  const id=parseInt(document.getElementById('emd-id').value);
+  const rawId=document.getElementById('emd-id').value;
   const date=document.getElementById('emd-input').value;
   if(!date){alert('اختاري تاريخ');return;}
+  
+  const isStop = rawId.toString().startsWith('stop_');
+  const id = parseInt(rawId.toString().replace('stop_',''));
   const m=customMeds.find(x=>x.id===id);
-  if(m){m.startDate=date; save('customMeds',customMeds); renderMeds(); showToast();}
+  if(m){
+    if(isStop){ m.stopDate=date; }
+    else { m.startDate=date; }
+    save('customMeds',customMeds);
+    renderMeds();
+    showToast();
+  }
   document.getElementById('emd-overlay').style.display='none';
 }
 function closeEditMedDate(){document.getElementById('emd-overlay').style.display='none';}
@@ -926,7 +1015,16 @@ function clearAllMeds(){
 function deleteMed(id){ customMeds=customMeds.filter(m=>m.id!==id); save('customMeds',customMeds); renderMeds(); showToast(); }
 function toggleMedStatus(id){
   const m=customMeds.find(m=>m.id===id);
-  if(m){ m.status=m.status==='on'?'off':'on'; save('customMeds',customMeds); renderMeds(); showToast(); }
+  if(m){
+    m.status=m.status==='on'?'off':'on';
+    if(m.status==='off' && !m.stopDate){
+      m.stopDate = new Date().toISOString().split('T')[0];
+    }
+    if(m.status==='on') m.stopDate='';
+    save('customMeds',customMeds);
+    renderMeds();
+    showToast();
+  }
 }
 function renderMeds(){
   renderActiveMeds();
@@ -939,9 +1037,9 @@ function renderMeds(){
   }
   const MN=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
   function fmtD(d){ if(!d)return ''; const p=d.split('-'); return p[2]+' '+MN[parseInt(p[1])-1]+' '+p[0]; }
-  function getDays(d){ if(!d)return 0; return Math.max(0,Math.floor((new Date()-new Date(d))/86400000)); }
+  function getDays(d, stopD){ if(!d)return 0; const end = stopD ? new Date(stopD) : new Date(); return Math.max(0,Math.floor((end-new Date(d))/86400000)); }
   el.innerHTML=customMeds.map(m=>{
-    const days=getDays(m.startDate);
+    const days=getDays(m.startDate, m.stopDate);
     const doses=days*(m.timesPerDay||1);
     const isOn=m.status==='on';
     return '<div class="mc '+(isOn?'':'gray-card')+'" style="flex-direction:column;align-items:stretch;gap:0;padding:12px;">'+
@@ -952,9 +1050,10 @@ function renderMeds(){
           (m.dose?'<div class="mds">'+m.dose+'</div>':'')+
           (m.startDate?'<div style="display:flex;align-items:center;gap:5px;margin-top:2px;">'+
           '<div class="mds" style="color:#e91e8c;font-size:9px;font-weight:600;">📅 بتاخديه من '+fmtD(m.startDate)+'</div>'+
-          '<button onclick="editMedDate('+m.id+')" style="font-size:8px;color:#1976d2;background:#e3f2fd;border:1px solid #90caf9;border-radius:6px;padding:1px 6px;cursor:pointer;font-family:Cairo,sans-serif;">تعديل</button>'+
+ 
+          (m.stopDate&&m.status==='off'?'<div class="mds" style="color:#e57373;font-size:9px;font-weight:600;margin-top:2px;">🛑 وقفت في '+fmtD(m.stopDate)+'</div>':'')+
           '</div>'
-        :'<div style="margin-top:2px;"><button onclick="editMedDate('+m.id+')" style="font-size:9px;color:#e91e8c;background:#fce4ec;border:1px solid #f48fb1;border-radius:8px;padding:3px 9px;cursor:pointer;font-family:Cairo,sans-serif;">📅 أضيفي تاريخ البداية</button></div>')+
+        :'')+
         '</div>'+
         '<div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;flex-shrink:0;">'+
           '<span class="mbdg '+(isOn?'mb-on':'mb-off')+'" style="cursor:pointer;white-space:nowrap;" onclick="toggleMedStatus('+m.id+')">'+
@@ -1013,6 +1112,7 @@ function go(n,btn,isPurple=false){
   btn.classList.add('on'); if(isPurple)btn.classList.add('purple');
   document.querySelector('.inner').scrollTop=0;
   if(n==='track') setTimeout(()=>{ renderTracking(); },100);
+  if(n==='forum') { loadForumPosts(); }
 }
  
 // ===== APPOINTMENTS =====
@@ -1308,7 +1408,16 @@ function openEditMed(id){
   document.getElementById('edit-med-date').value = m.startDate || '';
   document.getElementById('edit-med-times').value = m.timesPerDay || 1;
   document.getElementById('edit-med-status').value = m.status || 'on';
+  document.getElementById('edit-med-stopdate').value = m.stopDate || '';
+  document.getElementById('stop-date-field').style.display = m.status === 'off' ? 'block' : 'none';
   document.getElementById('edit-med-overlay').classList.add('show');
+}
+function toggleStopDate(){
+  const isOff = document.getElementById('edit-med-status').value === 'off';
+  document.getElementById('stop-date-field').style.display = isOff ? 'block' : 'none';
+  if(isOff && !document.getElementById('edit-med-stopdate').value){
+    document.getElementById('edit-med-stopdate').value = new Date().toISOString().split('T')[0];
+  }
 }
 function closeEditMed(){
   document.getElementById('edit-med-overlay').classList.remove('show');
@@ -1322,11 +1431,190 @@ function saveEditMed(){
   m.startDate = document.getElementById('edit-med-date').value;
   m.timesPerDay = parseInt(document.getElementById('edit-med-times').value) || 1;
   m.status = document.getElementById('edit-med-status').value;
+  m.stopDate = m.status === 'off' ? document.getElementById('edit-med-stopdate').value : '';
   save('customMeds', customMeds);
   saveToCloud();
   renderMeds();
   closeEditMed();
   showToast();
+}
+ 
+ 
+// ===== FORUM =====
+let forumPosts = [];
+let forumFilter = 'all';
+let forumUID = 0;
+ 
+const TYPE_LABELS = {question:'❓ سؤال', tip:'💡 نصيحة', experience:'📖 تجربة', symptom:'🤒 عرض'};
+const MONTHS_F = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+ 
+function getDisplayName(){
+  // Anonymous but consistent per user
+  if(userName) return userName.charAt(0).toUpperCase() + '***';
+  return 'أم 🌸';
+}
+ 
+function getWeekLabel(){
+  const w = Math.floor(totalDays/7);
+  return 'الأسبوع ' + (w||'?');
+}
+ 
+function fmtForumTime(ts){
+  const d = new Date(ts);
+  const now = new Date();
+  const diff = Math.floor((now-d)/60000);
+  if(diff < 1) return 'الآن';
+  if(diff < 60) return 'منذ ' + diff + ' دقيقة';
+  if(diff < 1440) return 'منذ ' + Math.floor(diff/60) + ' ساعة';
+  return d.getDate() + ' ' + MONTHS_F[d.getMonth()];
+}
+ 
+function filterForum(type, btn){
+  forumFilter = type;
+  document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderForumPosts();
+}
+ 
+async function loadForumPosts(){
+  if(!db) return;
+  try {
+    const snap = await db.collection('forum').orderBy('ts','desc').limit(50).get();
+    forumPosts = snap.docs.map(d=>({id:d.id, ...d.data()}));
+    renderForumPosts();
+  } catch(e){ console.log('Forum load error:', e); }
+}
+ 
+async function addForumPost(){
+  const text = document.getElementById('forum-input').value.trim();
+  const type = document.getElementById('forum-type').value;
+  if(!text){ return; }
+  if(text.length < 5){ alert('اكتبي أكثر من 5 حروف'); return; }
+  
+  const post = {
+    text, type,
+    author: getDisplayName(),
+    week: getWeekLabel(),
+    ts: Date.now(),
+    likes: 0,
+    likedBy: [],
+    comments: [],
+    uid: currentUser ? currentUser.uid : 'anon'
+  };
+ 
+  try {
+    if(db){
+      const ref = await db.collection('forum').add(post);
+      post.id = ref.id;
+    } else {
+      post.id = 'local_' + (forumUID++);
+    }
+    forumPosts.unshift(post);
+    document.getElementById('forum-input').value = '';
+    renderForumPosts();
+  } catch(e){
+    // Local fallback
+    post.id = 'local_' + (forumUID++);
+    forumPosts.unshift(post);
+    document.getElementById('forum-input').value = '';
+    renderForumPosts();
+  }
+}
+ 
+async function likePost(id){
+  const post = forumPosts.find(p=>p.id===id);
+  if(!post) return;
+  const uid = currentUser ? currentUser.uid : 'anon';
+  const liked = post.likedBy && post.likedBy.includes(uid);
+  if(liked){
+    post.likes = Math.max(0,(post.likes||0)-1);
+    post.likedBy = (post.likedBy||[]).filter(u=>u!==uid);
+  } else {
+    post.likes = (post.likes||0)+1;
+    post.likedBy = [...(post.likedBy||[]), uid];
+  }
+  if(db && !id.startsWith('local_')){
+    db.collection('forum').doc(id).update({likes:post.likes, likedBy:post.likedBy}).catch(e=>console.log(e));
+  }
+  renderForumPosts();
+}
+ 
+function toggleComments(id){
+  const el = document.getElementById('comments_'+id);
+  if(el) el.style.display = el.style.display==='none'?'block':'none';
+}
+ 
+async function addComment(postId){
+  const inp = document.getElementById('cinp_'+postId);
+  const text = inp ? inp.value.trim() : '';
+  if(!text) return;
+  const post = forumPosts.find(p=>p.id===postId);
+  if(!post) return;
+  const comment = {text, author: getDisplayName(), ts: Date.now()};
+  post.comments = [...(post.comments||[]), comment];
+  inp.value = '';
+  if(db && !postId.startsWith('local_')){
+    db.collection('forum').doc(postId).update({comments: post.comments}).catch(e=>console.log(e));
+  }
+  renderForumPosts();
+  // Re-open comments
+  setTimeout(()=>{
+    const el = document.getElementById('comments_'+postId);
+    if(el) el.style.display = 'block';
+  }, 50);
+}
+ 
+function renderForumPosts(){
+  const el = document.getElementById('forum-posts');
+  if(!el) return;
+  const filtered = forumFilter==='all' ? forumPosts : forumPosts.filter(p=>p.type===forumFilter);
+  if(!filtered.length){
+    el.innerHTML = '<div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>';
+    return;
+  }
+  const uid = currentUser ? currentUser.uid : 'anon';
+  el.innerHTML = filtered.map(p=>{
+    const liked = p.likedBy && p.likedBy.includes(uid);
+    const comments = p.comments || [];
+    return '<div class="forum-post">'+
+      '<div class="forum-post-header">'+
+        '<div class="forum-avatar">'+p.author.charAt(0)+'</div>'+
+        '<div class="forum-meta">'+
+          '<div class="forum-username">'+p.author+'</div>'+
+          '<div style="display:flex;gap:5px;align-items:center;margin-top:2px;">'+
+            '<span class="forum-week-badge">'+p.week+'</span>'+
+            '<span class="forum-time">'+fmtForumTime(p.ts)+'</span>'+
+          '</div>'+
+        '</div>'+
+        '<span style="font-size:9px;background:#fce4ec;color:#c2185b;padding:2px 7px;border-radius:8px;font-weight:700;">'+TYPE_LABELS[p.type]+'</span>'+
+      '</div>'+
+      '<div class="forum-content">'+p.text+'</div>'+
+      '<div class="forum-actions">'+
+        '<button class="forum-like-btn '+(liked?'liked':'')+'" data-pid="'+p.id+'" onclick="likePost(this.dataset.pid)">'+
+          '❤️ '+(p.likes||0)+
+        '</button>'+
+        '<button class="forum-comment-btn" data-pid="'+p.id+'" onclick="toggleComments(this.dataset.pid)">'+
+          '💬 '+(comments.length)+' تعليق'+
+        '</button>'+
+      '</div>'+
+      '<div id="comments_'+p.id+'" style="display:none;">'+
+        '<div class="forum-comments">'+
+          (comments.length?comments.map(cm=>
+            '<div class="forum-comment">'+
+              '<div class="forum-comment-user">'+cm.author+'</div>'+
+              '<div class="forum-comment-text">'+cm.text+'</div>'+
+            '</div>'
+          ).join(''):'<div style="font-size:10px;color:#aaa;text-align:center;padding:6px;">لا توجد تعليقات بعد</div>')+
+        '</div>'+
+        '<div class="forum-comment-input">'+
+          '<button data-pid="'+p.id+'" onclick="addComment(this.dataset.pid)" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">'+
+            '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>'+
+          '</button>'+
+          '<input id="cinp_'+p.id+'" placeholder="اكتبي تعليقك..." data-pid="'+p.id+'" onkeydown="if(event.keyCode===13)addComment(this.dataset.pid)"/>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
 }
  
 // ===== PROFILE =====
