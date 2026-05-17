@@ -1171,7 +1171,12 @@ function authErrMsg(code){
     'auth/invalid-credential':'إيميل أو كلمة سر غلط',
     'auth/too-many-requests':'محاولات كتير — استنى شوية',
   };
-  return msgs[code]||'حصل خطأ ('+code+')';
+  const defaultMsgs = {
+    'auth/configuration-not-found': 'تأكد من تفعيل Email/Password في Firebase Authentication',
+    'auth/network-request-failed': 'مشكلة في الإنترنت',
+    'auth/operation-not-allowed': 'Email/Password مش مفعل في Firebase',
+  };
+  return msgs[code] || defaultMsgs[code] || 'خطأ: '+code;
 }
 
 function logOut(){
