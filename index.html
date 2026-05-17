@@ -11,7 +11,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .phone{width:360px;height:740px;background:#fdf4f9;border-radius:44px;overflow:hidden;position:relative;border:8px solid #1a1a2e;box-shadow:0 0 0 1px #333,0 50px 120px rgba(0,0,0,.8);}
 .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:26px;background:#1a1a2e;border-radius:0 0 16px 16px;z-index:20;}
 .sbar{position:absolute;top:6px;left:0;right:0;display:flex;justify-content:space-between;padding:0 20px;font-size:10px;font-weight:700;z-index:19;color:#fff;}
-.inner{position:absolute;top:36px;left:0;right:0;bottom:64px;overflow-y:auto;direction:rtl;background:#fdf4f9;}
+.inner{position:absolute;top:36px;left:0;right:0;bottom:82px;overflow-y:auto;direction:rtl;background:#fdf4f9;}
 .inner::-webkit-scrollbar{display:none;}
 .scr{display:none;padding:0 13px 16px;}
 .scr.act{display:block;}
@@ -193,13 +193,17 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .modal-save{background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:11px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;}
 .modal-cancel{background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;}
  
-.bnav{position:absolute;bottom:0;left:0;right:0;height:64px;background:#fff;border-top:2px solid #fce4ec;display:flex;overflow-x:auto;box-shadow:0 -4px 20px rgba(233,30,140,.1);}.bnav::-webkit-scrollbar{display:none;}
-.nb{flex:0 0 60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;background:none;border:none;font-size:7px;font-weight:700;color:#ccc;font-family:'Cairo',sans-serif;transition:color .2s;}
+.bnav-wrap{position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid #fce4ec;box-shadow:0 -4px 20px rgba(233,30,140,.1);}
+.bnav-drag{width:36px;height:4px;background:#e0e0e0;border-radius:2px;margin:6px auto 0;}
+.bnav{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding:6px 4px 10px;gap:2px;}
+.bnav::-webkit-scrollbar{display:none;}
+.nb{flex:0 0 68px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;background:none;border:none;font-size:9px;font-weight:700;color:#bbb;font-family:'Cairo',sans-serif;transition:all .2s;padding:4px 6px;border-radius:14px;}
 .nb.on{color:#e91e8c;}
 .nb.on svg{stroke:#e91e8c;}
 .nb.on.purple{color:#9c27b0;}
 .nb.on.purple svg{stroke:#9c27b0;}
-.nb svg{width:18px;height:18px;stroke-width:2.2;stroke:#ccc;fill:none;}
+.nb svg{width:24px;height:24px;stroke-width:2;stroke:#bbb;fill:none;transition:all .2s;}
+.nb.on{color:#e91e8c;background:#fce4ec;}.nb.on svg{stroke:#e91e8c;}.nb.on.purple{color:#9c27b0;background:#f3e5f5;}.nb.on.purple svg{stroke:#9c27b0;}
  
  
 /* DOSE TRACKING */
@@ -233,6 +237,62 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .auth-btn{background:#fff;border:none;border-radius:14px;padding:13px;font-size:13px;font-weight:700;color:#e91e8c;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-top:4px;}
 .auth-err{font-size:10px;color:#ffcdd2;text-align:center;margin-top:8px;min-height:16px;font-weight:600;}
 .auth-loading{display:none;text-align:center;color:#fff;font-size:12px;margin-top:8px;}
+ 
+ 
+ 
+/* EDIT MED MODAL */
+.edit-med-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:60;display:none;align-items:flex-end;justify-content:center;}
+.edit-med-overlay.show{display:flex;}
+.edit-med-modal{background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;}
+/* PROFILE */
+.profile-icon{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;flex-shrink:0;}
+.profile-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:60;display:none;align-items:flex-end;justify-content:center;}
+.profile-overlay.show{display:flex;}
+.profile-modal{background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;max-height:85%;overflow-y:auto;}
+.profile-modal::-webkit-scrollbar{display:none;}
+.profile-avatar{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#1976d2);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 10px;}
+.profile-name-big{font-size:18px;font-weight:700;color:#1a1a2e;text-align:center;margin-bottom:4px;}
+.profile-email-sm{font-size:11px;color:#aaa;text-align:center;margin-bottom:16px;}
+.profile-field{margin-bottom:12px;}
+.profile-field label{font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;}
+.profile-field input{width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;}
+.profile-field input:focus{border-color:#e91e8c;}
+.profile-save-btn{background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-top:6px;}
+.profile-cancel-btn{background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:6px;margin-top:4px;}
+/* REMINDERS */
+.reminder-section{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:13px;margin-bottom:12px;}
+.reminder-title{font-size:11px;font-weight:700;color:#c2185b;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
+.notif-btn{font-size:10px;font-weight:700;padding:5px 12px;border-radius:10px;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
+.notif-on{background:#e8f5e9;color:#2e7d32;}
+.notif-off{background:#fce4ec;color:#c2185b;}
+.reminder-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #fce4ec;}
+.reminder-row:last-child{border-bottom:none;}
+.reminder-med-name{font-size:11px;font-weight:700;color:#1a1a2e;flex:1;}
+.reminder-times{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;}
+.time-chip{display:flex;align-items:center;gap:4px;background:#fce4ec;border:1px solid #f48fb1;border-radius:10px;padding:3px 8px;font-size:10px;font-weight:700;color:#c2185b;cursor:pointer;}
+.time-chip.active{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;border-color:transparent;}
+.add-time-btn{background:#e3f2fd;border:1px solid #90caf9;border-radius:10px;padding:3px 8px;font-size:10px;font-weight:700;color:#1565c0;cursor:pointer;font-family:'Cairo',sans-serif;}
+ 
+/* AI CHAT */
+.ai-screen{display:flex;flex-direction:column;height:100%;}
+.ai-header{background:linear-gradient(135deg,#e91e8c,#1976d2);padding:14px;margin:0 -13px;border-radius:0 0 20px 20px;text-align:center;margin-bottom:12px;}
+.ai-header-title{font-size:15px;font-weight:700;color:#fff;}
+.ai-header-sub{font-size:10px;color:rgba(255,255,255,.8);margin-top:2px;}
+.ai-suggestions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+.ai-sug{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:5px 11px;font-size:10px;font-weight:600;color:#c2185b;cursor:pointer;font-family:'Cairo',sans-serif;}
+.ai-sug:hover{background:#fce4ec;}
+.ai-messages{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:10px;padding-bottom:4px;}
+.ai-messages::-webkit-scrollbar{display:none;}
+.ai-msg{max-width:85%;padding:10px 13px;border-radius:16px;font-size:11px;line-height:1.6;}
+.ai-msg-user{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;align-self:flex-start;border-radius:16px 16px 4px 16px;}
+.ai-msg-bot{background:#fff;border:1.5px solid #f8bbd0;color:#1a1a2e;align-self:flex-end;border-radius:16px 16px 16px 4px;}
+.ai-msg-bot.loading{color:#aaa;font-style:italic;}
+.ai-input-row{display:flex;gap:7px;align-items:center;padding:8px 0;}
+.ai-input{flex:1;font-size:11px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:20px;background:#fff;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;}
+.ai-input:focus{border-color:#e91e8c;}
+.ai-send-btn{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.ai-send-btn svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.5;}
+.ai-disclaimer{font-size:9px;color:#aaa;text-align:center;margin-bottom:6px;}
 /* TRACKING */
 .seg{display:flex;background:#f0e6f0;border-radius:14px;padding:3px;margin-bottom:14px;}
 .seg-btn{flex:1;padding:7px 4px;border-radius:11px;font-size:10px;font-weight:700;border:none;background:transparent;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;}
@@ -270,6 +330,14 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <!-- PWA -->
+  <meta name="theme-color" content="#e91e8c"/>
+  <meta name="mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+  <meta name="apple-mobile-web-app-title" content="Pregnamate"/>
+  <link rel="manifest" href="manifest.json"/>
+  <link rel="apple-touch-icon" href="icon.png"/>
 </head>
 <body>
 <div class="phone">
@@ -337,7 +405,18 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
     <!-- HOME -->
     <div class="scr act" id="s-home">
       <div class="hdr">
-        <div class="htop"><div><div class="greet">أهلاً بكِ 🌸</div><div class="uname" id="disp-name">رباب</div></div><div style="display:flex;gap:6px;align-items:center;"><div class="chip" id="due-chip">📅 —</div><button onclick="logOut()" style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:4px 8px;font-size:9px;color:#fff;cursor:pointer;font-family:Cairo,sans-serif;">خروج</button></div></div>
+        <div class="htop">
+          <div>
+            <div class="greet">أهلاً بكِ 🌸</div>
+            <div class="uname" id="disp-name">رباب</div>
+          </div>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <div class="chip" id="today-chip">📅 —</div>
+            <div class="profile-icon" onclick="openProfile()">👤</div>
+            <button onclick="logOut()" style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:4px 8px;font-size:9px;color:#fff;cursor:pointer;font-family:Cairo,sans-serif;">خروج</button>
+          </div>
+        </div>
+        <div class="chip" id="due-chip" style="display:none;">🍼 —</div>
         <div class="wlbl" id="wlbl">الأسبوع السابع</div>
         <div class="wrow"><span class="wn" id="wn">6</span><span class="wu">أسابيع</span><span class="dn" id="dn">3</span><span class="du">أيام</span></div>
         <button class="edit-preg-btn" onclick="openModal()">✏️ تعديل عمر الحمل</button>
@@ -369,6 +448,15 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
       <div class="meds-list" id="custom-meds-list"></div>
       <!-- DAILY DOSE LOG -->
       <div id="daily-doses-section" style="margin-bottom:14px;"></div>
+ 
+      <!-- REMINDERS -->
+      <div class="reminder-section">
+        <div class="reminder-title">
+          <span>🔔 تنبيهات الأدوية</span>
+          <button class="notif-btn notif-off" id="notif-toggle-btn" onclick="toggleNotifications()">تفعيل التنبيهات</button>
+        </div>
+        <div id="reminder-list"><div style="font-size:11px;color:#aaa;text-align:center;padding:8px;">فعّل التنبيهات لإضافة مواعيد الجرعات</div></div>
+      </div>
  
       <div class="add-section" style="border-color:#f48fb1;">
         <div class="add-title">➕ أضيفي دواء جديد</div>
@@ -533,6 +621,77 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
       <button class="modal-cancel" onclick="closeModal()">إلغاء</button>
     </div>
   </div>
+ 
+ 
+  <!-- EDIT MED MODAL -->
+  <div class="edit-med-overlay" id="edit-med-overlay" onclick="if(event.target===this)closeEditMed()">
+    <div class="edit-med-modal">
+      <div style="font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:4px;">✏️ تعديل الدواء</div>
+      <div style="font-size:10px;color:#888;margin-bottom:16px;">عدّل بيانات الدواء</div>
+      <input type="hidden" id="edit-med-id"/>
+      <div class="add-field" style="margin-bottom:10px;">
+        <label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">💊 اسم الدواء</label>
+        <input type="text" id="edit-med-name" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;"/>
+      </div>
+      <div class="add-field" style="margin-bottom:10px;">
+        <label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">🕐 طريقة الاستخدام</label>
+        <input type="text" id="edit-med-dose" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;"/>
+      </div>
+      <div class="add-field" style="margin-bottom:10px;">
+        <label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📅 تاريخ البداية</label>
+        <input type="date" id="edit-med-date" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/>
+      </div>
+      <div class="add-field" style="margin-bottom:10px;">
+        <label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">🔢 عدد الجرعات يومياً</label>
+        <select id="edit-med-times" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;">
+          <option value="1">1 مرة يومياً</option>
+          <option value="2">2 مرات يومياً</option>
+          <option value="3">3 مرات يومياً</option>
+          <option value="4">4 مرات يومياً</option>
+        </select>
+      </div>
+      <div class="add-field" style="margin-bottom:14px;">
+        <label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📊 الحالة</label>
+        <select id="edit-med-status" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;">
+          <option value="on">مستمر ✅</option>
+          <option value="off">موقوف ❌</option>
+        </select>
+      </div>
+      <button onclick="saveEditMed()" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;">✅ حفظ التعديل</button>
+      <button onclick="closeEditMed()" style="background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;">إلغاء</button>
+    </div>
+  </div>
+ 
+  <!-- PROFILE MODAL -->
+  <div class="profile-overlay" id="profile-overlay" onclick="if(event.target===this)closeProfile()">
+    <div class="profile-modal">
+      <div class="profile-avatar" id="profile-avatar">👤</div>
+      <div class="profile-name-big" id="profile-name-big">—</div>
+      <div class="profile-email-sm" id="profile-email-sm"></div>
+ 
+      <div class="profile-field">
+        <label>👤 الاسم</label>
+        <input type="text" id="prof-name" placeholder="اسمك"/>
+      </div>
+      <div class="profile-field">
+        <label>🎂 تاريخ الميلاد</label>
+        <input type="date" id="prof-dob" style="direction:ltr;"/>
+      </div>
+      <div class="profile-field">
+        <label>📱 رقم الموبايل</label>
+        <input type="tel" id="prof-phone" placeholder="01xxxxxxxxx" style="direction:ltr;"/>
+      </div>
+      <div class="profile-field">
+        <label>📧 الإيميل</label>
+        <input type="email" id="prof-email" placeholder="example@email.com" style="direction:ltr;"/>
+      </div>
+ 
+      <div id="prof-err" style="display:none;color:#e91e8c;font-size:10px;font-weight:700;text-align:center;margin-bottom:8px;padding:8px;background:#fce4ec;border-radius:10px;"></div>
+      <button class="profile-save-btn" onclick="saveProfile()">✅ حفظ</button>
+      <button class="profile-cancel-btn" onclick="closeProfile()">إلغاء</button>
+    </div>
+  </div>
+ 
   <!-- EDIT MED DATE MODAL -->
   <div id="emd-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,0.5);z-index:60;display:none;align-items:flex-end;justify-content:center;" onclick="if(event.target===this)closeEditMedDate()">
     <div style="background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 28px;width:100%;">
@@ -546,16 +705,47 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
       <button onclick="saveEditMedDate()" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;">✅ حفظ التاريخ</button>
       <button onclick="closeEditMedDate()" style="background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;">إلغاء</button>
     </div>
+ 
+    <!-- AI CHAT -->
+    <div class="scr" id="s-ai">
+      <div style="height:14px"></div>
+      <div class="ai-header">
+        <div class="ai-header-title">🤖 Pregnamate AI</div>
+        <div class="ai-header-sub">مساعدك الذكي المتخصص في الحمل</div>
+      </div>
+      <div class="ai-suggestions">
+        <div class="ai-sug" onclick="askAI('الغثيان في الحمل — ازاي أتعامل معاه؟')">🤢 الغثيان</div>
+        <div class="ai-sug" onclick="askAI('إيه الأكل المناسب في الثلث الأول؟')">🥗 تغذية</div>
+        <div class="ai-sug" onclick="askAI('إمتى لازم أروح للدكتورة فوراً؟')">⚠️ تحذيرات</div>
+        <div class="ai-sug" onclick="askAI('إيه التحاليل المهمة في الثلث الثاني؟')">🔬 تحاليل</div>
+        <div class="ai-sug" onclick="askAI('الرياضة المسموحة أثناء الحمل؟')">🏃 رياضة</div>
+        <div class="ai-sug" onclick="askAI('ازاي أخفف ألم الظهر في الحمل؟')">😣 ألم ظهر</div>
+      </div>
+      <div class="ai-disclaimer">⚕️ المعلومات للتوعية فقط — استشيري طبيبتك دائماً</div>
+      <div class="ai-messages" id="ai-messages">
+        <div class="ai-msg ai-msg-bot">أهلاً! 🌸 أنا Pregnamate AI — مساعدك الذكي المتخصص في الحمل. اسأليني أي سؤال عن حملك!</div>
+      </div>
+      <div class="ai-input-row">
+        <div class="ai-send-btn" onclick="sendAIMsg()">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </div>
+        <input class="ai-input" id="ai-input" placeholder="اسأليني أي سؤال عن حملك..." onkeydown="if(event.key==='Enter')sendAIMsg()"/>
+      </div>
+    </div>
   </div>
  
  
-  <div class="bnav">
+  <div class="bnav-wrap">
+    <div class="bnav-drag"></div>
+    <div class="bnav">
     <button class="nb on" onclick="go('home',this)"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg>الرئيسية</button>
     <button class="nb" onclick="go('meds',this)"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M4 6h16v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><line x1="12" y1="10" x2="12" y2="16"/><line x1="9" y1="13" x2="15" y2="13"/></svg>الأدوية</button>
     <button class="nb" onclick="go('info',this)"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>معلومات</button>
     <button class="nb" onclick="go('appts',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>مواعيد</button>
     <button class="nb" onclick="go('track',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>الوزن</button>
     <button class="nb" id="nb-syms" onclick="go('syms',this,true)"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>أعراض</button>
+    <button class="nb" id="nb-ai" onclick="go('ai',this)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>AI</button>
+    </div>
   </div>
 </div>
  
@@ -604,7 +794,6 @@ function startApp(){
   save('userName', userName);
   save('totalDays', totalDays);
   saveToCloud();
-  saveToCloud();
   document.getElementById('onboard').style.display='none';
   initApp();
 }
@@ -615,6 +804,7 @@ function initApp(){
   renderHomeNotes();
   renderMeds();
   renderActiveMeds();
+  if(typeof Notification !== 'undefined' && Notification.permission==="granted"){ notifPermission=true; startReminderCheck(); }
   renderDailyDoses();
   renderPast();
   renderFuture();
@@ -642,7 +832,15 @@ function updateUI(){
   document.getElementById('info-emoji').textContent=fs[1]||'👶';
   const lmpCalc=new Date(); lmpCalc.setDate(lmpCalc.getDate()-totalDays);
   const due=new Date(lmpCalc); due.setDate(due.getDate()+280);
+  // Due date
   document.getElementById('due-chip').textContent='📅 '+due.getDate()+' '+MONTHS[due.getMonth()]+' '+due.getFullYear();
+  // Today's date chip
+  const todayEl = document.getElementById('today-chip');
+  if(todayEl){
+    const t = new Date();
+    const days = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+    todayEl.textContent = days[t.getDay()]+' '+t.getDate()+' '+MONTHS[t.getMonth()];
+  }
   document.getElementById('info-week-badge').textContent='🌱 الأسبوع '+(ORDS[dw-1]||dw);
   document.getElementById('week-tip').textContent=TIPS[w]||'الجنين بيكبر بشكل صحي كل يوم! 💕';
 }
@@ -727,6 +925,7 @@ function toggleMedStatus(id){
 }
 function renderMeds(){
   renderActiveMeds();
+  renderReminders();
   renderDailyDoses();
   const el=document.getElementById('custom-meds-list');
   if(!customMeds.length){
@@ -756,14 +955,17 @@ function renderMeds(){
           '<span class="mbdg '+(isOn?'mb-on':'mb-off')+'" style="cursor:pointer;white-space:nowrap;" onclick="toggleMedStatus('+m.id+')">'+
             (isOn?'مستمر ✅':'موقوف ❌')+
           '</span>'+
+          '<div style="display:flex;gap:4px;">'+
+          '<button style="width:22px;height:22px;border-radius:50%;background:#e3f2fd;border:1.5px solid #90caf9;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;color:#1565c0;" onclick="openEditMed('+m.id+')">✏️</button>'+
           '<button class="del-btn" onclick="deleteMed('+m.id+')">✕</button>'+
+          '</div>'+
         '</div>'+
       '</div>'+
       (m.startDate?
         '<div style="display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1.5px dashed #fce4ec;">'+
           '<div style="flex:1;background:#fce4ec;border-radius:10px;padding:7px 6px;text-align:center;">'+
             '<div style="font-size:16px;font-weight:700;color:#c2185b;">'+days+'</div>'+
-            '<div style="font-size:8px;color:#888;">يوم باخداه</div>'+
+            '<div style="font-size:8px;color:#888;">يوم من البداية</div>'+
           '</div>'+
           '<div style="flex:1;background:#e3f2fd;border-radius:10px;padding:7px 6px;text-align:center;">'+
             '<div style="font-size:16px;font-weight:700;color:#1565c0;">'+doses+'</div>'+
@@ -1022,6 +1224,286 @@ function renderFetTrack(){
 function renderTracking(){ renderMomTrack(); renderFetTrack(); }
  
  
+ 
+ 
+// ===== AI CHAT =====
+let aiHistory = [];
+ 
+const AI_SYSTEM = `أنت Pregnamate AI، مساعد ذكي متخصص في صحة الحمل والأمومة.
+تحدثي مع المستخدمة بالعربية المصرية بطريقة ودودة وبسيطة.
+تخصصك فقط في: الحمل، تطور الجنين، صحة الأم، التغذية أثناء الحمل، الأعراض الشائعة، التحاليل، مواعيد الكشف، ما يجوز وما لا يجوز في الحمل.
+لو السؤال خارج الحمل والأمومة، قولي بلطف إنك متخصص في الحمل فقط.
+دايماً نبّهي إن أي معلومة طبية لازم تتأكد منها مع الطبيبة.
+كوني موجزة ومفيدة — إجاباتك مش تتعدى 150 كلمة.`;
+ 
+async function sendAIMsg(){
+  const input = document.getElementById('ai-input');
+  const msg = input.value.trim();
+  if(!msg) return;
+  input.value = '';
+  askAI(msg);
+}
+ 
+async function askAI(msg){
+  const messagesEl = document.getElementById('ai-messages');
+  
+  // Add user message
+  messagesEl.innerHTML += '<div class="ai-msg ai-msg-user">' + msg + '</div>';
+  
+  // Add loading
+  const loadId = 'load-' + Date.now();
+  messagesEl.innerHTML += '<div class="ai-msg ai-msg-bot loading" id="' + loadId + '">⏳ جاري التفكير...</div>';
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  
+  // Add to history
+  aiHistory.push({role:'user', content: msg});
+  
+  // Keep last 10 messages
+  if(aiHistory.length > 10) aiHistory = aiHistory.slice(-10);
+  
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 400,
+        system: AI_SYSTEM,
+        messages: aiHistory
+      })
+    });
+    
+    const data = await response.json();
+    const reply = data.content && data.content[0] ? data.content[0].text : 'عذراً، حصل خطأ. جربي تاني.';
+    
+    // Replace loading with reply
+    const loadEl = document.getElementById(loadId);
+    if(loadEl){ loadEl.className = 'ai-msg ai-msg-bot'; loadEl.textContent = reply; }
+    
+    aiHistory.push({role:'assistant', content: reply});
+    
+  } catch(e) {
+    const loadEl = document.getElementById(loadId);
+    if(loadEl){ loadEl.textContent = '⚠️ خطأ في الاتصال. تأكدي من الإنترنت.'; }
+    console.log('AI error:', e);
+  }
+  
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+ 
+ 
+ 
+// ===== EDIT MEDICINE =====
+function openEditMed(id){
+  const m = customMeds.find(x => x.id === id);
+  if(!m) return;
+  document.getElementById('edit-med-id').value = id;
+  document.getElementById('edit-med-name').value = m.name || '';
+  document.getElementById('edit-med-dose').value = m.dose || '';
+  document.getElementById('edit-med-date').value = m.startDate || '';
+  document.getElementById('edit-med-times').value = m.timesPerDay || 1;
+  document.getElementById('edit-med-status').value = m.status || 'on';
+  document.getElementById('edit-med-overlay').classList.add('show');
+}
+function closeEditMed(){
+  document.getElementById('edit-med-overlay').classList.remove('show');
+}
+function saveEditMed(){
+  const id = parseInt(document.getElementById('edit-med-id').value);
+  const m = customMeds.find(x => x.id === id);
+  if(!m) return;
+  m.name = document.getElementById('edit-med-name').value.trim() || m.name;
+  m.dose = document.getElementById('edit-med-dose').value.trim();
+  m.startDate = document.getElementById('edit-med-date').value;
+  m.timesPerDay = parseInt(document.getElementById('edit-med-times').value) || 1;
+  m.status = document.getElementById('edit-med-status').value;
+  save('customMeds', customMeds);
+  saveToCloud();
+  renderMeds();
+  closeEditMed();
+  showToast();
+}
+ 
+// ===== PROFILE =====
+let userProfile = load('userProfile', {name:'', dob:'', phone:'', email:''});
+ 
+function openProfile(){
+  // Fill fields
+  document.getElementById('prof-name').value = userProfile.name || userName || '';
+  document.getElementById('prof-dob').value = userProfile.dob || '';
+  document.getElementById('prof-phone').value = userProfile.phone || '';
+  document.getElementById('prof-email').value = userProfile.email || (currentUser ? currentUser.email : '');
+  // Show current info
+  const displayName = userProfile.name || userName || '—';
+  document.getElementById('profile-name-big').textContent = displayName;
+  document.getElementById('profile-email-sm').textContent = currentUser ? currentUser.email : '';
+  document.getElementById('profile-avatar').textContent = displayName.charAt(0).toUpperCase() || '👤';
+  document.getElementById('profile-overlay').classList.add('show');
+}
+ 
+function closeProfile(){
+  document.getElementById('profile-overlay').classList.remove('show');
+}
+ 
+function saveProfile(){
+  const name = document.getElementById('prof-name').value.trim();
+  const dob = document.getElementById('prof-dob').value;
+  const phone = document.getElementById('prof-phone').value.trim();
+  const email = document.getElementById('prof-email').value.trim();
+  const errEl = document.getElementById('prof-err');
+ 
+  // Validate phone if entered
+  if(phone && !/^01[0-9]{9}$/.test(phone)){
+    errEl.textContent = '⚠️ رقم الموبايل لازم يبدأ بـ 01 ويكون 11 رقم';
+    errEl.style.display = 'block';
+    return;
+  }
+ 
+  // Validate email if entered
+  if(email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    errEl.textContent = '⚠️ الإيميل مش صح — مثال: name@email.com';
+    errEl.style.display = 'block';
+    return;
+  }
+ 
+  errEl.style.display = 'none';
+  userProfile = {name, dob, phone, email};
+  save('userProfile', userProfile);
+ 
+  // Update userName if name changed
+  if(name && name !== userName){
+    userName = name;
+    save('userName', userName);
+    document.getElementById('disp-name').textContent = userName;
+  }
+ 
+  saveToCloud();
+  closeProfile();
+  showToast();
+}
+ 
+// ===== REMINDERS =====
+let reminders = load('reminders', {}); // {medId: ['08:00', '20:00']}
+let notifPermission = false;
+let reminderInterval = null;
+ 
+function toggleNotifications(){
+  if(!('Notification' in window)){ alert('متصفحك مش بيدعم التنبيهات'); return; }
+  if(typeof Notification !== 'undefined' && Notification.permission === 'granted'){
+    notifPermission = true;
+    renderReminders();
+  } else {
+    typeof Notification !== 'undefined' && Notification.requestPermission().then(perm=>{
+      notifPermission = perm === 'granted';
+      if(notifPermission){
+        document.getElementById('notif-toggle-btn').textContent = '✅ التنبيهات مفعلة';
+        document.getElementById('notif-toggle-btn').className = 'notif-btn notif-on';
+        startReminderCheck();
+        renderReminders();
+      } else {
+        alert('محتاج تسمح بالتنبيهات من إعدادات المتصفح');
+      }
+    });
+  }
+}
+ 
+function addReminderTime(medId){
+  medId = parseInt(medId) || medId;
+  const time = prompt('ادخل وقت التنبيه (مثال: 08:00)');
+  if(!time || !time.match(/^[0-2][0-9]:[0-5][0-9]$/)){ 
+    if(time) alert('الوقت لازم يكون بالشكل HH:MM مثلاً 08:00');
+    return; 
+  }
+  if(!reminders[medId]) reminders[medId] = [];
+  if(!reminders[medId].includes(time)){
+    reminders[medId].push(time);
+    reminders[medId].sort();
+    save('reminders', reminders);
+    renderReminders();
+  }
+}
+ 
+function removeReminderTime(medId, time){
+  medId = parseInt(medId) || medId;
+  if(!reminders[medId]) return;
+  reminders[medId] = reminders[medId].filter(t => t !== time);
+  save('reminders', reminders);
+  renderReminders();
+}
+ 
+function renderReminders(){
+  const el = document.getElementById('reminder-list');
+  if(!el) return;
+  const activeMeds = customMeds.filter(m => m.status === 'on');
+  
+  if(!notifPermission && Notification.permission !== 'granted'){
+    el.innerHTML = '<div style="font-size:11px;color:#aaa;text-align:center;padding:8px;">فعّل التنبيهات لإضافة مواعيد الجرعات</div>';
+    return;
+  }
+  
+  // Update button state
+  const btn = document.getElementById('notif-toggle-btn');
+  if(btn){
+    btn.textContent = '✅ التنبيهات مفعلة';
+    btn.className = 'notif-btn notif-on';
+  }
+  notifPermission = true;
+  startReminderCheck();
+ 
+  if(!activeMeds.length){
+    el.innerHTML = '<div style="font-size:11px;color:#aaa;text-align:center;padding:8px;">مفيش أدوية نشطة</div>';
+    return;
+  }
+ 
+    el.innerHTML = activeMeds.map(function(m) {
+    var times = reminders[m.id] || [];
+    var timeBtns = times.map(function(t) {
+      return '<div class="time-chip active" data-mid="' + m.id + '" data-t="' + t + '" onclick="removeReminderTime(this.dataset.mid,this.dataset.t)">🔔 ' + t + ' ✕</div>';
+    }).join('');
+    return '<div class="reminder-row">' +
+      '<div class="reminder-med-name">💊 ' + m.name + '</div>' +
+      '<div class="reminder-times">' + timeBtns + '<button class="add-time-btn" onclick="addReminderTime(' + m.id + ')">+ وقت</button>' +
+      '</div></div>';
+  }).join('');
+}
+ 
+function startReminderCheck(){
+  if(reminderInterval) return;
+  reminderInterval = setInterval(checkReminders, 30000); // check every 30s
+  checkReminders(); // check immediately
+}
+ 
+function checkReminders(){
+  if(!customMeds || !reminders) return;
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,'0');
+  const mm = String(now.getMinutes()).padStart(2,'0');
+  const currentTime = hh + ':' + mm;
+  
+  customMeds.filter(m => m.status === 'on').forEach(m => {
+    const times = reminders[m.id] || [];
+    if(times.includes(currentTime)){
+      const lastKey = 'notif_' + m.id + '_' + currentTime + '_' + now.toDateString();
+      if(!sessionStorage.getItem(lastKey)){
+        sessionStorage.setItem(lastKey, '1');
+        sendNotification(m.name, 'حان وقت جرعة ' + m.name + ' 💊');
+      }
+    }
+  });
+}
+ 
+function sendNotification(title, body){
+  if(typeof Notification !== 'undefined' && Notification.permission === 'granted'){
+    new Notification('Pregnamate 🤰 - ' + title, {
+      body: body,
+      icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🤰</text></svg>',
+      badge: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💊</text></svg>',
+      vibrate: [200, 100, 200],
+      tag: title
+    });
+  }
+}
+ 
 // ===== DAILY DOSE TRACKING =====
  
 function getTodayKey(){
@@ -1220,15 +1702,16 @@ function authErrMsg(code){
 }
  
 function logOut(){
-  if(!auth||!confirm('عايزة تخرجي؟')) return;
-  auth.signOut().then(()=>{
-    currentUser=null;
-    hideApp();
-    document.getElementById('auth-screen').style.display='flex';
-    document.getElementById('auth-email').value='';
-    document.getElementById('auth-password').value='';
-    setAuthErr('');
-  });
+  if(!confirm('عايزة تخرجي؟')) return;
+  if(auth){
+    auth.signOut().catch(e=>console.log(e));
+  }
+  currentUser=null;
+  hideApp();
+  document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('auth-email').value='';
+  document.getElementById('auth-password').value='';
+  setAuthErr('');
 }
  
 function saveToCloud(){
@@ -1255,7 +1738,7 @@ function loadFromCloud(){
       if(doc.exists){
         const d=doc.data();
         userName=d.userName||''; totalDays=d.totalDays||0;
-        homeNotes=d.homeNotes||[]; customMeds=d.customMeds||[];
+        homeNotes=d.homeNotes||[]; userProfile=d.userProfile||{name:"",dob:"",phone:"",email:""}; customMeds=d.customMeds||[];
         pastAppts=d.pastAppts||[]; futureAppts=d.futureAppts||[];
         symptoms=d.symptoms||[]; momWeights=d.momWeights||[];
         fetWeights=d.fetWeights||[]; doseLog=d.doseLog||{};
@@ -1311,5 +1794,15 @@ document.addEventListener('DOMContentLoaded', function(){
     checkOnboard();
   }
 });
+</script>
+ 
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('SW registered'))
+      .catch(err => console.log('SW error:', err));
+  });
+}
 </script>
 </body>
