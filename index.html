@@ -372,6 +372,32 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .poll-pct{font-size:10px;color:#e91e8c;font-weight:700;}
 .poll-total{font-size:9px;color:#aaa;text-align:center;margin-top:4px;}
  
+ 
+.admin-overlay{position:absolute;inset:0;background:#f5f5f5;z-index:90;display:none;overflow-y:auto;direction:rtl;}
+.admin-overlay.show{display:block;}
+.admin-header{background:linear-gradient(135deg,#1a237e,#880e4f);padding:16px;position:sticky;top:0;z-index:10;}
+.admin-header-title{font-size:16px;font-weight:700;color:#fff;}
+.admin-header-sub{font-size:10px;color:rgba(255,255,255,.8);margin-top:2px;}
+.admin-back{background:rgba(255,255,255,.2);border:none;border-radius:10px;padding:5px 12px;font-size:10px;font-weight:700;color:#fff;cursor:pointer;font-family:'Cairo',sans-serif;float:left;}
+.admin-section{background:#fff;border-radius:16px;padding:14px;margin:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.admin-section-title{font-size:12px;font-weight:700;color:#1a1a2e;margin-bottom:12px;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.stat-card{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:12px;text-align:center;}
+.stat-num{font-size:24px;font-weight:700;color:#e91e8c;}
+.stat-lbl{font-size:9px;color:#888;margin-top:2px;}
+.admin-post-card{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:10px;margin-bottom:8px;}
+.admin-post-meta{font-size:9px;color:#aaa;margin-bottom:6px;}
+.admin-post-text{font-size:11px;color:#1a1a2e;margin-bottom:8px;line-height:1.5;}
+.admin-actions{display:flex;gap:6px;flex-wrap:wrap;}
+.admin-btn{padding:4px 10px;border-radius:8px;font-size:9px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
+.admin-btn-del{background:#ffebee;color:#c62828;}
+.admin-btn-pin{background:#fff3e0;color:#e65100;}
+.admin-btn-ban{background:#f3e5f5;color:#6a1b9a;}
+.admin-tab{padding:7px 14px;border-radius:10px;font-size:10px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;background:#f0f0f0;color:#888;}
+.admin-tab.on{background:linear-gradient(135deg,#e91e8c,#1976d2);color:#fff;}
+.admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;}
+.admin-tabs::-webkit-scrollbar{display:none;}
+ 
 </style>
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -803,6 +829,39 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
     </div>
   </div>
  
+ 
+  <!-- LIGHTBOX -->
+  <div id="forum-lightbox" onclick="closeLightbox()" style="position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:200;display:none;align-items:center;justify-content:center;">
+    <img id="lightbox-img" src="" style="max-width:95vw;max-height:90vh;border-radius:8px;" alt=""/>
+  </div>
+ 
+  <!-- ADMIN PANEL -->
+  <div id="admin-panel" style="position:absolute;inset:0;background:#f5f5f5;z-index:90;display:none;overflow-y:auto;direction:rtl;">
+    <div class="admin-header">
+      <button class="admin-back" onclick="closeAdmin()">← رجوع</button>
+      <div class="admin-header-title">🛡️ لوحة الإدارة</div>
+      <div class="admin-header-sub">Pregnamate Admin</div>
+    </div>
+    <div style="padding:4px;">
+      <div class="admin-section">
+        <div class="admin-section-title">📊 إحصائيات</div>
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-num" id="admin-stat-posts">—</div><div class="stat-lbl">منشور</div></div>
+          <div class="stat-card"><div class="stat-num" id="admin-stat-reports">—</div><div class="stat-lbl">بلاغ</div></div>
+          <div class="stat-card"><div class="stat-num" id="admin-stat-banned">—</div><div class="stat-lbl">محظور</div></div>
+          <div class="stat-card"><div class="stat-num" id="admin-stat-users">—</div><div class="stat-lbl">مستخدم</div></div>
+        </div>
+      </div>
+      <div class="admin-section">
+        <div class="admin-tabs">
+          <button class="admin-tab on" onclick="adminTab('posts',this)">📝 المنشورات</button>
+          <button class="admin-tab" onclick="adminTab('reports',this)">🚨 البلاغات</button>
+          <button class="admin-tab" onclick="adminTab('banned',this)">🚫 المحظورين</button>
+        </div>
+        <div id="admin-content"><div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">جاري التحميل...</div></div>
+      </div>
+    </div>
+  </div>
   <div class="bnav-wrap">
     <div class="bnav-drag"></div>
     <div class="bnav">
@@ -817,189 +876,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
   </div>
 </div>
  
-<script>
-// ===== FIREBASE SDK INIT =====
-let auth = null, db = null, currentUser = null, isNewUser = false;
  
-function switchAuthTab(tab){
-  document.getElementById('tab-login').className='auth-tab'+(tab==='login'?' on':'');
-  document.getElementById('tab-signup').className='auth-tab'+(tab==='signup'?' on':'');
-  document.getElementById('auth-name-field').style.display=tab==='signup'?'block':'none';
-  document.getElementById('auth-btn').textContent=tab==='login'?'دخول 🚀':'إنشاء حساب ✨';
-}
- 
-function setAuthErr(msg){ const el=document.getElementById('auth-err'); if(el)el.textContent=msg; }
-function setAuthLoading(v){
-  const btn=document.getElementById('auth-btn');
-  const load=document.getElementById('auth-loading');
-  if(load)load.style.display=v?'block':'none';
-  if(btn)btn.disabled=v;
-}
- 
-function hideApp(){
-  document.querySelector('.inner').style.display='none';
-  document.querySelector('.bnav').style.display='none';
-  document.getElementById('onboard').style.display='none';
-}
-function showApp(){
-  document.querySelector('.inner').style.display='block';
-  document.querySelector('.bnav').style.display='flex';
-}
- 
-function handleAuth(){
-  if(!auth){
-    setAuthErr('⏳ جاري التحميل...');
-    setTimeout(handleAuth, 800);
-    return;
-  }
-  setAuthErr('');
-  const email=document.getElementById('auth-email').value.trim();
-  const pass=document.getElementById('auth-password').value;
-  const isSignup=document.getElementById('auth-name-field').style.display!=='none';
-  setAuthErr('');
-  if(!email||!pass){ setAuthErr('⚠️ ادخل الإيميل وكلمة السر'); return; }
-  if(pass.length<6){ setAuthErr('⚠️ كلمة السر 6 حروف على الأقل'); return; }
-  setAuthLoading(true);
-  if(isSignup){
-    const name=document.getElementById('auth-name').value.trim();
-    if(!name){ setAuthErr('⚠️ ادخل اسمك'); setAuthLoading(false); return; }
-    auth.createUserWithEmailAndPassword(email,pass)
-      .then(cred=>{
-        currentUser=cred.user; userName=name;
-        setAuthLoading(false);
-        document.getElementById('auth-screen').style.display='none';
-        showApp();
-        document.getElementById('onboard').style.display='flex';
-      })
-      .catch(e=>{ setAuthErr(authErrMsg(e.code)); setAuthLoading(false); });
-  } else {
-    auth.signInWithEmailAndPassword(email,pass)
-      .then(cred=>{ currentUser=cred.user; loadFromCloud(); })
-      .catch(e=>{ setAuthErr(authErrMsg(e.code)); setAuthLoading(false); });
-  }
-}
- 
-function handleGoogle(){
-  if(!auth){ setAuthErr('⚠️ جاري التحميل، انتظري لحظة'); return; }
-  const provider=new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({'prompt':'select_account'});
-  auth.signInWithPopup(provider)
-    .then(result=>{
-      currentUser=result.user;
-      if(result.additionalUserInfo.isNewUser){
-        document.getElementById('auth-screen').style.display='none';
-        showApp();
-        document.getElementById('onboard').style.display='flex';
-      } else {
-        document.getElementById('auth-screen').style.display='none';
-        loadFromCloud();
-      }
-    })
-    .catch(e=>{ if(e.code!=='auth/popup-closed-by-user') setAuthErr(authErrMsg(e.code)); });
-}
- 
-function authErrMsg(code){
-  const msgs={
-    'auth/email-already-in-use':'الإيميل ده مسجل قبل كده',
-    'auth/invalid-email':'إيميل مش صح',
-    'auth/weak-password':'كلمة السر ضعيفة',
-    'auth/user-not-found':'مفيش حساب بالإيميل ده',
-    'auth/wrong-password':'كلمة السر غلط',
-    'auth/invalid-credential':'إيميل أو كلمة سر غلط',
-    'auth/too-many-requests':'محاولات كتير — استنى شوية',
-    'auth/configuration-not-found':'تأكد من تفعيل Email/Password في Firebase',
-    'auth/unauthorized-domain':'الدومين مش مضاف في Firebase Authorized Domains',
-  };
-  return msgs[code]||'خطأ: '+code;
-}
- 
-function logOut(){
-  if(!confirm('عايزة تخرجي؟')) return;
-  if(auth) auth.signOut().catch(e=>e);
-  currentUser=null;
-  hideApp();
-  document.getElementById('auth-screen').style.display='flex';
-  document.getElementById('auth-email').value='';
-  document.getElementById('auth-password').value='';
-  setAuthErr('');
-}
- 
-function saveToCloud(){
-  if(!db||!currentUser) return;
-  const data={
-    userName, totalDays,
-    homeNotes:homeNotes||[], customMeds:customMeds||[],
-    pastAppts:pastAppts||[], futureAppts:futureAppts||[],
-    symptoms:symptoms||[], momWeights:momWeights||[],
-    fetWeights:fetWeights||[], doseLog:doseLog||{},
-    userProfile:userProfile||{}, uid:uid||0,
-    updatedAt:firebase.firestore.FieldValue.serverTimestamp()
-  };
-  db.collection('users').doc(currentUser.uid).set(data,{merge:true}).catch(e=>console.log(e));
-}
- 
-function loadFromCloud(){
-  if(!db||!currentUser){ setAuthLoading(false); return; }
-  db.collection('users').doc(currentUser.uid).get()
-    .then(doc=>{
-      setAuthLoading(false);
-      document.getElementById('auth-screen').style.display='none';
-      showApp();
-      if(doc.exists){
-        const d=doc.data();
-        userName=d.userName||''; totalDays=d.totalDays||0;
-        homeNotes=d.homeNotes||[]; customMeds=d.customMeds||[];
-        pastAppts=d.pastAppts||[]; futureAppts=d.futureAppts||[];
-        symptoms=d.symptoms||[]; momWeights=d.momWeights||[];
-        fetWeights=d.fetWeights||[]; doseLog=d.doseLog||{};
-        userProfile=d.userProfile||{}; uid=d.uid||0;
-        if(!userName){ document.getElementById('onboard').style.display='flex'; }
-        else { initApp(); }
-      } else {
-        document.getElementById('onboard').style.display='flex';
-      }
-    })
-    .catch(e=>{ setAuthLoading(false); setAuthErr('خطأ في التحميل'); console.log(e); });
-}
- 
-// Override save to sync cloud
-const _lsSave = save;
-// save handled in main script
- 
- 
-// Init Firebase IMMEDIATELY (not waiting for DOMContentLoaded)
-(function initFirebase(){
-  try{
-    if(!firebase.apps.length){
-      firebase.initializeApp({
-        apiKey:"AIzaSyB6fdavCzp6uXlcDmombfvK-12WOvKPTgs",
-        authDomain:"pregnamate-84ae7.firebaseapp.com",
-        projectId:"pregnamate-84ae7",
-        storageBucket:"pregnamate-84ae7.firebasestorage.app",
-        messagingSenderId:"768070478277",
-        appId:"1:768070478277:web:5d70cd7c722b9ef04503ac"
-      });
-    }
-    auth=firebase.auth();
-    db=firebase.firestore();
- 
-    auth.onAuthStateChanged(user=>{
-      if(user&&!currentUser){
-        currentUser=user;
-        document.getElementById('auth-screen').style.display='none';
-        loadFromCloud();
-      } else if(!user&&!currentUser){
-        document.getElementById('auth-screen').style.display='flex';
-        hideApp();
-      }
-    });
-  }catch(e){
-    console.log('Firebase error:',e);
-    // Firebase not loaded yet - retry after 500ms
-    setTimeout(initFirebase, 500);
-  }
-})();
-</script>
  
 <script>
 </script>
@@ -1563,6 +1440,95 @@ function renderDailyDoses(){
 }
  
  
+ 
+// ===== ADMIN PANEL =====
+const ADMIN_UID = '3BS9kTS6BkWqVc5z44LvDssLxjZ2';
+let bannedUsers = load('bannedUsers',[]);
+let reportsList = load('reportsList',[]);
+let currentAdminTab = 'posts';
+ 
+function openAdmin(){
+  if(!currentUser||currentUser.uid!==ADMIN_UID) return;
+  closeProfile();
+  document.getElementById('admin-panel').style.display='block';
+  loadAdminStats(); loadAdminPosts();
+}
+function closeAdmin(){ document.getElementById('admin-panel').style.display='none'; }
+ 
+async function loadAdminStats(){
+  if(!db) return;
+  try{
+    const snap=await db.collection('forum').get();
+    document.getElementById('admin-stat-posts').textContent=snap.size;
+    document.getElementById('admin-stat-reports').textContent=reportsList.length;
+    document.getElementById('admin-stat-banned').textContent=bannedUsers.length;
+    document.getElementById('admin-stat-users').textContent='—';
+  }catch(e){}
+}
+ 
+function adminTab(tab,btn){
+  currentAdminTab=tab;
+  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  if(tab==='posts') loadAdminPosts();
+  else if(tab==='reports') loadAdminReports();
+  else if(tab==='banned') loadAdminBanned();
+}
+ 
+async function loadAdminPosts(){
+  const el=document.getElementById('admin-content'); if(!el) return;
+  if(!db){el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">Firebase غير متصل</div>';return;}
+  el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">⏳ جاري التحميل...</div>';
+  try{
+    const snap=await db.collection('forum').orderBy('ts','desc').limit(30).get();
+    if(!snap.size){el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا توجد منشورات</div>';return;}
+    el.innerHTML=snap.docs.map(doc=>{
+      const p={id:doc.id,...doc.data()};
+      return '<div class="admin-post-card">'+
+        '<div class="admin-post-meta">'+p.author+' · '+p.week+'</div>'+
+        '<div class="admin-post-text">'+p.text+'</div>'+
+        '<div class="admin-actions">'+
+          '<button class="admin-btn admin-btn-del" data-pid="'+p.id+'" onclick="adminDeletePost(this.dataset.pid)">🗑 حذف</button>'+
+          '<button class="admin-btn admin-btn-pin" data-pid="'+p.id+'" data-pinned="'+(p.pinned||false)+'" onclick="adminPinPost(this.dataset.pid,this.dataset.pinned)">'+(p.pinned?'📌 إلغاء':'📌 تثبيت')+'</button>'+
+          '<button class="admin-btn admin-btn-ban" data-uid="'+p.uid+'" onclick="adminBanUser(this.dataset.uid)">🚫 حظر</button>'+
+        '</div></div>';
+    }).join('');
+  }catch(e){el.innerHTML='<div style="color:red;font-size:10px;padding:10px;">'+e.message+'</div>';}
+}
+ 
+function loadAdminReports(){
+  const el=document.getElementById('admin-content');if(!el)return;
+  if(!reportsList.length){el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا توجد بلاغات</div>';return;}
+  el.innerHTML=reportsList.map((r,i)=>'<div class="admin-post-card"><div class="admin-post-meta">بلاغ #'+(i+1)+' — '+new Date(r.ts).toLocaleDateString('ar')+'</div><div class="admin-post-text">Post: '+r.postId+'</div><button class="admin-btn admin-btn-del" onclick="clearReport('+i+')">✓ تم</button></div>').join('');
+}
+ 
+function loadAdminBanned(){
+  const el=document.getElementById('admin-content');if(!el)return;
+  if(!bannedUsers.length){el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا يوجد محظورون</div>';return;}
+  el.innerHTML=bannedUsers.map((uid,i)=>'<div class="admin-post-card"><div class="admin-post-text">'+uid+'</div><button class="admin-btn" style="background:#e8f5e9;color:#2e7d32;" onclick="adminUnban('+i+')">✓ رفع الحظر</button></div>').join('');
+}
+ 
+async function adminDeletePost(postId){
+  if(!confirm('حذف المنشور؟'))return;
+  try{await db.collection('forum').doc(postId).delete();forumPosts=forumPosts.filter(p=>p.id!==postId);loadAdminPosts();loadAdminStats();}
+  catch(e){alert('خطأ: '+e.message);}
+}
+async function adminPinPost(postId,pinned){
+  const np=pinned==='true'?false:true;
+  try{await db.collection('forum').doc(postId).update({pinned:np});loadAdminPosts();}catch(e){alert('خطأ');}
+}
+function adminBanUser(uid){
+  if(uid===ADMIN_UID){alert('مش تقدر تحظر نفسك');return;}
+  if(!bannedUsers.includes(uid)){bannedUsers.push(uid);save('bannedUsers',bannedUsers);}
+  loadAdminBanned();document.getElementById('admin-stat-banned').textContent=bannedUsers.length;
+  alert('تم الحظر ✅');
+}
+function adminUnban(idx){bannedUsers.splice(idx,1);save('bannedUsers',bannedUsers);loadAdminBanned();}
+function clearReport(idx){reportsList.splice(idx,1);save('reportsList',reportsList);loadAdminReports();document.getElementById('admin-stat-reports').textContent=reportsList.length;}
+function reportPost(postId){if(confirm('تبلغي عن هذا المنشور؟')){reportsList.push({postId,ts:Date.now()});save('reportsList',reportsList);alert('شكراً ✅');}}
+function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('forum-lightbox').style.display='flex';}
+function closeLightbox(){document.getElementById('forum-lightbox').style.display='none';}
+ 
 // ===== FORUM =====
 let forumPosts = [];
 let currentPostType = 'text';
@@ -1944,13 +1910,210 @@ function sendNotif(title,body){
     new Notification('Pregnamate 🤰 - '+title,{body,tag:title});
 }
 // ===== START =====
-checkOnboard();
+// Auth handled by Firebase
 </script>
  
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(e=>e));
 }
+</script>
+ 
+ 
+ 
+ 
+<script>
+let auth = null, db = null, currentUser = null;
+function hideApp(){
+  const inner=document.querySelector('.inner');
+  const bnav=document.querySelector('.bnav');
+  const onboard=document.getElementById('onboard');
+  if(inner) inner.style.display='none';
+  if(bnav) bnav.style.display='none';
+  if(onboard) onboard.style.display='none';
+}
+function showApp(){
+  const inner=document.querySelector('.inner');
+  const bnav=document.querySelector('.bnav');
+  if(inner) inner.style.display='block';
+  if(bnav) bnav.style.display='flex';
+}
+ 
+function setAuthErr(msg){ const el=document.getElementById('auth-err'); if(el) el.textContent=msg; }
+function setAuthLoading(v){
+  const btn=document.getElementById('auth-btn');
+  const load=document.getElementById('auth-loading');
+  if(load) load.style.display=v?'block':'none';
+  if(btn) btn.disabled=v;
+}
+function switchAuthTab(tab){
+  const tl=document.getElementById('tab-login');
+  const ts=document.getElementById('tab-signup');
+  const nf=document.getElementById('auth-name-field');
+  const btn=document.getElementById('auth-btn');
+  if(tl) tl.className='auth-tab'+(tab==='login'?' on':'');
+  if(ts) ts.className='auth-tab'+(tab==='signup'?' on':'');
+  if(nf) nf.style.display=tab==='signup'?'block':'none';
+  if(btn) btn.textContent=tab==='login'?'دخول 🚀':'إنشاء حساب ✨';
+}
+function handleAuth(){
+  if(!auth){
+    // Firebase not ready yet - wait up to 5 seconds
+    let attempts = 0;
+    const tryAgain = setInterval(()=>{
+      attempts++;
+      if(auth){
+        clearInterval(tryAgain);
+        setAuthErr('');
+        handleAuth();
+      } else if(attempts > 25){
+        clearInterval(tryAgain);
+        setAuthErr('⚠️ تأكد من الإنترنت وأعد تحميل الصفحة');
+      }
+    }, 200);
+    return;
+  }
+  const email=document.getElementById('auth-email').value.trim();
+  const pass=document.getElementById('auth-password').value;
+  const isSignup=document.getElementById('auth-name-field').style.display!=='none';
+  setAuthErr('');
+  if(!email||!pass){ setAuthErr('⚠️ ادخل الإيميل وكلمة السر'); return; }
+  if(pass.length<6){ setAuthErr('⚠️ كلمة السر 6 حروف على الأقل'); return; }
+  setAuthLoading(true);
+  if(isSignup){
+    const name=document.getElementById('auth-name').value.trim();
+    if(!name){ setAuthErr('⚠️ ادخل اسمك'); setAuthLoading(false); return; }
+    auth.createUserWithEmailAndPassword(email,pass)
+      .then(cred=>{
+        currentUser=cred.user; userName=name;
+        setAuthLoading(false);
+        document.getElementById('auth-screen').style.display='none';
+        showApp();
+        document.getElementById('onboard').style.display='flex';
+      })
+      .catch(e=>{ setAuthErr(authErrMsg(e.code)); setAuthLoading(false); });
+  } else {
+    auth.signInWithEmailAndPassword(email,pass)
+      .then(cred=>{ currentUser=cred.user; loadFromCloud(); })
+      .catch(e=>{ setAuthErr(authErrMsg(e.code)); setAuthLoading(false); });
+  }
+}
+ 
+function handleGoogle(){
+  if(!auth){ setAuthErr('⚠️ انتظري لحظة...'); setTimeout(handleGoogle,500); return; }
+  const provider=new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({'prompt':'select_account'});
+  auth.signInWithPopup(provider)
+    .then(result=>{
+      currentUser=result.user;
+      if(result.additionalUserInfo.isNewUser){
+        document.getElementById('auth-screen').style.display='none';
+        showApp();
+        document.getElementById('onboard').style.display='flex';
+      } else {
+        document.getElementById('auth-screen').style.display='none';
+        loadFromCloud();
+      }
+    })
+    .catch(e=>{ if(e.code!=='auth/popup-closed-by-user') setAuthErr(authErrMsg(e.code)); });
+}
+ 
+function authErrMsg(code){
+  const msgs={
+    'auth/email-already-in-use':'الإيميل ده مسجل قبل كده',
+    'auth/invalid-email':'إيميل مش صح',
+    'auth/weak-password':'كلمة السر ضعيفة',
+    'auth/user-not-found':'مفيش حساب بالإيميل ده',
+    'auth/wrong-password':'كلمة السر غلط',
+    'auth/invalid-credential':'إيميل أو كلمة سر غلط',
+    'auth/too-many-requests':'محاولات كتير — استنى شوية',
+    'auth/configuration-not-found':'تأكد من تفعيل Email/Password في Firebase',
+    'auth/unauthorized-domain':'الدومين مش مضاف في Firebase Authorized Domains',
+  };
+  return msgs[code]||'خطأ: '+code;
+}
+ 
+function logOut(){
+  if(!confirm('عايزة تخرجي؟')) return;
+  if(auth) auth.signOut().catch(e=>e);
+  currentUser=null;
+  hideApp();
+  document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('auth-email').value='';
+  document.getElementById('auth-password').value='';
+  setAuthErr('');
+}
+ 
+function saveToCloud(){
+  if(!db||!currentUser) return;
+  const data={
+    userName, totalDays,
+    homeNotes:homeNotes||[], customMeds:customMeds||[],
+    pastAppts:pastAppts||[], futureAppts:futureAppts||[],
+    symptoms:symptoms||[], momWeights:momWeights||[],
+    fetWeights:fetWeights||[], doseLog:doseLog||{},
+    userProfile:userProfile||{}, uid:uid||0,
+    updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+  };
+  db.collection('users').doc(currentUser.uid).set(data,{merge:true}).catch(e=>console.log(e));
+}
+ 
+function loadFromCloud(){
+  if(!db||!currentUser){ setAuthLoading(false); return; }
+  db.collection('users').doc(currentUser.uid).get()
+    .then(doc=>{
+      setAuthLoading(false);
+      document.getElementById('auth-screen').style.display='none';
+      showApp();
+      if(doc.exists){
+        const d=doc.data();
+        userName=d.userName||''; totalDays=d.totalDays||0;
+        homeNotes=d.homeNotes||[]; customMeds=d.customMeds||[];
+        pastAppts=d.pastAppts||[]; futureAppts=d.futureAppts||[];
+        symptoms=d.symptoms||[]; momWeights=d.momWeights||[];
+        fetWeights=d.fetWeights||[]; doseLog=d.doseLog||{};
+        userProfile=d.userProfile||{}; uid=d.uid||0;
+        if(!userName){ document.getElementById('onboard').style.display='flex'; }
+        else { initApp(); }
+      } else {
+        document.getElementById('onboard').style.display='flex';
+      }
+    })
+    .catch(e=>{ setAuthLoading(false); setAuthErr('خطأ في التحميل'); console.log(e); });
+}
+ 
+// Init Firebase on page load
+document.addEventListener('DOMContentLoaded',function(){
+  try{
+    if(!firebase.apps.length){
+      firebase.initializeApp({
+        apiKey:"AIzaSyB6fdavCzp6uXlcDmombfvK-12WOvKPTgs",
+        authDomain:"pregnamate-84ae7.firebaseapp.com",
+        projectId:"pregnamate-84ae7",
+        storageBucket:"pregnamate-84ae7.firebasestorage.app",
+        messagingSenderId:"768070478277",
+        appId:"1:768070478277:web:5d70cd7c722b9ef04503ac"
+      });
+    }
+    auth=firebase.auth();
+    db=firebase.firestore();
+    hideApp();
+    auth.onAuthStateChanged(user=>{
+      if(user&&!currentUser){
+        currentUser=user;
+        document.getElementById('auth-screen').style.display='none';
+        loadFromCloud();
+      } else if(!user&&!currentUser){
+        document.getElementById('auth-screen').style.display='flex';
+        hideApp();
+      }
+    });
+  }catch(e){
+    console.log('Firebase error:',e);
+    document.getElementById('auth-screen').style.display='flex';
+    hideApp();
+  }
+});
 </script>
 </body>
 </html>
