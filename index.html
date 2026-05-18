@@ -16,7 +16,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .inner::-webkit-scrollbar{display:none;}
 .scr{display:none;padding:0 13px 16px;}
 .scr.act{display:block;}
-
+ 
 /* ONBOARDING */
 .onboard{position:absolute;inset:0;background:linear-gradient(145deg,#e91e8c,#1976d2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;z-index:100;}
 .ob-logo{font-size:48px;margin-bottom:12px;}
@@ -30,7 +30,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .ob-field input:focus{border-color:#fff;background:rgba(255,255,255,.28);}
 .ob-hint{font-size:9px;color:rgba(255,255,255,.65);margin-top:4px;}
 .ob-btn{background:#fff;border:none;border-radius:14px;padding:13px;font-size:13px;font-weight:700;color:#e91e8c;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-top:6px;}
-
+ 
 /* HEADER */
 .hdr{background:linear-gradient(145deg,#e91e8c 0%,#1976d2 100%);padding:18px 15px 22px;margin:0 -13px 14px;border-radius:0 0 28px 28px;position:relative;overflow:hidden;}
 .hdr::before{content:'';position:absolute;top:-40px;right:-25px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.1);}
@@ -168,11 +168,11 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .ss-val{font-size:18px;font-weight:700;color:#7b1fa2;}
 .ss-lbl{font-size:8px;color:#888;margin-top:2px;}
 .sym-empty{text-align:center;padding:20px;color:#aaa;font-size:11px;}
-
+ 
 /* Save indicator */
 .save-toast{position:absolute;top:44px;left:50%;transform:translateX(-50%);background:rgba(46,125,50,.9);color:#fff;font-size:10px;font-weight:700;padding:6px 16px;border-radius:20px;z-index:200;opacity:0;transition:opacity .3s;white-space:nowrap;}
 .save-toast.show{opacity:1;}
-
+ 
 /* MODAL */
 .modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:50;display:none;align-items:flex-end;justify-content:center;}
 .modal-overlay.show{display:flex;}
@@ -193,16 +193,20 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .modal-hint{font-size:9px;color:#aaa;margin-bottom:14px;text-align:center;}
 .modal-save{background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:11px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;}
 .modal-cancel{background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;}
-
-.bnav{position:absolute;bottom:0;left:0;right:0;height:64px;background:#fff;border-top:2px solid #fce4ec;display:flex;overflow-x:auto;box-shadow:0 -4px 20px rgba(233,30,140,.1);}.bnav::-webkit-scrollbar{display:none;}
+ 
+.bnav-wrap{position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid #fce4ec;box-shadow:0 -4px 20px rgba(233,30,140,.1);}
+.bnav-drag{width:36px;height:4px;background:#e0e0e0;border-radius:2px;margin:6px auto 2px;}
+.bnav{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding:4px 6px 10px;gap:0;}
+.bnav::-webkit-scrollbar{display:none;}
+ 
 .nb{flex:0 0 60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;background:none;border:none;font-size:7px;font-weight:700;color:#ccc;font-family:'Cairo',sans-serif;transition:color .2s;}
 .nb.on{color:#e91e8c;}
 .nb.on svg{stroke:#e91e8c;}
 .nb.on.purple{color:#9c27b0;}
 .nb.on.purple svg{stroke:#9c27b0;}
 .nb svg{width:18px;height:18px;stroke-width:2.2;stroke:#ccc;fill:none;}
-
-
+ 
+ 
 /* DOSE TRACKING */
 .dose-day-card{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:12px 13px;margin-bottom:9px;box-shadow:0 2px 8px rgba(233,30,140,.06);}
 .dose-med-name{font-size:12px;font-weight:700;color:#1a1a2e;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
@@ -269,11 +273,11 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .forum-add-input{width:100%;font-size:11px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;resize:none;min-height:70px;display:block;margin-bottom:8px;}
 .forum-send-btn{background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;}
 .forum-empty{text-align:center;padding:24px;color:#aaa;font-size:11px;}
-.forum-filter{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px;direction:rtl;justify-content:flex-end;}
+.forum-filter{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;}
 .forum-filter::-webkit-scrollbar{display:none;}
 .ftag{padding:4px 12px;border-radius:16px;font-size:10px;font-weight:700;border:1.5px solid #f8bbd0;background:#fff;color:#c2185b;cursor:pointer;white-space:nowrap;font-family:'Cairo',sans-serif;}
 .ftag.active{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;border-color:transparent;}
-
+ 
 /* AUTH SCREEN */
 .auth-screen{position:absolute;inset:0;background:linear-gradient(145deg,#e91e8c,#1976d2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;z-index:200;}
 .auth-logo{font-size:52px;margin-bottom:8px;}
@@ -291,13 +295,13 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .auth-btn{background:#fff;border:none;border-radius:14px;padding:13px;font-size:13px;font-weight:700;color:#e91e8c;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-top:4px;}
 .auth-err{font-size:10px;color:#ffcdd2;text-align:center;margin-top:8px;min-height:16px;font-weight:600;}
 .auth-loading{display:none;text-align:center;color:#fff;font-size:12px;margin-top:8px;}
-
-
-
-
+ 
+ 
+ 
+ 
 /* PROFILE */
-.profile-icon{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;flex-shrink:0;-webkit-tap-highlight-color:transparent;}
-.profile-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:70;display:none;align-items:flex-end;justify-content:center;}
+.profile-icon{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;flex-shrink:0;}
+.profile-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:60;display:none;align-items:flex-end;justify-content:center;}
 .profile-overlay.show{display:flex;}
 .profile-modal{background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;max-height:85%;overflow-y:auto;}
 .profile-modal::-webkit-scrollbar{display:none;}
@@ -310,13 +314,13 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .profile-field input:focus{border-color:#e91e8c;}
 .profile-save-btn{background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-top:6px;}
 .profile-cancel-btn{background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:6px;margin-top:4px;}
-
+ 
 /* EDIT MED MODAL */
 .edit-med-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:60;display:none;align-items:flex-end;justify-content:center;}
 .edit-med-overlay.show{display:flex;}
 .edit-med-modal{background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;}
-
-
+ 
+ 
 /* REMINDERS */
 .reminder-section{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:13px;margin-bottom:12px;}
 .reminder-title{font-size:11px;font-weight:700;color:#c2185b;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
@@ -330,8 +334,8 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .time-chip{display:flex;align-items:center;gap:4px;background:#fce4ec;border:1px solid #f48fb1;border-radius:10px;padding:3px 8px;font-size:10px;font-weight:700;color:#c2185b;cursor:pointer;}
 .time-chip.active{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;border-color:transparent;}
 .add-time-btn{background:#e3f2fd;border:1px solid #90caf9;border-radius:10px;padding:3px 8px;font-size:10px;font-weight:700;color:#1565c0;cursor:pointer;font-family:'Cairo',sans-serif;}
-
-
+ 
+ 
 /* DOSE TRACKING */
 .dose-day-card{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:12px 13px;margin-bottom:9px;box-shadow:0 2px 8px rgba(233,30,140,.06);}
 .dose-med-name{font-size:12px;font-weight:700;color:#1a1a2e;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
@@ -342,59 +346,32 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .dose-date-header{font-size:10px;font-weight:700;color:#888;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
 .dose-progress{height:5px;background:#fce4ec;border-radius:3px;overflow:hidden;margin-top:8px;}
 .dose-progress-fill{height:100%;background:linear-gradient(90deg,#e91e8c,#f06292);border-radius:3px;transition:width .3s;}
-
-
+ 
+ 
 .google-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;border:none;border-radius:14px;padding:13px;font-size:12px;font-weight:700;color:#1a1a2e;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:4px;}
 .google-btn:hover{background:#f5f5f5;}
-
-
-/* FORUM EXTRA */
-.forum-reactions{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;}
-.react-btn{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:16px;padding:3px 9px;font-size:11px;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;display:flex;align-items:center;gap:3px;}
-.react-btn.reacted{background:#fce4ec;border-color:#e91e8c;font-weight:700;}
-.react-count{font-size:10px;color:#888;}
-.forum-img{width:100%;max-height:200px;object-fit:cover;border-radius:12px;margin:8px 0;cursor:pointer;}
-.forum-img-upload{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.img-upload-btn{background:#e3f2fd;border:1.5px solid #90caf9;border-radius:10px;padding:6px 12px;font-size:10px;font-weight:700;color:#1565c0;cursor:pointer;font-family:'Cairo',sans-serif;white-space:nowrap;}
-.forum-img-preview{max-width:80px;max-height:60px;border-radius:8px;object-fit:cover;}
-.forum-meta-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
-.view-count{font-size:9px;color:#bbb;display:flex;align-items:center;gap:3px;}
-.pin-badge{background:#fff3e0;color:#e65100;font-size:8px;font-weight:700;padding:2px 7px;border-radius:8px;}
-.report-btn{font-size:9px;color:#bbb;background:none;border:none;cursor:pointer;font-family:'Cairo',sans-serif;margin-right:auto;}
-.delete-btn-forum{font-size:9px;color:#e91e8c;background:#fce4ec;border:1px solid #f48fb1;border-radius:8px;padding:2px 8px;cursor:pointer;font-family:'Cairo',sans-serif;}
-.pinned-post{border-color:#ff9800;background:#fffde7;}
-.forum-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:200;display:none;align-items:center;justify-content:center;}
-.forum-lightbox.show{display:flex;}
-.forum-lightbox img{max-width:95vw;max-height:90vh;border-radius:8px;}
-
-
-/* ADMIN PANEL */
-.admin-overlay{position:absolute;inset:0;background:#f5f5f5;z-index:90;display:none;overflow-y:auto;direction:rtl;}
-.admin-overlay.show{display:block;}
-.admin-header{background:linear-gradient(135deg,#1a237e,#880e4f);padding:16px;position:sticky;top:0;z-index:10;}
-.admin-header-title{font-size:16px;font-weight:700;color:#fff;}
-.admin-header-sub{font-size:10px;color:rgba(255,255,255,.8);margin-top:2px;}
-.admin-back{background:rgba(255,255,255,.2);border:none;border-radius:10px;padding:5px 12px;font-size:10px;font-weight:700;color:#fff;cursor:pointer;font-family:'Cairo',sans-serif;float:left;}
-.admin-section{background:#fff;border-radius:16px;padding:14px;margin:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.admin-section-title{font-size:12px;font-weight:700;color:#1a1a2e;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.stat-card{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:12px;text-align:center;}
-.stat-num{font-size:24px;font-weight:700;color:#e91e8c;}
-.stat-lbl{font-size:9px;color:#888;margin-top:2px;}
-.admin-post-card{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:10px;margin-bottom:8px;}
-.admin-post-text{font-size:11px;color:#1a1a2e;margin-bottom:6px;line-height:1.5;}
-.admin-post-meta{font-size:9px;color:#aaa;margin-bottom:8px;}
-.admin-actions{display:flex;gap:6px;flex-wrap:wrap;}
-.admin-btn{padding:4px 10px;border-radius:8px;font-size:9px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
-.admin-btn-del{background:#ffebee;color:#c62828;}
-.admin-btn-pin{background:#fff3e0;color:#e65100;}
-.admin-btn-ban{background:#f3e5f5;color:#6a1b9a;}
-.admin-report-card{background:#fff8e1;border:1.5px solid #ffcc02;border-radius:12px;padding:10px;margin-bottom:8px;}
-.admin-tab{padding:7px 14px;border-radius:10px;font-size:10px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;background:#f0f0f0;color:#888;}
-.admin-tab.on{background:linear-gradient(135deg,#e91e8c,#1976d2);color:#fff;}
-.admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;}
-.admin-tabs::-webkit-scrollbar{display:none;}
-
+ 
+ 
+/* POST TYPE SELECTOR */
+.post-type-selector{display:flex;gap:8px;margin-bottom:12px;}
+.post-type-btn{flex:1;padding:10px 6px;border-radius:14px;border:1.5px solid #f8bbd0;background:#fff;font-size:10px;font-weight:700;color:#c2185b;cursor:pointer;font-family:'Cairo',sans-serif;text-align:center;transition:all .2s;}
+.post-type-btn.active{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;border-color:transparent;}
+/* POLL */
+.poll-options{margin-bottom:10px;}
+.poll-option-row{display:flex;gap:6px;align-items:center;margin-bottom:6px;}
+.poll-option-input{flex:1;font-size:11px;padding:8px 11px;border:1.5px solid #f8bbd0;border-radius:10px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;}
+.poll-remove-btn{width:24px;height:24px;border-radius:50%;background:#fce4ec;border:1px solid #f48fb1;color:#e91e8c;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.add-option-btn{background:#e3f2fd;border:1px solid #90caf9;border-radius:10px;padding:5px 12px;font-size:10px;font-weight:700;color:#1565c0;cursor:pointer;font-family:'Cairo',sans-serif;width:100%;margin-bottom:8px;}
+/* POLL DISPLAY */
+.poll-container{margin:8px 0;}
+.poll-option-display{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:9px 12px;margin-bottom:6px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.poll-option-display:hover{border-color:#e91e8c;}
+.poll-option-display.voted{border-color:#e91e8c;background:#fce4ec;}
+.poll-bar{position:absolute;top:0;left:0;height:100%;background:rgba(233,30,140,.1);border-radius:12px;transition:width .5s;}
+.poll-option-text{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;color:#1a1a2e;}
+.poll-pct{font-size:10px;color:#e91e8c;font-weight:700;}
+.poll-total{font-size:9px;color:#aaa;text-align:center;margin-top:4px;}
+ 
 </style>
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -413,7 +390,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
   <div class="notch"></div>
   <div class="sbar"><span>9:41</span><span>Pregnamate 🤱</span><span>📶🔋</span></div>
   <div class="save-toast" id="toast">💾 تم الحفظ</div>
-
+ 
 <!-- AUTH SCREEN -->
   <div class="auth-screen" id="auth-screen">
     <div class="auth-logo">🤰</div>
@@ -450,7 +427,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
       <div class="auth-loading" id="auth-loading">⏳ جاري التحميل...</div>
     </div>
   </div>
-
+ 
   <!-- ONBOARDING -->
   <div class="onboard" id="onboard">
     <div class="ob-logo">🤰</div>
@@ -469,7 +446,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
       <button class="ob-btn" onclick="startApp()">ابدأي رحلتك 🚀</button>
     </div>
   </div>
-
+ 
   <div class="inner">
     <!-- HOME -->
     <div class="scr act" id="s-home">
@@ -480,11 +457,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
         <button class="edit-preg-btn" onclick="openModal()">✏️ تعديل عمر الحمل</button>
         <div class="bgs"><span class="bg" id="mbg">الشهر الثاني</span><span class="bg" id="tbg">الثلث الأول</span><span class="bg" id="fbg">🍓 فراولة</span></div>
         <div class="pb"><div class="pf" id="pf" style="width:16%"></div></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px;">
-          <span style="font-size:9px;color:rgba(255,255,255,.7);">بداية الحمل</span>
-          <span id="pcurr" style="font-size:14px;font-weight:700;color:#fff;">16%</span>
-          <span style="font-size:9px;color:rgba(255,255,255,.7);">الولادة</span>
-        </div>
+        <div class="pl"><span>أسبوع 1</span><span id="pcurr">أسبوع 6</span><span>أسبوع 40</span></div>
       </div>
       <div class="g3">
         <div class="ic ic1"><div class="ie">💊</div><div class="iv" id="doses-today-count">0/0</div><div class="il">جرعات اليوم</div></div>
@@ -499,7 +472,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
       <div class="addrow"><input id="hni" placeholder="عرض أو ملاحظة اليوم..."/><button class="abtn-sm" onclick="addHomeNote()">+ سجّلي</button></div>
       <div id="hns"></div>
     </div>
-
+ 
     <!-- MEDS -->
     <div class="scr" id="s-meds">
       <div style="height:14px"></div>
@@ -510,7 +483,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
       <div class="meds-list" id="custom-meds-list"></div>
       <!-- DAILY DOSE LOG -->
       <div id="daily-doses-section" style="margin-bottom:14px;"></div>
-
+ 
       <div class="add-section" style="border-color:#f48fb1;">
         <div class="add-title">➕ أضيفي دواء جديد</div>
         <div class="add-field"><label>💊 اسم الدواء والجرعة</label><input id="med-name" placeholder="مثال: Folic Acid 400mcg"/></div>
@@ -532,7 +505,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
         <button class="save-btn" onclick="addMed()">✅ حفظ</button>
       </div>
     </div>
-
+ 
     <!-- INFO -->
     <div class="scr" id="s-info">
       <div style="height:14px"></div>
@@ -550,7 +523,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
         <div class="is is-p"><div class="is-l">يشبه</div><div style="font-size:20px;margin-top:2px" id="info-emoji">🍓</div></div>
       </div>
     </div>
-
+ 
     <!-- APPOINTMENTS -->
     <div class="scr" id="s-appts">
       <div style="height:14px"></div>
@@ -569,7 +542,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
         <button class="save-btn" onclick="saveAppt()">✅ حفظ</button>
       </div>
     </div>
-
+ 
     <!-- SYMPTOMS -->
     <div class="scr" id="s-syms">
       <div style="height:14px"></div>
@@ -608,7 +581,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
       <div class="stitle stitle-purple">📋 السجل</div>
       <div class="sym-list" id="sym-list"><div class="sym-empty">لا توجد أعراض مسجلة بعد<br><span style="font-size:18px;margin-top:6px;display:block">🌸</span></div></div>
     </div>
-
+ 
     <!-- TRACKING -->
     <div class="scr" id="s-track">
       <div style="height:14px"></div>
@@ -659,7 +632,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
         <div class="track-records" id="fet-recs"><div class="trk-empty">لا توجد قياسات بعد &#128118;</div></div>
       </div>
     </div>
-
+ 
     <!-- FORUM -->
     <div class="scr" id="s-forum">
       <div style="height:14px"></div>
@@ -667,34 +640,6 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
         <div style="font-size:15px;font-weight:700;color:#fff;">💬 مجتمع Pregnamate</div>
         <div style="font-size:10px;color:rgba(255,255,255,.85);margin-top:3px;">شاركي تجربتك مع أمهات زيك 🌸</div>
       </div>
-      <div class="forum-filter" style="direction:ltr;">
-        <button class="ftag active" onclick="filterForum('all',this)">🌸 الكل</button>
-        <button class="ftag" onclick="filterForum('question',this)">❓ سؤال</button>
-        <button class="ftag" onclick="filterForum('tip',this)">💡 نصيحة</button>
-        <button class="ftag" onclick="filterForum('experience',this)">📖 تجربة</button>
-        <button class="ftag" onclick="filterForum('symptom',this)">🤒 عرض</button>
-      </div>
-      <div class="forum-add-box">
-        <div class="forum-add-title">✍️ شاركي مع المجتمع</div>
-        <select id="forum-type" style="width:100%;font-size:10px;padding:7px 11px;border:1.5px solid #f8bbd0;border-radius:10px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;margin-bottom:8px;">
-          <option value="question">❓ سؤال</option>
-          <option value="tip">💡 نصيحة</option>
-          <option value="experience">📖 تجربة</option>
-          <option value="symptom">🤒 عرض</option>
-        </select>
-        <textarea class="forum-add-input" id="forum-input" placeholder="اكتبي هنا... (هويتك هتبقى مخفية)"></textarea>
-        <div class="forum-img-upload">
-          <label class="img-upload-btn" for="forum-img-input">📷 أضيفي صورة</label>
-          <input type="file" id="forum-img-input" accept="image/*" style="display:none;" onchange="previewForumImg(event)"/>
-          <img id="forum-img-preview" class="forum-img-preview" style="display:none;"/>
-          <button id="forum-img-clear" style="display:none;background:none;border:none;color:#e91e8c;font-size:14px;cursor:pointer;" onclick="clearForumImg()">✕</button>
-        </div>
-        <button class="forum-send-btn" onclick="addForumPost()">📤 نشر</button>
-      </div>
-      <div id="forum-posts">
-        <div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>
-      </div>
-    </div>
       <div class="forum-filter">
         <button class="ftag active" onclick="filterForum('all',this)">🌸 الكل</button>
         <button class="ftag" onclick="filterForum('question',this)">❓ سؤال</button>
@@ -717,8 +662,8 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
         <div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>
       </div>
     </div>
-
-
+ 
+ 
     <!-- AI CHAT -->
     <div class="scr" id="s-ai">
       <div style="height:14px"></div>
@@ -743,10 +688,10 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
         <input id="ai-input" style="flex:1;font-size:11px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:20px;background:#fff;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;" placeholder="اسأليني أي سؤال عن حملك..." onkeydown="if(event.keyCode===13)sendAIMsg()"/>
       </div>
     </div>
-
+ 
   </div>
-
-
+ 
+ 
   <!-- MODAL -->
   <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
     <div class="modal">
@@ -773,8 +718,8 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
       <button onclick="closeEditMedDate()" style="background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;">إلغاء</button>
     </div>
   </div>
-
-
+ 
+ 
   <!-- EDIT MED DATE MODAL -->
   <div id="emd-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,0.5);z-index:60;display:none;align-items:flex-end;justify-content:center;" onclick="if(event.target===this)closeEditMedDate()">
     <div style="background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 28px;width:100%;">
@@ -789,9 +734,46 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
       <button onclick="closeEditMedDate()" style="background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;">إلغاء</button>
     </div>
   </div>
-
-
-  <div class="bnav">
+ 
+ 
+ 
+  <!-- EDIT MED MODAL -->
+  <div id="edit-med-overlay" onclick="if(event.target===this)closeEditMed()" style="position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:60;display:none;align-items:flex-end;justify-content:center;">
+    <div style="background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;">
+      <div style="font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:16px;">✏️ تعديل الدواء</div>
+      <input type="hidden" id="edit-med-id"/>
+      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">💊 اسم الدواء</label><input type="text" id="edit-med-name" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;"/></div>
+      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">🕐 طريقة الاستخدام</label><input type="text" id="edit-med-dose" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;"/></div>
+      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📅 تاريخ البداية</label><input type="date" id="edit-med-date" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/></div>
+      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">🔢 عدد الجرعات يومياً</label><select id="edit-med-times" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;"><option value="1">1 مرة يومياً</option><option value="2">2 مرات يومياً</option><option value="3">3 مرات يومياً</option><option value="4">4 مرات يومياً</option></select></div>
+      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📊 الحالة</label><select id="edit-med-status" onchange="toggleStopDate()" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;"><option value="on">مستمر ✅</option><option value="off">موقوف ❌</option></select></div>
+      <div id="stop-date-field" style="margin-bottom:14px;display:none;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📅 تاريخ الوقف</label><input type="date" id="edit-med-stopdate" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/></div>
+      <button onclick="saveEditMed()" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;">✅ حفظ التعديل</button>
+      <button onclick="closeEditMed()" style="background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;">إلغاء</button>
+    </div>
+  </div>
+ 
+ 
+  <!-- PROFILE MODAL -->
+  <div id="profile-overlay" onclick="if(event.target===this)closeProfile()" style="position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:70;display:none;align-items:flex-end;justify-content:center;">
+    <div style="background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;max-height:85%;overflow-y:auto;">
+      <div id="profile-avatar" style="width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#1976d2);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 10px;">👤</div>
+      <div id="profile-name-big" style="font-size:18px;font-weight:700;color:#1a1a2e;text-align:center;margin-bottom:4px;">—</div>
+      <div id="profile-email-sm" style="font-size:11px;color:#aaa;text-align:center;margin-bottom:16px;"></div>
+      <div style="margin-bottom:12px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">👤 الاسم</label><input type="text" id="prof-name" placeholder="اسمك" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;"/></div>
+      <div style="margin-bottom:12px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">🎂 تاريخ الميلاد</label><input type="date" id="prof-dob" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/></div>
+      <div style="margin-bottom:12px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📱 رقم الموبايل</label><input type="tel" id="prof-phone" placeholder="01xxxxxxxxx" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/></div>
+      <div style="margin-bottom:14px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📧 الإيميل</label><input type="email" id="prof-email" placeholder="example@email.com" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/></div>
+      <div id="prof-err" style="display:none;color:#e91e8c;font-size:10px;font-weight:700;text-align:center;margin-bottom:8px;padding:8px;background:#fce4ec;border-radius:10px;"></div>
+      <button onclick="saveProfile()" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;">✅ حفظ</button>
+      <button onclick="closeProfile()" style="background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;">إلغاء</button>
+      <div id="admin-access-btn" style="display:none;margin-top:8px;"><button onclick="openAdmin()" style="background:linear-gradient(135deg,#1a237e,#880e4f);border:none;border-radius:13px;padding:10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;">🛡️ لوحة الإدارة</button></div>
+    </div>
+  </div>
+ 
+  <div class="bnav-wrap">
+    <div class="bnav-drag"></div>
+    <div class="bnav">
     <button class="nb on" onclick="go('home',this)"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg>الرئيسية</button>
     <button class="nb" onclick="go('meds',this)"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M4 6h16v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><line x1="12" y1="10" x2="12" y2="16"/><line x1="9" y1="13" x2="15" y2="13"/></svg>الأدوية</button>
     <button class="nb" onclick="go('info',this)"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>معلومات</button>
@@ -802,18 +784,18 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
     <button class="nb" onclick="go('ai',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>AI</button>
   </div>
 </div>
-
+ 
 <script>
 // ===== FIREBASE SDK INIT =====
 let auth = null, db = null, currentUser = null, isNewUser = false;
-
+ 
 function switchAuthTab(tab){
   document.getElementById('tab-login').className='auth-tab'+(tab==='login'?' on':'');
   document.getElementById('tab-signup').className='auth-tab'+(tab==='signup'?' on':'');
   document.getElementById('auth-name-field').style.display=tab==='signup'?'block':'none';
   document.getElementById('auth-btn').textContent=tab==='login'?'دخول 🚀':'إنشاء حساب ✨';
 }
-
+ 
 function setAuthErr(msg){ const el=document.getElementById('auth-err'); if(el)el.textContent=msg; }
 function setAuthLoading(v){
   const btn=document.getElementById('auth-btn');
@@ -821,7 +803,7 @@ function setAuthLoading(v){
   if(load)load.style.display=v?'block':'none';
   if(btn)btn.disabled=v;
 }
-
+ 
 function hideApp(){
   document.querySelector('.inner').style.display='none';
   document.querySelector('.bnav').style.display='none';
@@ -831,7 +813,7 @@ function showApp(){
   document.querySelector('.inner').style.display='block';
   document.querySelector('.bnav').style.display='flex';
 }
-
+ 
 function handleAuth(){
   if(!auth){ setAuthErr('⚠️ جاري التحميل، انتظري لحظة'); return; }
   const email=document.getElementById('auth-email').value.trim();
@@ -859,7 +841,7 @@ function handleAuth(){
       .catch(e=>{ setAuthErr(authErrMsg(e.code)); setAuthLoading(false); });
   }
 }
-
+ 
 function handleGoogle(){
   if(!auth){ setAuthErr('⚠️ جاري التحميل، انتظري لحظة'); return; }
   const provider=new firebase.auth.GoogleAuthProvider();
@@ -878,7 +860,7 @@ function handleGoogle(){
     })
     .catch(e=>{ if(e.code!=='auth/popup-closed-by-user') setAuthErr(authErrMsg(e.code)); });
 }
-
+ 
 function authErrMsg(code){
   const msgs={
     'auth/email-already-in-use':'الإيميل ده مسجل قبل كده',
@@ -893,7 +875,7 @@ function authErrMsg(code){
   };
   return msgs[code]||'خطأ: '+code;
 }
-
+ 
 function logOut(){
   if(!confirm('عايزة تخرجي؟')) return;
   if(auth) auth.signOut().catch(e=>e);
@@ -904,7 +886,7 @@ function logOut(){
   document.getElementById('auth-password').value='';
   setAuthErr('');
 }
-
+ 
 function saveToCloud(){
   if(!db||!currentUser) return;
   const data={
@@ -918,7 +900,7 @@ function saveToCloud(){
   };
   db.collection('users').doc(currentUser.uid).set(data,{merge:true}).catch(e=>console.log(e));
 }
-
+ 
 function loadFromCloud(){
   if(!db||!currentUser){ setAuthLoading(false); return; }
   db.collection('users').doc(currentUser.uid).get()
@@ -942,7 +924,7 @@ function loadFromCloud(){
     })
     .catch(e=>{ setAuthLoading(false); setAuthErr('خطأ في التحميل'); console.log(e); });
 }
-
+ 
 // Override save to sync cloud
 const _lsSave = save;
 function save(k,v){
@@ -950,7 +932,7 @@ function save(k,v){
   clearTimeout(window._ct);
   window._ct=setTimeout(saveToCloud,2000);
 }
-
+ 
 // Init Firebase on page load
 document.addEventListener('DOMContentLoaded',function(){
   try{
@@ -984,7 +966,7 @@ document.addEventListener('DOMContentLoaded',function(){
   }
 });
 </script>
-
+ 
 <script>
 </script>
 <script>
@@ -994,17 +976,17 @@ const MOS=['الأول','الثاني','الثالث','الرابع','الخام
 const MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 const FSIZE=[['',''],['',''],['',''],['3mm','🌱'],['4mm','🌱'],['5mm','🌱'],['6mm','🫐'],['1cm','🍓'],['1.6cm','🍒'],['2.3cm','🍇'],['3cm','🍒'],['4cm','🫑'],['5cm','🍋'],['7cm','🍑'],['8.7cm','🍎'],['10cm','🍏'],['11.6cm','🥑'],['13cm','🍐'],['14.2cm','🥭'],['15.3cm','🌽'],['16.4cm','🥦'],['26cm','🍆'],['28cm','🌽'],['29cm','🥕'],['30cm','🧅'],['34cm','🥬'],['35cm','🥒'],['36cm','🥒'],['37cm','🍆'],['38cm','🎃'],['39cm','🎃'],['40cm','🎃'],['41cm','🍉'],['42cm','🍉'],['43cm','🍉'],['44cm','🍉'],['45cm','🍉'],['46cm','🍉'],['47cm','🍉'],['48cm','🍉'],['50cm','👶']];
 const TIPS=['','','','','الجنين في أولى مراحل التشكّل 🌱','القلب بيبدأ يدق! 🫀','الكيس الجنيني واضح بالإيكو 🔍','ملامح الوجه بتتشكل 👀','الجنين حجمه زي فراولة 🍓','الجنين بيتحرك وإنتِ مش حاسة 🤸','بدأ الثلث التاني 🎉','الشعر والأظافر بتنمو 💅','الجنين بيسمع صوتك 👂','الجنين بيبتسم في النوم 😴','بدأت تحسي بالحركة 🤸','الجنين بيبص ببصيرة محدودة 👁','الجنين بيبكي بكاء صامت 😢','الجنين بيستجيب للضوء والصوت 🔊','الجنين في نمو سريع جداً 📈','الجنين بيكبر كتير هذا الأسبوع 💪'];
-
+ 
 // ===== LOCAL STORAGE =====
 function save(key, val){ try{ localStorage.setItem('hamila_'+key, JSON.stringify(val)); }catch(e){} }
 function load(key, def){ try{ const v=localStorage.getItem('hamila_'+key); return v!==null?JSON.parse(v):def; }catch(e){ return def; } }
-
+ 
 function showToast(){
   const t=document.getElementById('toast');
   t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),1500);
 }
-
+ 
 // ===== STATE =====
 let totalDays = load('totalDays', 45);
 let userName   = load('userName', '');
@@ -1014,9 +996,8 @@ let pastAppts  = load('pastAppts', []);
 let futureAppts= load('futureAppts', []);
 let symptoms   = load('symptoms', []);
 let uid        = load('uid', 0);
-let reminders   = load('reminders', {});
 let doseLog    = load('doseLog', {});
-
+ 
 // ===== ONBOARDING =====
 function checkOnboard(){
   if(!userName){ document.getElementById('onboard').style.display='flex'; }
@@ -1035,7 +1016,7 @@ function startApp(){
   document.getElementById('onboard').style.display='none';
   initApp();
 }
-
+ 
 // ===== INIT =====
 function initApp(){
   updateUI();
@@ -1050,15 +1031,14 @@ function initApp(){
   renderTracking();
   setWT(document.querySelector('.wt.s'),0);
 }
-
+ 
 // ===== UI UPDATE =====
 function updateUI(){
   const w=Math.floor(totalDays/7), d=totalDays%7, dw=w+1;
   document.getElementById('wn').textContent=w;
   document.getElementById('dn').textContent=d;
-  const pct=Math.min(100,Math.round(totalDays/280*100));
-  document.getElementById('pcurr').textContent=pct+'%';
-  document.getElementById('pf').style.width=pct+'%';
+  document.getElementById('pf').style.width=Math.min(100,Math.round(totalDays/280*100))+'%';
+  document.getElementById('pcurr').textContent='أسبوع '+w;
   document.getElementById('wlbl').textContent='الأسبوع '+(ORDS[dw-1]||dw);
   document.getElementById('disp-name').textContent=userName||'حاملة';
   const mo=Math.ceil(dw/4.3);
@@ -1072,16 +1052,16 @@ function updateUI(){
   const lmpCalc=new Date(); lmpCalc.setDate(lmpCalc.getDate()-totalDays);
   const due=new Date(lmpCalc); due.setDate(due.getDate()+280);
   document.getElementById('due-chip').textContent='📅 '+due.getDate()+' '+MONTHS[due.getMonth()]+' '+due.getFullYear();
-  // Update today's date chip
+  // Today's date
   const todayNow=new Date();
-  const days=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const dayNames=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
   const todayEl=document.getElementById('today-chip');
-  if(todayEl) todayEl.textContent='📅 '+days[todayNow.getDay()]+' '+todayNow.getDate()+' '+MONTHS[todayNow.getMonth()];
+  if(todayEl) todayEl.textContent='📅 '+dayNames[todayNow.getDay()]+' '+todayNow.getDate()+' '+MONTHS[todayNow.getMonth()];
   document.getElementById('info-week-badge').textContent='🌱 الأسبوع '+(ORDS[dw-1]||dw);
   document.getElementById('week-tip').textContent=TIPS[w]||'الجنين بيكبر بشكل صحي كل يوم! 💕';
 }
-
-
+ 
+ 
 function renderActiveMeds(){
   const el=document.getElementById('active-meds-home');
   if(!el)return;
@@ -1109,7 +1089,7 @@ function renderHomeNotes(){
     <div class="note"><span class="note-txt">• ${n.t} <span style="font-size:8px;color:#aaa;">${n.d}</span></span>
     <button class="del-btn" onclick="deleteHomeNote(${i})">✕</button></div>`).join('');
 }
-
+ 
 // ===== MEDS =====
 function addMed(){
   const name=document.getElementById('med-name').value.trim();
@@ -1126,8 +1106,8 @@ function addMed(){
   save('customMeds',customMeds); save('uid',uid);
   renderMeds(); showToast();
 }
-
-
+ 
+ 
 function editMedDate(id){
   const m=customMeds.find(x=>x.id===id);
   if(!m)return;
@@ -1213,13 +1193,13 @@ function renderMeds(){
     '</div>';
   }).join('');
 }
-
+ 
 // ===== WEEK INFO
-
+ 
 // ===== WEEK INFO =====
 const WC=[['الجنين حجمه ~1.2 سم 🍓','الدماغ والجهاز العصبي بيتطوروا بسرعة','بدأت تتشكل ملامح الوجه والأذنين','القلب بيدق 150 مرة في الدقيقة'],['الغثيان والتعب طبيعيين جداً','الثدي قد يكون حساساً','النوم الكتير مفيد لجسمك','التبول المتكرر طبيعي'],['زودي حمض الفوليك يومياً','اتجنبي الجبن والسمك غير المطهيين','8 أكواب مياه على الأقل','الزنجبيل والنعناع بيخففوا الغثيان'],['تجنبي الأسبرين والإيبوبروفين','أي نزيف — روحي للدكتورة فوراً','تجنبي الحرارة الشديدة','الأشعة السينية بدون ضرورة تجنبيها']];
 function setWT(btn,i){document.querySelectorAll('.wt').forEach(b=>b.classList.remove('s'));btn.classList.add('s');document.getElementById('wic').innerHTML=WC[i].map(t=>`<div class="wi"><div class="wdot"></div><span class="wtxt">${t}</span></div>`).join('');}
-
+ 
 // ===== MODAL =====
 let modalTab='lmp';
 function openModal(){document.getElementById('modal').classList.add('show');}
@@ -1232,7 +1212,7 @@ function applyEdit(){
   if(totalDays<0)totalDays=0;
   save('totalDays',totalDays); updateUI(); closeModal(); showToast();
 }
-
+ 
 // ===== NAV =====
 function go(n,btn,isPurple=false){
   document.querySelectorAll('.scr').forEach(s=>s.classList.remove('act'));
@@ -1243,7 +1223,7 @@ function go(n,btn,isPurple=false){
   if(n==='track') setTimeout(()=>{ renderTracking(); },100);
   if(n==='forum') loadForumPosts();
 }
-
+ 
 // ===== APPOINTMENTS =====
 let currentType='past';
 function setType(t){currentType=t;document.getElementById('tog-past').className='tog-btn'+(t==='past'?' active-past':'');document.getElementById('tog-future').className='tog-btn'+(t==='future'?' active-future':'');document.getElementById('past-fields').style.display=t==='past'?'block':'none';document.getElementById('future-fields').style.display=t==='future'?'block':'none';}
@@ -1275,7 +1255,7 @@ function renderFuture(){
   if(!futureAppts.length){el.innerHTML='<div style="font-size:11px;color:#aaa;text-align:center;padding:10px;">لا توجد مواعيد قادمة</div>';return;}
   el.innerHTML=futureAppts.map(a=>`<div class="upcoming-card"><button class="del-btn del-btn-blue del-btn-abs" onclick="deleteFuture(${a.id})">✕</button><div class="uc-top"><div class="uc-date"><div class="uc-day">📅</div><div class="uc-mon">${a.date||'قريباً'}</div></div><div><div class="uc-title">${a.name}</div>${a.note?`<div class="uc-sub">${a.note}</div>`:''}</div></div></div>`).join('');
 }
-
+ 
 // ===== SYMPTOMS =====
 let currentInt=1;
 function setInt(n){currentInt=n;[1,2,3].forEach(i=>{document.getElementById('int'+i).className='int-btn'+(i<=n?' on':'');});}
@@ -1300,18 +1280,18 @@ function renderSymptoms(){
   if(!symptoms.length){el.innerHTML='<div class="sym-empty">لا توجد أعراض مسجلة بعد<br><span style="font-size:18px;margin-top:6px;display:block">🌸</span></div>';return;}
   el.innerHTML=symptoms.map(s=>`<div class="sym-card"><button class="sym-del" onclick="deleteSym(${s.id})">✕</button><div class="sym-emoji-box">${s.emoji}</div><div class="sym-info"><div class="sym-name">${s.name}</div><div class="sym-meta"><span class="sym-date">📅 ${s.date}</span><div class="int-dots">${[1,2,3].map(i=>`<div class="int-dot ${i<=s.intensity?'filled':'empty'}"></div>`).join('')}</div><span style="font-size:9px;color:#ce93d8">${s.intensity===1?'خفيف':s.intensity===2?'متوسط':'شديد'}</span></div></div></div>`).join('');
 }
-
-
+ 
+ 
 // ===== TRACKING =====
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
 // ===== TRACKING =====
 let momWeights = load('momWeights', []);
 let fetWeights = load('fetWeights', []);
-
+ 
 function switchTrackTab(t){
   document.getElementById('sec-mom').style.display=t==='mom'?'block':'none';
   document.getElementById('sec-fet').style.display=t==='fet'?'block':'none';
@@ -1322,13 +1302,13 @@ function switchTrackTab(t){
     else drawTrackChart('fet-canvas',fetWeights,'#e91e8c');
   },80);
 }
-
+ 
 function showTrkErr(id,msg){
   const el=document.getElementById(id);
   el.textContent='⚠️ '+msg; el.style.display='block';
   setTimeout(()=>el.style.display='none',2500);
 }
-
+ 
 function addMom(){
   const date=document.getElementById('mom-date').value;
   const wRaw=document.getElementById('mom-w').value.trim();
@@ -1341,7 +1321,7 @@ function addMom(){
   document.getElementById('mom-w').value='';
   renderMomTrack(); showToast();
 }
-
+ 
 function addFet(){
   const date=document.getElementById('fet-date').value;
   const wRaw=document.getElementById('fet-w').value.trim();
@@ -1354,13 +1334,13 @@ function addFet(){
   document.getElementById('fet-w').value='';
   renderFetTrack(); showToast();
 }
-
+ 
 function delMomW(i){momWeights.splice(i,1);save('momWeights',momWeights);renderMomTrack();showToast();}
 function delFetW(i){fetWeights.splice(i,1);save('fetWeights',fetWeights);renderFetTrack();showToast();}
-
+ 
 function fmtD(d){const p=d.split('-');return p[2]+'/'+p[1];}
 const MNAMES=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-
+ 
 function drawTrackChart(id,data,color){
   const canvas=document.getElementById(id);
   if(!canvas)return;
@@ -1406,7 +1386,7 @@ function drawTrackChart(id,data,color){
     ctx.fillText(fmtD(data[i].date),p.x,120-6);
   });
 }
-
+ 
 function renderMomTrack(){
   document.getElementById('mom-cnt').textContent=momWeights.length;
   if(momWeights.length){
@@ -1430,7 +1410,7 @@ function renderMomTrack(){
   }).join('');
   setTimeout(()=>drawTrackChart('mom-canvas',momWeights,'#1976d2'),50);
 }
-
+ 
 function renderFetTrack(){
   document.getElementById('fet-cnt').textContent=fetWeights.length;
   if(fetWeights.length){
@@ -1454,12 +1434,12 @@ function renderFetTrack(){
   }).join('');
   setTimeout(()=>drawTrackChart('fet-canvas',fetWeights,'#e91e8c'),50);
 }
-
+ 
 function renderTracking(){ renderMomTrack(); renderFetTrack(); }
-
-
+ 
+ 
 // ===== DAILY DOSE TRACKING =====
-
+ 
 function getTodayKey(){
   return new Date().toISOString().split('T')[0];
 }
@@ -1468,7 +1448,7 @@ function getTodayLabel(){
   const days=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
   return days[t.getDay()]+' '+t.getDate()+' '+MONTHS[t.getMonth()];
 }
-
+ 
 function toggleDose(medId, doseIdx){
   const today=getTodayKey();
   if(!doseLog[today]) doseLog[today]={};
@@ -1480,7 +1460,7 @@ function toggleDose(medId, doseIdx){
   updateDoseCount();
   showToast();
 }
-
+ 
 function updateDoseCount(){
   const today=getTodayKey();
   const activeMeds=customMeds.filter(m=>m.status==='on');
@@ -1494,7 +1474,7 @@ function updateDoseCount(){
   const el=document.getElementById('doses-today-count');
   if(el) el.textContent=takenDoses+'/'+totalDoses;
 }
-
+ 
 function renderDailyDoses(){
   const el=document.getElementById('daily-doses-section');
   if(!el)return;
@@ -1513,16 +1493,16 @@ function renderDailyDoses(){
     return s;
   },0);
   const pct=totalDoses?Math.round(takenDoses/totalDoses*100):0;
-
+ 
   const doseLabels1=['الصبح','الظهر','العصر','الليل'];
   const doseLabels2=['صبح','ليل'];
-
+ 
   let html='<div class="stitle stitle-pink" style="margin-bottom:8px;">✅ جرعات النهارده</div>';
   html+='<div style="background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:12px 13px;margin-bottom:10px;">';
   html+='<div class="dose-date-header"><span>'+getTodayLabel()+'</span><span style="color:#e91e8c;font-weight:700;">'+takenDoses+' / '+totalDoses+' جرعة</span></div>';
   html+='<div class="dose-progress"><div class="dose-progress-fill" style="width:'+pct+'%"></div></div>';
   html+='</div>';
-
+ 
   activeMeds.forEach(m=>{
     const times=m.timesPerDay||1;
     const labels=times===1?['خدتيها']:times===2?doseLabels2:times>=3?doseLabels1.slice(0,times):doseLabels1;
@@ -1539,306 +1519,160 @@ function renderDailyDoses(){
     html+='</div>';
     html+='</div>';
   });
-
+ 
   el.innerHTML=html;
   updateDoseCount();
 }
-
-
-
-// ===== ADMIN PANEL =====
-const ADMIN_UID = '3BS9kTS6BkWqVc5z44LvDssLxjZ2';
-let bannedUsers = load('bannedUsers', []);
-let reportsList = load('reportsList', []);
-let currentAdminTab = 'posts';
-
-function openAdmin(){
-  if(!currentUser||currentUser.uid!==ADMIN_UID)return;
-  closeProfile();
-  document.getElementById('admin-panel').classList.add('show');
-  loadAdminStats();
-  loadAdminPosts();
-}
-function closeAdmin(){document.getElementById('admin-panel').classList.remove('show');}
-
-async function loadAdminStats(){
-  if(!db)return;
-  try{
-    const postsSnap=await db.collection('forum').get();
-    document.getElementById('admin-stat-posts').textContent=postsSnap.size;
-    document.getElementById('admin-stat-reports').textContent=reportsList.length;
-    document.getElementById('admin-stat-banned').textContent=bannedUsers.length;
-    document.getElementById('admin-stat-users').textContent='—';
-  }catch(e){console.log(e);}
-}
-
-function adminTab(tab,btn){
-  currentAdminTab=tab;
-  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  if(tab==='posts') loadAdminPosts();
-  else if(tab==='reports') loadAdminReports();
-  else if(tab==='banned') loadAdminBanned();
-}
-
-async function loadAdminPosts(){
-  const el=document.getElementById('admin-content');
-  if(!db){el.innerHTML='<div style="text-align:center;color:#aaa;font-size:11px;padding:16px;">Firebase غير متصل</div>';return;}
-  el.innerHTML='<div style="text-align:center;color:#aaa;font-size:11px;padding:16px;">⏳ جاري التحميل...</div>';
-  try{
-    const snap=await db.collection('forum').orderBy('ts','desc').limit(30).get();
-    // posts loaded below
-    if(!snap.size){el.innerHTML='<div style="text-align:center;color:#aaa;font-size:11px;padding:16px;">لا توجد منشورات</div>';return;}
-    el.innerHTML=snap.docs.map(doc=>{
-      const p={id:doc.id,...doc.data()};
-      return '<div class="admin-post-card">'+
-        '<div class="admin-post-meta">'+p.author+' · '+p.week+' · '+(TYPE_LABELS[p.type]||p.type)+'</div>'+
-        '<div class="admin-post-text">'+p.text+'</div>'+
-        '<div class="admin-actions">'+
-          '<button class="admin-btn admin-btn-del" data-pid="'+p.id+'" onclick="adminDeletePost(this.dataset.pid)">🗑 حذف</button>'+
-          '<button class="admin-btn admin-btn-pin" data-pid="'+p.id+'" data-pinned="'+(p.pinned||false)+'" onclick="adminPinPost(this.dataset.pid,this.dataset.pinned)">'+
-            (p.pinned?'📌 إلغاء التثبيت':'📌 تثبيت')+
-          '</button>'+
-          '<button class="admin-btn admin-btn-ban" data-uid="'+p.uid+'" onclick="adminBanUser(this.dataset.uid)">🚫 حظر</button>'+
-        '</div>'+
-      '</div>';
-    }).join('');
-  }catch(e){el.innerHTML='<div style="color:red;font-size:10px;padding:10px;">خطأ: '+e.message+'</div>';}
-}
-
-function loadAdminReports(){
-  const el=document.getElementById('admin-content');
-  if(!reportsList.length){el.innerHTML='<div style="text-align:center;color:#aaa;font-size:11px;padding:16px;">لا توجد بلاغات</div>';return;}
-  el.innerHTML=reportsList.map((r,i)=>'<div class="admin-report-card">'+
-    '<div style="font-size:10px;font-weight:700;color:#e65100;">بلاغ #'+(i+1)+'</div>'+
-    '<div style="font-size:10px;color:#555;margin:4px 0;">المنشور: '+r.postId+'</div>'+
-    '<div style="font-size:9px;color:#888;">'+new Date(r.ts).toLocaleDateString('ar')+'</div>'+
-    '<button class="admin-btn admin-btn-del" style="margin-top:6px;" onclick="clearReport('+i+')">✓ تم المراجعة</button>'+
-  '</div>').join('');
-}
-
-function loadAdminBanned(){
-  const el=document.getElementById('admin-content');
-  if(!bannedUsers.length){el.innerHTML='<div style="text-align:center;color:#aaa;font-size:11px;padding:16px;">لا يوجد مستخدمون محظورون</div>';return;}
-  el.innerHTML=bannedUsers.map((uid,i)=>'<div class="admin-post-card">'+
-    '<div style="font-size:10px;font-weight:700;color:#6a1b9a;">🚫 '+uid+'</div>'+
-    '<button class="admin-btn" style="background:#e8f5e9;color:#2e7d32;margin-top:6px;" onclick="adminUnban('+i+')">✓ رفع الحظر</button>'+
-  '</div>').join('');
-}
-
-async function adminDeletePost(postId){
-  if(!confirm('حذف المنشور؟')) return;
-  try{
-    await db.collection('forum').doc(postId).delete();
-    forumPosts=forumPosts.filter(p=>p.id!==postId);
-    loadAdminPosts();loadAdminStats();
-  }catch(e){alert('خطأ: '+e.message);}
-}
-
-async function adminPinPost(postId,pinned){
-  const newPinned=pinned==='true'?false:true;
-  try{
-    await db.collection('forum').doc(postId).update({pinned:newPinned});
-    loadAdminPosts();
-  }catch(e){alert('خطأ: '+e.message);}
-}
-
-function adminBanUser(uid){
-  if(uid===ADMIN_UID){alert('مش تقدر تحظر نفسك 😄');return;}
-  if(!bannedUsers.includes(uid)){
-    bannedUsers.push(uid);
-    save('bannedUsers',bannedUsers);
-  }
-  document.getElementById('admin-stat-banned').textContent=bannedUsers.length;
-  loadAdminBanned();
-  alert('تم حظر المستخدم ✅');
-}
-
-function adminUnban(idx){
-  bannedUsers.splice(idx,1);
-  save('bannedUsers',bannedUsers);
-  loadAdminBanned();
-  document.getElementById('admin-stat-banned').textContent=bannedUsers.length;
-}
-
-function clearReport(idx){
-  reportsList.splice(idx,1);
-  save('reportsList',reportsList);
-  loadAdminReports();
-  document.getElementById('admin-stat-reports').textContent=reportsList.length;
-}
-
-// Override reportPost to save locally
-function reportPost(postId){
-  if(confirm('تبلغي عن هذا المنشور؟')){
-    reportsList.push({postId,ts:Date.now()});
-    save('reportsList',reportsList);
-    alert('شكراً — تم إرسال البلاغ للمشرف ✅');
-  }
-}
-
-// Check if user is banned before posting
-const _origAddForumPost = addForumPost;
-
+ 
+ 
 // ===== FORUM =====
 let forumPosts = [];
+let currentPostType = 'text';
+ 
+function setPostType(type){
+  currentPostType = type;
+  ['text','photo','poll'].forEach(t=>{
+    document.getElementById('ptype-'+t).classList.toggle('active', t===type);
+  });
+  document.getElementById('photo-section').style.display = type==='photo'?'block':'none';
+  document.getElementById('poll-section').style.display = type==='poll'?'block':'none';
+  // Update placeholder
+  const ta = document.getElementById('forum-input');
+  if(type==='poll') ta.placeholder='اكتبي سؤال الاستفتاء...';
+  else ta.placeholder='اكتبي هنا... (هويتك هتبقى مخفية)';
+}
+ 
+function addPollOption(){
+  const container = document.getElementById('poll-options-container');
+  const count = container.querySelectorAll('.poll-option-row').length;
+  if(count >= 5){ alert('الحد الأقصى 5 خيارات'); return; }
+  const row = document.createElement('div');
+  row.className = 'poll-option-row';
+  row.innerHTML = '<input class="poll-option-input" placeholder="خيار '+(count+1)+'"/><button class="poll-remove-btn" onclick="removePollOption(this)">✕</button>';
+  container.appendChild(row);
+}
+ 
+function removePollOption(btn){
+  const container = document.getElementById('poll-options-container');
+  if(container.querySelectorAll('.poll-option-row').length <= 2){ alert('لازم يكون فيه خيارين على الأقل'); return; }
+  btn.parentElement.remove();
+}
+ 
+function getPollOptions(){
+  return Array.from(document.querySelectorAll('.poll-option-input'))
+    .map(i=>i.value.trim()).filter(v=>v.length>0);
+}
 let forumFilter = 'all';
 let forumUID = 0;
-let forumImgData = null;
 const TYPE_LABELS = {question:'❓ سؤال', tip:'💡 نصيحة', experience:'📖 تجربة', symptom:'🤒 عرض'};
 const MONTHS_F = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-const REACTIONS = ['❤️','💗','🤗','😮','👍'];
-
-
 function getDisplayName(){ return userName ? userName.charAt(0).toUpperCase()+'***' : 'أم 🌸'; }
 function getWeekLabel(){ return 'الأسبوع '+(Math.floor(totalDays/7)||'?'); }
 function fmtForumTime(ts){
-  const d=new Date(ts),now=new Date(),diff=Math.floor((now-d)/60000);
+  const d=new Date(ts), now=new Date(), diff=Math.floor((now-d)/60000);
   if(diff<1)return 'الآن'; if(diff<60)return 'منذ '+diff+' دقيقة';
   if(diff<1440)return 'منذ '+Math.floor(diff/60)+' ساعة';
   return d.getDate()+' '+MONTHS_F[d.getMonth()];
 }
-
-function previewForumImg(e){
-  const file=e.target.files[0];
-  if(!file)return;
-  if(file.size>500000){alert('الصورة كبيرة جداً — اختاري صورة أقل من 500KB');return;}
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    forumImgData=ev.target.result;
-    const prev=document.getElementById('forum-img-preview');
-    prev.src=forumImgData; prev.style.display='block';
-    document.getElementById('forum-img-clear').style.display='inline';
-  };
-  reader.readAsDataURL(file);
-}
-function clearForumImg(){
-  forumImgData=null;
-  document.getElementById('forum-img-preview').style.display='none';
-  document.getElementById('forum-img-clear').style.display='none';
-  document.getElementById('forum-img-input').value='';
-}
-function openLightbox(src){
-  document.getElementById('lightbox-img').src=src;
-  document.getElementById('forum-lightbox').classList.add('show');
-}
-function closeLightbox(){document.getElementById('forum-lightbox').classList.remove('show');}
-
 function filterForum(type,btn){
   forumFilter=type;
   document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderForumPosts();
 }
-
 async function loadForumPosts(){
   if(!db)return;
   try{
-    const snap=await db.collection('forum').orderBy('pinned','desc').orderBy('ts','desc').limit(50).get();
+    const snap=await db.collection('forum').orderBy('ts','desc').limit(50).get();
     forumPosts=snap.docs.map(d=>({id:d.id,...d.data()}));
     renderForumPosts();
-  }catch(e){
-    // fallback without compound index
-    try{
-      const snap=await db.collection('forum').orderBy('ts','desc').limit(50).get();
-      forumPosts=snap.docs.map(d=>({id:d.id,...d.data()}));
-      renderForumPosts();
-    }catch(e2){console.log('Forum load error:',e2);}
-  }
+  }catch(e){console.log('Forum load error:',e);}
 }
-
 async function addForumPost(){
   const text=document.getElementById('forum-input').value.trim();
   const type=document.getElementById('forum-type').value;
   if(!text||text.length<5){alert('اكتبي أكثر من 5 حروف');return;}
-  const post={
-    text,type,img:forumImgData||null,
-    author:getDisplayName(),week:getWeekLabel(),
-    ts:Date.now(),likes:0,likedBy:[],
-    reactions:{},comments:[],
-    views:0,pinned:false,
-    uid:currentUser?currentUser.uid:'anon'
-  };
+  const post={text,type,author:getDisplayName(),week:getWeekLabel(),ts:Date.now(),likes:0,likedBy:[],comments:[],uid:currentUser?currentUser.uid:'anon'};
   try{
     if(db){const ref=await db.collection('forum').add(post);post.id=ref.id;}
     else{post.id='local_'+(forumUID++);}
     forumPosts.unshift(post);
     document.getElementById('forum-input').value='';
-    clearForumImg();
     renderForumPosts();
-  }catch(e){post.id='local_'+(forumUID++);forumPosts.unshift(post);document.getElementById('forum-input').value='';clearForumImg();renderForumPosts();}
+  }catch(e){post.id='local_'+(forumUID++);forumPosts.unshift(post);document.getElementById('forum-input').value='';renderForumPosts();}
 }
-
-async function reactPost(postId, emoji){
-  const post=forumPosts.find(p=>p.id===postId);if(!post)return;
+async function likePost(id){
+  const post=forumPosts.find(p=>p.id===id);if(!post)return;
   const uid=currentUser?currentUser.uid:'anon';
-  if(!post.reactions)post.reactions={};
-  if(!post.reactions[emoji])post.reactions[emoji]=[];
-  const idx=post.reactions[emoji].indexOf(uid);
-  if(idx>=0)post.reactions[emoji].splice(idx,1);
-  else post.reactions[emoji].push(uid);
-  if(db&&!postId.startsWith('local_'))
-    db.collection('forum').doc(postId).update({reactions:post.reactions}).catch(e=>e);
+  const liked=post.likedBy&&post.likedBy.includes(uid);
+  if(liked){post.likes=Math.max(0,(post.likes||0)-1);post.likedBy=(post.likedBy||[]).filter(u=>u!==uid);}
+  else{post.likes=(post.likes||0)+1;post.likedBy=[...(post.likedBy||[]),uid];}
+  if(db&&!id.startsWith('local_'))db.collection('forum').doc(id).update({likes:post.likes,likedBy:post.likedBy}).catch(e=>e);
   renderForumPosts();
 }
-
-async function deletePost(postId){
-  if(!confirm('هتحذفي المنشور ده؟')) return;
-  forumPosts=forumPosts.filter(p=>p.id!==postId);
-  if(db&&!postId.startsWith('local_'))
-    db.collection('forum').doc(postId).delete().catch(e=>e);
-  renderForumPosts();
-}
-
-async function pinPost(postId){
-  const post=forumPosts.find(p=>p.id===postId);if(!post)return;
-  post.pinned=!post.pinned;
-  if(db&&!postId.startsWith('local_'))
-    db.collection('forum').doc(postId).update({pinned:post.pinned}).catch(e=>e);
-  renderForumPosts();
-}
-
-function reportPost(postId){
-  if(confirm('تبلغي عن هذا المنشور؟')){
-    alert('شكراً — تم إرسال البلاغ للمشرف ✅');
-  }
-}
-
 function toggleComments(id){const el=document.getElementById('comments_'+id);if(el)el.style.display=el.style.display==='none'?'block':'none';}
-
 async function addComment(postId){
   const inp=document.getElementById('cinp_'+postId);
   const text=inp?inp.value.trim():'';if(!text)return;
   const post=forumPosts.find(p=>p.id===postId);if(!post)return;
   const comment={text,author:getDisplayName(),ts:Date.now()};
   post.comments=[...(post.comments||[]),comment];inp.value='';
-  if(db&&!postId.startsWith('local_'))
-    db.collection('forum').doc(postId).update({comments:post.comments}).catch(e=>e);
+  if(db&&!postId.startsWith('local_'))db.collection('forum').doc(postId).update({comments:post.comments}).catch(e=>e);
   renderForumPosts();
   setTimeout(()=>{const el=document.getElementById('comments_'+postId);if(el)el.style.display='block';},50);
 }
-
+ 
+async function voteInPoll(postId, optionIdx){
+  const post=forumPosts.find(p=>p.id===postId);
+  if(!post||!post.poll)return;
+  const uid=currentUser?currentUser.uid:'anon';
+  if(post.poll.votedBy && post.poll.votedBy.includes(uid)){
+    alert('صوتِ بالفعل في هذا الاستفتاء'); return;
+  }
+  if(!post.poll.votes) post.poll.votes=post.poll.options.map(()=>0);
+  if(!post.poll.votedBy) post.poll.votedBy=[];
+  post.poll.votes[optionIdx]=(post.poll.votes[optionIdx]||0)+1;
+  post.poll.votedBy.push(uid);
+  if(db&&!postId.startsWith('local_'))
+    db.collection('forum').doc(postId).update({'poll':post.poll}).catch(e=>e);
+  renderForumPosts();
+}
+ 
+ 
+function renderPollHTML(p, uid){
+  if(!p.poll||!p.poll.options) return '';
+  const votes=p.poll.votes||p.poll.options.map(()=>0);
+  const total=votes.reduce((a,b)=>a+b,0);
+  const hasVoted=p.poll.votedBy&&p.poll.votedBy.includes(uid);
+  let html='<div class="poll-container">';
+  p.poll.options.forEach((opt,i)=>{
+    const pct=total>0?Math.round(votes[i]/total*100):0;
+    html+='<div class="poll-option-display'+(hasVoted?' voted':'')+'"'+
+      (!hasVoted?' data-pid="'+p.id+'" data-idx="'+i+'" onclick="voteInPoll(this.dataset.pid,parseInt(this.dataset.idx))"':'')+'>'+
+      '<div class="poll-bar" style="width:'+(hasVoted?pct:0)+'%"></div>'+
+      '<div class="poll-option-text"><span>'+opt+'</span>'+(hasVoted?'<span class="poll-pct">'+pct+'%</span>':'')+
+      '</div></div>';
+  });
+  html+='<div class="poll-total">'+(hasVoted?total+' صوت':'اضغطي للتصويت 📊')+'</div></div>';
+  return html;
+}
+ 
 function renderForumPosts(){
   const el=document.getElementById('forum-posts');if(!el)return;
-  const uid=currentUser?currentUser.uid:'anon';
   let filtered=forumFilter==='all'?[...forumPosts]:forumPosts.filter(p=>p.type===forumFilter);
-  // Pinned first
   filtered.sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0));
   if(!filtered.length){el.innerHTML='<div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>';return;}
-
+  const uid=currentUser?currentUser.uid:'anon';
   el.innerHTML=filtered.map(p=>{
+    const liked=p.likedBy&&p.likedBy.includes(uid);
     const comments=p.comments||[];
-    const reactions=p.reactions||{};
     const isOwner=p.uid===uid;
     const isPinned=p.pinned||false;
-
-    // Reactions row
+    const reactions=p.reactions||{};
     const reactRow=REACTIONS.map(e=>{
       const arr=reactions[e]||[];
-      const reacted=arr.includes(uid);
-      return '<button class="react-btn '+(reacted?'reacted':'')+'" data-pid="'+p.id+'" data-e="'+e+'" onclick="reactPost(this.dataset.pid,this.dataset.e)">'+e+(arr.length?'<span class="react-count">'+arr.length+'</span>':'')+'</button>';
+      return '<button class="react-btn '+(arr.includes(uid)?'reacted':'')+'" data-pid="'+p.id+'" data-e="'+e+'" onclick="reactPost(this.dataset.pid,this.dataset.e)">'+e+(arr.length?'<span class="react-count">'+arr.length+'</span>':'')+' </button>';
     }).join('');
-
     return '<div class="forum-post'+(isPinned?' pinned-post':'')+'">'+
       '<div class="forum-post-header">'+
         '<div class="forum-avatar">'+p.author.charAt(0)+'</div>'+
@@ -1850,18 +1684,19 @@ function renderForumPosts(){
           '<div style="display:flex;gap:5px;align-items:center;margin-top:2px;">'+
             '<span class="forum-week-badge">'+p.week+'</span>'+
             '<span class="forum-time">'+fmtForumTime(p.ts)+'</span>'+
-            '<span class="view-count">👁 '+(p.views||0)+'</span>'+
           '</div>'+
         '</div>'+
         '<span style="font-size:9px;background:#fce4ec;color:#c2185b;padding:2px 7px;border-radius:8px;font-weight:700;">'+TYPE_LABELS[p.type]+'</span>'+
       '</div>'+
       '<div class="forum-content">'+p.text+'</div>'+
       (p.img?'<img class="forum-img" src="'+p.img+'" onclick="openLightbox(this.src)" alt="صورة"/>':'')+
+      (p.poll?renderPollHTML(p,uid):'')+
       '<div class="forum-reactions">'+reactRow+'</div>'+
       '<div class="forum-actions" style="margin-top:8px;">'+
+        '<button class="forum-like-btn '+(liked?'liked':'')+'" data-pid="'+p.id+'" onclick="likePost(this.dataset.pid)">❤️ '+(p.likes||0)+'</button>'+
         '<button class="forum-comment-btn" data-pid="'+p.id+'" onclick="toggleComments(this.dataset.pid)">💬 '+comments.length+' تعليق</button>'+
         (isOwner?'<button class="delete-btn-forum" data-pid="'+p.id+'" onclick="deletePost(this.dataset.pid)">🗑 حذف</button>':'')+
-        (uid===ADMIN_UID?'<button class="delete-btn-forum" style="background:#fff3e0;border-color:#ffb74d;color:#e65100;" data-pid="'+p.id+'" onclick="pinPost(this.dataset.pid)">'+(isPinned?'📌 إلغاء التثبيت':'📌 تثبيت')+'</button>':'')+
+        (uid===ADMIN_UID?'<button class="delete-btn-forum" style="background:#fff3e0;border-color:#ffb74d;color:#e65100;" data-pid="'+p.id+'" onclick="pinPost(this.dataset.pid)">'+(isPinned?'📌 إلغاء تثبيت':'📌 تثبيت')+'</button>':'')+
         '<button class="report-btn" data-pid="'+p.id+'" onclick="reportPost(this.dataset.pid)">⚑ إبلاغ</button>'+
       '</div>'+
       '<div id="comments_'+p.id+'" style="display:none;">'+
@@ -1879,7 +1714,8 @@ function renderForumPosts(){
     '</div>';
   }).join('');
 }
-
+ 
+ 
 // ===== AI CHAT =====
 let aiHistory = [];
 const AI_SYSTEM = 'أنت Pregnamate AI، مساعد ذكي متخصص في صحة الحمل والأمومة. تحدثي بالعربية المصرية بطريقة ودودة وبسيطة. تخصصك فقط في الحمل وصحة الأم والجنين. إجاباتك مش تتعدى 150 كلمة. دايماً نبّهي إن المعلومات للتوعية وليست بديلاً عن الطبيبة.';
@@ -1909,8 +1745,8 @@ async function askAI(msg){
   }
   messagesEl.scrollTop=messagesEl.scrollHeight;
 }
-
-
+ 
+ 
 // ===== EDIT MEDICINE =====
 function openEditMed(id){
   const m=customMeds.find(x=>x.id===id);if(!m)return;
@@ -1922,9 +1758,9 @@ function openEditMed(id){
   document.getElementById('edit-med-status').value=m.status||'on';
   document.getElementById('edit-med-stopdate').value=m.stopDate||'';
   document.getElementById('stop-date-field').style.display=m.status==='off'?'block':'none';
-  document.getElementById('edit-med-overlay').classList.add('show');
+  const eov=document.getElementById('edit-med-overlay');if(eov){eov.style.display='flex';eov.style.alignItems='flex-end';eov.style.justifyContent='center';}
 }
-function closeEditMed(){document.getElementById('edit-med-overlay').classList.remove('show');}
+function closeEditMed(){const eov=document.getElementById('edit-med-overlay');if(eov)eov.style.display='none';}
 function toggleStopDate(){
   const isOff=document.getElementById('edit-med-status').value==='off';
   document.getElementById('stop-date-field').style.display=isOff?'block':'none';
@@ -1942,9 +1778,9 @@ function saveEditMed(){
   m.stopDate=m.status==='off'?document.getElementById('edit-med-stopdate').value:'';
   save('customMeds',customMeds);saveToCloud();renderMeds();closeEditMed();showToast();
 }
-
-
-
+ 
+ 
+ 
 // ===== PROFILE =====
 let userProfile = load('userProfile', {name:'',dob:'',phone:'',email:''});
 function openProfile(){
@@ -1956,13 +1792,9 @@ function openProfile(){
   document.getElementById('profile-name-big').textContent=n;
   document.getElementById('profile-email-sm').textContent=currentUser?currentUser.email:'';
   document.getElementById('profile-avatar').textContent=n.charAt(0).toUpperCase()||'👤';
-  const pov=document.getElementById('profile-overlay');if(pov){pov.style.display='flex';}
-  try{
-    const adminBtn=document.getElementById('admin-access-btn');
-    if(adminBtn) adminBtn.style.display=(currentUser&&currentUser.uid===ADMIN_UID)?'block':'none';
-  }catch(e){}
+  document.getElementById('profile-overlay').classList.add('show');
 }
-function closeProfile(){const pov=document.getElementById('profile-overlay');if(pov)pov.style.display='none';}
+function closeProfile(){document.getElementById('profile-overlay').classList.remove('show');}
 function saveProfile(){
   const name=document.getElementById('prof-name').value.trim();
   const dob=document.getElementById('prof-dob').value;
@@ -1977,8 +1809,11 @@ function saveProfile(){
   if(name&&name!==userName){userName=name;save('userName',userName);const el=document.getElementById('disp-name');if(el)el.textContent=userName;}
   saveToCloud();closeProfile();showToast();
 }
-
+ 
 // ===== REMINDERS =====
+let reminders = load('reminders', {});
+let notifPermission = false;
+let reminderInterval = null;
 function toggleNotifications(){
   if(!('Notification' in window)){alert('متصفحك مش بيدعم التنبيهات');return;}
   if(Notification.permission==='granted'){notifPermission=true;renderReminders();return;}
@@ -2032,7 +1867,7 @@ function sendNotif(title,body){
 // ===== START =====
 checkOnboard();
 </script>
-
+ 
 <script>
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(e=>e));
