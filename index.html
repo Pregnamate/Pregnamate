@@ -1532,7 +1532,30 @@ function closeLightbox(){document.getElementById('forum-lightbox').style.display
 // ===== FORUM =====
 let forumPosts = [];
 let currentPostType = 'text';
+let forumImgData = null;
  
+function previewForumImg(e){
+  const file=e.target.files[0]; if(!file) return;
+  if(file.size>500000){alert('الصورة كبيرة جداً — اختاري أقل من 500KB'); return;}
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    forumImgData=ev.target.result;
+    const prev=document.getElementById('forum-img-preview');
+    const clr=document.getElementById('forum-img-clear');
+    if(prev){prev.src=forumImgData; prev.style.display='block';}
+    if(clr) clr.style.display='inline';
+  };
+  reader.readAsDataURL(file);
+}
+function clearForumImg(){
+  forumImgData=null;
+  const prev=document.getElementById('forum-img-preview');
+  const clr=document.getElementById('forum-img-clear');
+  const inp=document.getElementById('forum-img-input');
+  if(prev) prev.style.display='none';
+  if(clr) clr.style.display='none';
+  if(inp) inp.value='';
+}
 function setPostType(type){
   currentPostType = type;
   ['text','photo','poll'].forEach(t=>{
