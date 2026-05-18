@@ -847,7 +847,12 @@ function showApp(){
 }
  
 function handleAuth(){
-  if(!auth){ setAuthErr('⚠️ جاري التحميل، انتظري لحظة'); return; }
+  if(!auth){
+    setAuthErr('⏳ جاري التحميل...');
+    setTimeout(handleAuth, 800);
+    return;
+  }
+  setAuthErr('');
   const email=document.getElementById('auth-email').value.trim();
   const pass=document.getElementById('auth-password').value;
   const isSignup=document.getElementById('auth-name-field').style.display!=='none';
@@ -959,14 +964,11 @@ function loadFromCloud(){
  
 // Override save to sync cloud
 const _lsSave = save;
-function save(k,v){
-  try{ localStorage.setItem('hamila_'+k,JSON.stringify(v)); }catch(e){}
-  clearTimeout(window._ct);
-  window._ct=setTimeout(saveToCloud,2000);
-}
+// save handled in main script
  
-// Init Firebase on page load
-document.addEventListener('DOMContentLoaded',function(){
+ 
+// Init Firebase IMMEDIATELY (not waiting for DOMContentLoaded)
+(function initFirebase(){
   try{
     if(!firebase.apps.length){
       firebase.initializeApp({
@@ -980,23 +982,23 @@ document.addEventListener('DOMContentLoaded',function(){
     }
     auth=firebase.auth();
     db=firebase.firestore();
-    hideApp();
+ 
     auth.onAuthStateChanged(user=>{
       if(user&&!currentUser){
         currentUser=user;
         document.getElementById('auth-screen').style.display='none';
         loadFromCloud();
-      } else if(!user && !currentUser){
+      } else if(!user&&!currentUser){
         document.getElementById('auth-screen').style.display='flex';
         hideApp();
       }
     });
   }catch(e){
     console.log('Firebase error:',e);
-    document.getElementById('auth-screen').style.display='none';
-    showApp(); checkOnboard();
+    // Firebase not loaded yet - retry after 500ms
+    setTimeout(initFirebase, 500);
   }
-});
+})();
 </script>
  
 <script>
@@ -1010,7 +1012,11 @@ const FSIZE=[['',''],['',''],['',''],['3mm','🌱'],['4mm','🌱'],['5mm','🌱'
 const TIPS=['','','','','الجنين في أولى مراحل التشكّل 🌱','القلب بيبدأ يدق! 🫀','الكيس الجنيني واضح بالإيكو 🔍','ملامح الوجه بتتشكل 👀','الجنين حجمه زي فراولة 🍓','الجنين بيتحرك وإنتِ مش حاسة 🤸','بدأ الثلث التاني 🎉','الشعر والأظافر بتنمو 💅','الجنين بيسمع صوتك 👂','الجنين بيبتسم في النوم 😴','بدأت تحسي بالحركة 🤸','الجنين بيبص ببصيرة محدودة 👁','الجنين بيبكي بكاء صامت 😢','الجنين بيستجيب للضوء والصوت 🔊','الجنين في نمو سريع جداً 📈','الجنين بيكبر كتير هذا الأسبوع 💪'];
  
 // ===== LOCAL STORAGE =====
-function save(key, val){ try{ localStorage.setItem('hamila_'+key, JSON.stringify(val)); }catch(e){} }
+function save(key, val){
+  try{ localStorage.setItem('hamila_'+key, JSON.stringify(val)); }catch(e){}
+  clearTimeout(window._ct);
+  window._ct=setTimeout(function(){ if(typeof saveToCloud==='function') saveToCloud(); }, 2000);
+}
 function load(key, def){ try{ const v=localStorage.getItem('hamila_'+key); return v!==null?JSON.parse(v):def; }catch(e){ return def; } }
  
 function showToast(){
