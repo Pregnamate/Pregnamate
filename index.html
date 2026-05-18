@@ -347,6 +347,54 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .google-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;border:none;border-radius:14px;padding:13px;font-size:12px;font-weight:700;color:#1a1a2e;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:4px;}
 .google-btn:hover{background:#f5f5f5;}
 
+
+/* FORUM EXTRA */
+.forum-reactions{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;}
+.react-btn{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:16px;padding:3px 9px;font-size:11px;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;display:flex;align-items:center;gap:3px;}
+.react-btn.reacted{background:#fce4ec;border-color:#e91e8c;font-weight:700;}
+.react-count{font-size:10px;color:#888;}
+.forum-img{width:100%;max-height:200px;object-fit:cover;border-radius:12px;margin:8px 0;cursor:pointer;}
+.forum-img-upload{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.img-upload-btn{background:#e3f2fd;border:1.5px solid #90caf9;border-radius:10px;padding:6px 12px;font-size:10px;font-weight:700;color:#1565c0;cursor:pointer;font-family:'Cairo',sans-serif;white-space:nowrap;}
+.forum-img-preview{max-width:80px;max-height:60px;border-radius:8px;object-fit:cover;}
+.forum-meta-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+.view-count{font-size:9px;color:#bbb;display:flex;align-items:center;gap:3px;}
+.pin-badge{background:#fff3e0;color:#e65100;font-size:8px;font-weight:700;padding:2px 7px;border-radius:8px;}
+.report-btn{font-size:9px;color:#bbb;background:none;border:none;cursor:pointer;font-family:'Cairo',sans-serif;margin-right:auto;}
+.delete-btn-forum{font-size:9px;color:#e91e8c;background:#fce4ec;border:1px solid #f48fb1;border-radius:8px;padding:2px 8px;cursor:pointer;font-family:'Cairo',sans-serif;}
+.pinned-post{border-color:#ff9800;background:#fffde7;}
+.forum-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:200;display:none;align-items:center;justify-content:center;}
+.forum-lightbox.show{display:flex;}
+.forum-lightbox img{max-width:95vw;max-height:90vh;border-radius:8px;}
+
+
+/* ADMIN PANEL */
+.admin-overlay{position:absolute;inset:0;background:#f5f5f5;z-index:90;display:none;overflow-y:auto;direction:rtl;}
+.admin-overlay.show{display:block;}
+.admin-header{background:linear-gradient(135deg,#1a237e,#880e4f);padding:16px;position:sticky;top:0;z-index:10;}
+.admin-header-title{font-size:16px;font-weight:700;color:#fff;}
+.admin-header-sub{font-size:10px;color:rgba(255,255,255,.8);margin-top:2px;}
+.admin-back{background:rgba(255,255,255,.2);border:none;border-radius:10px;padding:5px 12px;font-size:10px;font-weight:700;color:#fff;cursor:pointer;font-family:'Cairo',sans-serif;float:left;}
+.admin-section{background:#fff;border-radius:16px;padding:14px;margin:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.admin-section-title{font-size:12px;font-weight:700;color:#1a1a2e;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.stat-card{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:12px;text-align:center;}
+.stat-num{font-size:24px;font-weight:700;color:#e91e8c;}
+.stat-lbl{font-size:9px;color:#888;margin-top:2px;}
+.admin-post-card{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:10px;margin-bottom:8px;}
+.admin-post-text{font-size:11px;color:#1a1a2e;margin-bottom:6px;line-height:1.5;}
+.admin-post-meta{font-size:9px;color:#aaa;margin-bottom:8px;}
+.admin-actions{display:flex;gap:6px;flex-wrap:wrap;}
+.admin-btn{padding:4px 10px;border-radius:8px;font-size:9px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
+.admin-btn-del{background:#ffebee;color:#c62828;}
+.admin-btn-pin{background:#fff3e0;color:#e65100;}
+.admin-btn-ban{background:#f3e5f5;color:#6a1b9a;}
+.admin-report-card{background:#fff8e1;border:1.5px solid #ffcc02;border-radius:12px;padding:10px;margin-bottom:8px;}
+.admin-tab{padding:7px 14px;border-radius:10px;font-size:10px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;background:#f0f0f0;color:#888;}
+.admin-tab.on{background:linear-gradient(135deg,#e91e8c,#1976d2);color:#fff;}
+.admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;}
+.admin-tabs::-webkit-scrollbar{display:none;}
+
 </style>
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -619,6 +667,34 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
         <div style="font-size:15px;font-weight:700;color:#fff;">💬 مجتمع Pregnamate</div>
         <div style="font-size:10px;color:rgba(255,255,255,.85);margin-top:3px;">شاركي تجربتك مع أمهات زيك 🌸</div>
       </div>
+      <div class="forum-filter">
+        <button class="ftag active" onclick="filterForum('all',this)">🌸 الكل</button>
+        <button class="ftag" onclick="filterForum('question',this)">❓ سؤال</button>
+        <button class="ftag" onclick="filterForum('tip',this)">💡 نصيحة</button>
+        <button class="ftag" onclick="filterForum('experience',this)">📖 تجربة</button>
+        <button class="ftag" onclick="filterForum('symptom',this)">🤒 عرض</button>
+      </div>
+      <div class="forum-add-box">
+        <div class="forum-add-title">✍️ شاركي مع المجتمع</div>
+        <select id="forum-type" style="width:100%;font-size:10px;padding:7px 11px;border:1.5px solid #f8bbd0;border-radius:10px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;margin-bottom:8px;">
+          <option value="question">❓ سؤال</option>
+          <option value="tip">💡 نصيحة</option>
+          <option value="experience">📖 تجربة</option>
+          <option value="symptom">🤒 عرض</option>
+        </select>
+        <textarea class="forum-add-input" id="forum-input" placeholder="اكتبي هنا... (هويتك هتبقى مخفية)"></textarea>
+        <div class="forum-img-upload">
+          <label class="img-upload-btn" for="forum-img-input">📷 أضيفي صورة</label>
+          <input type="file" id="forum-img-input" accept="image/*" style="display:none;" onchange="previewForumImg(event)"/>
+          <img id="forum-img-preview" class="forum-img-preview" style="display:none;"/>
+          <button id="forum-img-clear" style="display:none;background:none;border:none;color:#e91e8c;font-size:14px;cursor:pointer;" onclick="clearForumImg()">✕</button>
+        </div>
+        <button class="forum-send-btn" onclick="addForumPost()">📤 نشر</button>
+      </div>
+      <div id="forum-posts">
+        <div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>
+      </div>
+    </div>
       <div class="forum-filter">
         <button class="ftag active" onclick="filterForum('all',this)">🌸 الكل</button>
         <button class="ftag" onclick="filterForum('question',this)">❓ سؤال</button>
@@ -996,6 +1072,11 @@ function updateUI(){
   const lmpCalc=new Date(); lmpCalc.setDate(lmpCalc.getDate()-totalDays);
   const due=new Date(lmpCalc); due.setDate(due.getDate()+280);
   document.getElementById('due-chip').textContent='📅 '+due.getDate()+' '+MONTHS[due.getMonth()]+' '+due.getFullYear();
+  // Update today's date chip
+  const todayNow=new Date();
+  const days=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const todayEl=document.getElementById('today-chip');
+  if(todayEl) todayEl.textContent='📅 '+days[todayNow.getDay()]+' '+todayNow.getDate()+' '+MONTHS[todayNow.getMonth()];
   document.getElementById('info-week-badge').textContent='🌱 الأسبوع '+(ORDS[dw-1]||dw);
   document.getElementById('week-tip').textContent=TIPS[w]||'الجنين بيكبر بشكل صحي كل يوم! 💕';
 }
@@ -1464,89 +1545,324 @@ function renderDailyDoses(){
 }
 
 
+
+// ===== ADMIN PANEL =====
+const ADMIN_UID = '3BS9kTS6BkWqVc5z44LvDssLxjZ2';
+let bannedUsers = load('bannedUsers', []);
+let reportsList = load('reportsList', []);
+let currentAdminTab = 'posts';
+
+function openAdmin(){
+  if(!currentUser||currentUser.uid!==ADMIN_UID)return;
+  closeProfile();
+  document.getElementById('admin-panel').classList.add('show');
+  loadAdminStats();
+  loadAdminPosts();
+}
+function closeAdmin(){document.getElementById('admin-panel').classList.remove('show');}
+
+async function loadAdminStats(){
+  if(!db)return;
+  try{
+    const postsSnap=await db.collection('forum').get();
+    document.getElementById('admin-stat-posts').textContent=postsSnap.size;
+    document.getElementById('admin-stat-reports').textContent=reportsList.length;
+    document.getElementById('admin-stat-banned').textContent=bannedUsers.length;
+    document.getElementById('admin-stat-users').textContent='—';
+  }catch(e){console.log(e);}
+}
+
+function adminTab(tab,btn){
+  currentAdminTab=tab;
+  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  if(tab==='posts') loadAdminPosts();
+  else if(tab==='reports') loadAdminReports();
+  else if(tab==='banned') loadAdminBanned();
+}
+
+async function loadAdminPosts(){
+  const el=document.getElementById('admin-content');
+  if(!db){el.innerHTML='<div style="text-align:center;color:#aaa;font-size:11px;padding:16px;">Firebase غير متصل</div>';return;}
+  el.innerHTML='<div style="text-align:center;color:#aaa;font-size:11px;padding:16px;">⏳ جاري التحميل...</div>';
+  try{
+    const snap=await db.collection('forum').orderBy('ts','desc').limit(30).get();
+    // posts loaded below
+    if(!snap.size){el.innerHTML='<div style="text-align:center;color:#aaa;font-size:11px;padding:16px;">لا توجد منشورات</div>';return;}
+    el.innerHTML=snap.docs.map(doc=>{
+      const p={id:doc.id,...doc.data()};
+      return '<div class="admin-post-card">'+
+        '<div class="admin-post-meta">'+p.author+' · '+p.week+' · '+(TYPE_LABELS[p.type]||p.type)+'</div>'+
+        '<div class="admin-post-text">'+p.text+'</div>'+
+        '<div class="admin-actions">'+
+          '<button class="admin-btn admin-btn-del" data-pid="'+p.id+'" onclick="adminDeletePost(this.dataset.pid)">🗑 حذف</button>'+
+          '<button class="admin-btn admin-btn-pin" data-pid="'+p.id+'" data-pinned="'+(p.pinned||false)+'" onclick="adminPinPost(this.dataset.pid,this.dataset.pinned)">'+
+            (p.pinned?'📌 إلغاء التثبيت':'📌 تثبيت')+
+          '</button>'+
+          '<button class="admin-btn admin-btn-ban" data-uid="'+p.uid+'" onclick="adminBanUser(this.dataset.uid)">🚫 حظر</button>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  }catch(e){el.innerHTML='<div style="color:red;font-size:10px;padding:10px;">خطأ: '+e.message+'</div>';}
+}
+
+function loadAdminReports(){
+  const el=document.getElementById('admin-content');
+  if(!reportsList.length){el.innerHTML='<div style="text-align:center;color:#aaa;font-size:11px;padding:16px;">لا توجد بلاغات</div>';return;}
+  el.innerHTML=reportsList.map((r,i)=>'<div class="admin-report-card">'+
+    '<div style="font-size:10px;font-weight:700;color:#e65100;">بلاغ #'+(i+1)+'</div>'+
+    '<div style="font-size:10px;color:#555;margin:4px 0;">المنشور: '+r.postId+'</div>'+
+    '<div style="font-size:9px;color:#888;">'+new Date(r.ts).toLocaleDateString('ar')+'</div>'+
+    '<button class="admin-btn admin-btn-del" style="margin-top:6px;" onclick="clearReport('+i+')">✓ تم المراجعة</button>'+
+  '</div>').join('');
+}
+
+function loadAdminBanned(){
+  const el=document.getElementById('admin-content');
+  if(!bannedUsers.length){el.innerHTML='<div style="text-align:center;color:#aaa;font-size:11px;padding:16px;">لا يوجد مستخدمون محظورون</div>';return;}
+  el.innerHTML=bannedUsers.map((uid,i)=>'<div class="admin-post-card">'+
+    '<div style="font-size:10px;font-weight:700;color:#6a1b9a;">🚫 '+uid+'</div>'+
+    '<button class="admin-btn" style="background:#e8f5e9;color:#2e7d32;margin-top:6px;" onclick="adminUnban('+i+')">✓ رفع الحظر</button>'+
+  '</div>').join('');
+}
+
+async function adminDeletePost(postId){
+  if(!confirm('حذف المنشور؟')) return;
+  try{
+    await db.collection('forum').doc(postId).delete();
+    forumPosts=forumPosts.filter(p=>p.id!==postId);
+    loadAdminPosts();loadAdminStats();
+  }catch(e){alert('خطأ: '+e.message);}
+}
+
+async function adminPinPost(postId,pinned){
+  const newPinned=pinned==='true'?false:true;
+  try{
+    await db.collection('forum').doc(postId).update({pinned:newPinned});
+    loadAdminPosts();
+  }catch(e){alert('خطأ: '+e.message);}
+}
+
+function adminBanUser(uid){
+  if(uid===ADMIN_UID){alert('مش تقدر تحظر نفسك 😄');return;}
+  if(!bannedUsers.includes(uid)){
+    bannedUsers.push(uid);
+    save('bannedUsers',bannedUsers);
+  }
+  document.getElementById('admin-stat-banned').textContent=bannedUsers.length;
+  loadAdminBanned();
+  alert('تم حظر المستخدم ✅');
+}
+
+function adminUnban(idx){
+  bannedUsers.splice(idx,1);
+  save('bannedUsers',bannedUsers);
+  loadAdminBanned();
+  document.getElementById('admin-stat-banned').textContent=bannedUsers.length;
+}
+
+function clearReport(idx){
+  reportsList.splice(idx,1);
+  save('reportsList',reportsList);
+  loadAdminReports();
+  document.getElementById('admin-stat-reports').textContent=reportsList.length;
+}
+
+// Override reportPost to save locally
+function reportPost(postId){
+  if(confirm('تبلغي عن هذا المنشور؟')){
+    reportsList.push({postId,ts:Date.now()});
+    save('reportsList',reportsList);
+    alert('شكراً — تم إرسال البلاغ للمشرف ✅');
+  }
+}
+
+// Check if user is banned before posting
+const _origAddForumPost = addForumPost;
+
 // ===== FORUM =====
 let forumPosts = [];
 let forumFilter = 'all';
 let forumUID = 0;
+let forumImgData = null;
 const TYPE_LABELS = {question:'❓ سؤال', tip:'💡 نصيحة', experience:'📖 تجربة', symptom:'🤒 عرض'};
 const MONTHS_F = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const REACTIONS = ['❤️','💗','🤗','😮','👍'];
+
+
 function getDisplayName(){ return userName ? userName.charAt(0).toUpperCase()+'***' : 'أم 🌸'; }
 function getWeekLabel(){ return 'الأسبوع '+(Math.floor(totalDays/7)||'?'); }
 function fmtForumTime(ts){
-  const d=new Date(ts), now=new Date(), diff=Math.floor((now-d)/60000);
+  const d=new Date(ts),now=new Date(),diff=Math.floor((now-d)/60000);
   if(diff<1)return 'الآن'; if(diff<60)return 'منذ '+diff+' دقيقة';
   if(diff<1440)return 'منذ '+Math.floor(diff/60)+' ساعة';
   return d.getDate()+' '+MONTHS_F[d.getMonth()];
 }
+
+function previewForumImg(e){
+  const file=e.target.files[0];
+  if(!file)return;
+  if(file.size>500000){alert('الصورة كبيرة جداً — اختاري صورة أقل من 500KB');return;}
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    forumImgData=ev.target.result;
+    const prev=document.getElementById('forum-img-preview');
+    prev.src=forumImgData; prev.style.display='block';
+    document.getElementById('forum-img-clear').style.display='inline';
+  };
+  reader.readAsDataURL(file);
+}
+function clearForumImg(){
+  forumImgData=null;
+  document.getElementById('forum-img-preview').style.display='none';
+  document.getElementById('forum-img-clear').style.display='none';
+  document.getElementById('forum-img-input').value='';
+}
+function openLightbox(src){
+  document.getElementById('lightbox-img').src=src;
+  document.getElementById('forum-lightbox').classList.add('show');
+}
+function closeLightbox(){document.getElementById('forum-lightbox').classList.remove('show');}
+
 function filterForum(type,btn){
   forumFilter=type;
   document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderForumPosts();
 }
+
 async function loadForumPosts(){
   if(!db)return;
   try{
-    const snap=await db.collection('forum').orderBy('ts','desc').limit(50).get();
+    const snap=await db.collection('forum').orderBy('pinned','desc').orderBy('ts','desc').limit(50).get();
     forumPosts=snap.docs.map(d=>({id:d.id,...d.data()}));
     renderForumPosts();
-  }catch(e){console.log('Forum load error:',e);}
+  }catch(e){
+    // fallback without compound index
+    try{
+      const snap=await db.collection('forum').orderBy('ts','desc').limit(50).get();
+      forumPosts=snap.docs.map(d=>({id:d.id,...d.data()}));
+      renderForumPosts();
+    }catch(e2){console.log('Forum load error:',e2);}
+  }
 }
+
 async function addForumPost(){
   const text=document.getElementById('forum-input').value.trim();
   const type=document.getElementById('forum-type').value;
   if(!text||text.length<5){alert('اكتبي أكثر من 5 حروف');return;}
-  const post={text,type,author:getDisplayName(),week:getWeekLabel(),ts:Date.now(),likes:0,likedBy:[],comments:[],uid:currentUser?currentUser.uid:'anon'};
+  const post={
+    text,type,img:forumImgData||null,
+    author:getDisplayName(),week:getWeekLabel(),
+    ts:Date.now(),likes:0,likedBy:[],
+    reactions:{},comments:[],
+    views:0,pinned:false,
+    uid:currentUser?currentUser.uid:'anon'
+  };
   try{
     if(db){const ref=await db.collection('forum').add(post);post.id=ref.id;}
     else{post.id='local_'+(forumUID++);}
     forumPosts.unshift(post);
     document.getElementById('forum-input').value='';
+    clearForumImg();
     renderForumPosts();
-  }catch(e){post.id='local_'+(forumUID++);forumPosts.unshift(post);document.getElementById('forum-input').value='';renderForumPosts();}
+  }catch(e){post.id='local_'+(forumUID++);forumPosts.unshift(post);document.getElementById('forum-input').value='';clearForumImg();renderForumPosts();}
 }
-async function likePost(id){
-  const post=forumPosts.find(p=>p.id===id);if(!post)return;
+
+async function reactPost(postId, emoji){
+  const post=forumPosts.find(p=>p.id===postId);if(!post)return;
   const uid=currentUser?currentUser.uid:'anon';
-  const liked=post.likedBy&&post.likedBy.includes(uid);
-  if(liked){post.likes=Math.max(0,(post.likes||0)-1);post.likedBy=(post.likedBy||[]).filter(u=>u!==uid);}
-  else{post.likes=(post.likes||0)+1;post.likedBy=[...(post.likedBy||[]),uid];}
-  if(db&&!id.startsWith('local_'))db.collection('forum').doc(id).update({likes:post.likes,likedBy:post.likedBy}).catch(e=>e);
+  if(!post.reactions)post.reactions={};
+  if(!post.reactions[emoji])post.reactions[emoji]=[];
+  const idx=post.reactions[emoji].indexOf(uid);
+  if(idx>=0)post.reactions[emoji].splice(idx,1);
+  else post.reactions[emoji].push(uid);
+  if(db&&!postId.startsWith('local_'))
+    db.collection('forum').doc(postId).update({reactions:post.reactions}).catch(e=>e);
   renderForumPosts();
 }
+
+async function deletePost(postId){
+  if(!confirm('هتحذفي المنشور ده؟')) return;
+  forumPosts=forumPosts.filter(p=>p.id!==postId);
+  if(db&&!postId.startsWith('local_'))
+    db.collection('forum').doc(postId).delete().catch(e=>e);
+  renderForumPosts();
+}
+
+async function pinPost(postId){
+  const post=forumPosts.find(p=>p.id===postId);if(!post)return;
+  post.pinned=!post.pinned;
+  if(db&&!postId.startsWith('local_'))
+    db.collection('forum').doc(postId).update({pinned:post.pinned}).catch(e=>e);
+  renderForumPosts();
+}
+
+function reportPost(postId){
+  if(confirm('تبلغي عن هذا المنشور؟')){
+    alert('شكراً — تم إرسال البلاغ للمشرف ✅');
+  }
+}
+
 function toggleComments(id){const el=document.getElementById('comments_'+id);if(el)el.style.display=el.style.display==='none'?'block':'none';}
+
 async function addComment(postId){
   const inp=document.getElementById('cinp_'+postId);
   const text=inp?inp.value.trim():'';if(!text)return;
   const post=forumPosts.find(p=>p.id===postId);if(!post)return;
   const comment={text,author:getDisplayName(),ts:Date.now()};
   post.comments=[...(post.comments||[]),comment];inp.value='';
-  if(db&&!postId.startsWith('local_'))db.collection('forum').doc(postId).update({comments:post.comments}).catch(e=>e);
+  if(db&&!postId.startsWith('local_'))
+    db.collection('forum').doc(postId).update({comments:post.comments}).catch(e=>e);
   renderForumPosts();
   setTimeout(()=>{const el=document.getElementById('comments_'+postId);if(el)el.style.display='block';},50);
 }
+
 function renderForumPosts(){
   const el=document.getElementById('forum-posts');if(!el)return;
-  const filtered=forumFilter==='all'?forumPosts:forumPosts.filter(p=>p.type===forumFilter);
-  if(!filtered.length){el.innerHTML='<div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>';return;}
   const uid=currentUser?currentUser.uid:'anon';
+  let filtered=forumFilter==='all'?[...forumPosts]:forumPosts.filter(p=>p.type===forumFilter);
+  // Pinned first
+  filtered.sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0));
+  if(!filtered.length){el.innerHTML='<div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>';return;}
+
   el.innerHTML=filtered.map(p=>{
-    const liked=p.likedBy&&p.likedBy.includes(uid);
     const comments=p.comments||[];
-    return '<div class="forum-post">'+
+    const reactions=p.reactions||{};
+    const isOwner=p.uid===uid;
+    const isPinned=p.pinned||false;
+
+    // Reactions row
+    const reactRow=REACTIONS.map(e=>{
+      const arr=reactions[e]||[];
+      const reacted=arr.includes(uid);
+      return '<button class="react-btn '+(reacted?'reacted':'')+'" data-pid="'+p.id+'" data-e="'+e+'" onclick="reactPost(this.dataset.pid,this.dataset.e)">'+e+(arr.length?'<span class="react-count">'+arr.length+'</span>':'')+'</button>';
+    }).join('');
+
+    return '<div class="forum-post'+(isPinned?' pinned-post':'')+'">'+
       '<div class="forum-post-header">'+
         '<div class="forum-avatar">'+p.author.charAt(0)+'</div>'+
-        '<div class="forum-meta"><div class="forum-username">'+p.author+'</div>'+
+        '<div class="forum-meta">'+
+          '<div style="display:flex;align-items:center;gap:5px;">'+
+            '<span class="forum-username">'+p.author+'</span>'+
+            (isPinned?'<span class="pin-badge">📌 مثبت</span>':'')+
+          '</div>'+
           '<div style="display:flex;gap:5px;align-items:center;margin-top:2px;">'+
             '<span class="forum-week-badge">'+p.week+'</span>'+
             '<span class="forum-time">'+fmtForumTime(p.ts)+'</span>'+
-          '</div></div>'+
+            '<span class="view-count">👁 '+(p.views||0)+'</span>'+
+          '</div>'+
+        '</div>'+
         '<span style="font-size:9px;background:#fce4ec;color:#c2185b;padding:2px 7px;border-radius:8px;font-weight:700;">'+TYPE_LABELS[p.type]+'</span>'+
       '</div>'+
       '<div class="forum-content">'+p.text+'</div>'+
-      '<div class="forum-actions">'+
-        '<button class="forum-like-btn '+(liked?'liked':'')+'" data-pid="'+p.id+'" onclick="likePost(this.dataset.pid)">❤️ '+(p.likes||0)+'</button>'+
+      (p.img?'<img class="forum-img" src="'+p.img+'" onclick="openLightbox(this.src)" alt="صورة"/>':'')+
+      '<div class="forum-reactions">'+reactRow+'</div>'+
+      '<div class="forum-actions" style="margin-top:8px;">'+
         '<button class="forum-comment-btn" data-pid="'+p.id+'" onclick="toggleComments(this.dataset.pid)">💬 '+comments.length+' تعليق</button>'+
+        (isOwner?'<button class="delete-btn-forum" data-pid="'+p.id+'" onclick="deletePost(this.dataset.pid)">🗑 حذف</button>':'')+
+        (uid===ADMIN_UID?'<button class="delete-btn-forum" style="background:#fff3e0;border-color:#ffb74d;color:#e65100;" data-pid="'+p.id+'" onclick="pinPost(this.dataset.pid)">'+(isPinned?'📌 إلغاء التثبيت':'📌 تثبيت')+'</button>':'')+
+        '<button class="report-btn" data-pid="'+p.id+'" onclick="reportPost(this.dataset.pid)">⚑ إبلاغ</button>'+
       '</div>'+
       '<div id="comments_'+p.id+'" style="display:none;">'+
         '<div class="forum-comments">'+
@@ -1563,7 +1879,6 @@ function renderForumPosts(){
     '</div>';
   }).join('');
 }
-
 
 // ===== AI CHAT =====
 let aiHistory = [];
@@ -1642,6 +1957,8 @@ function openProfile(){
   document.getElementById('profile-email-sm').textContent=currentUser?currentUser.email:'';
   document.getElementById('profile-avatar').textContent=n.charAt(0).toUpperCase()||'👤';
   document.getElementById('profile-overlay').classList.add('show');
+  const adminBtn=document.getElementById('admin-access-btn');
+  if(adminBtn) adminBtn.style.display=(currentUser&&currentUser.uid===ADMIN_UID)?'block':'none';
 }
 function closeProfile(){document.getElementById('profile-overlay').classList.remove('show');}
 function saveProfile(){
