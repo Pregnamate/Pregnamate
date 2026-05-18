@@ -1608,12 +1608,31 @@ function filterForum(type,btn){
   renderForumPosts();
 }
 async function loadForumPosts(){
-  if(!db)return;
+  // First load from localStorage for instant display
   try{
-    const snap=await db.collection('forum').orderBy('ts','desc').limit(50).get();
-    forumPosts=snap.docs.map(d=>({id:d.id,...d.data()}));
+    const localPosts = JSON.parse(localStorage.getItem('hamila_forumPosts')||'[]');
+    if(localPosts.length > 0 && forumPosts.length === 0){
+      forumPosts = localPosts;
+      renderForumPosts();
+    }
+  }catch(e){}
+ 
+  if(!db){ renderForumPosts(); return; }
+  
+  try{
+    const snap=await db.collection('forum').orderBy('ts','desc').limit(100).get();
+    const fbPosts=snap.docs.map(d=>({id:d.id,...d.data()}));
+    // Merge: keep temp posts + Firebase posts
+    const tempPosts=forumPosts.filter(p=>p.id&&p.id.startsWith('temp_'));
+    forumPosts=[...tempPosts,...fbPosts];
+    forumPosts.sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0)||(b.ts-a.ts));
+    // Update localStorage with latest
+    try{ localStorage.setItem('hamila_forumPosts', JSON.stringify(forumPosts.slice(0,100))); }catch(e){}
     renderForumPosts();
-  }catch(e){console.log('Forum load error:',e);}
+  }catch(e){
+    console.log('Forum load error:',e);
+    renderForumPosts();
+  }
 }
 async function addForumPost(){
   const text=document.getElementById('forum-input').value.trim();
@@ -1657,13 +1676,26 @@ async function addForumPost(){
   setPostType('text');
   renderForumPosts();
   
-  // Then save to Firebase in background
+  // Save to localStorage as backup
+  try{
+    const localPosts = JSON.parse(localStorage.getItem('hamila_forumPosts')||'[]');
+    localPosts.unshift(post);
+    localStorage.setItem('hamila_forumPosts', JSON.stringify(localPosts.slice(0,100)));
+  }catch(e){}
+ 
+  // Save to Firebase
   if(db){
     try{
-      const ref=await db.collection('forum').add(post);
-      // Update the temp post with real Firebase ID
-      const idx=forumPosts.findIndex(p=>p.id===post.id);
-      if(idx>=0) forumPosts[idx].id=ref.id;
+      const ref = await db.collection('forum').add(post);
+      const idx = forumPosts.findIndex(p=>p.id===post.id);
+      if(idx>=0) forumPosts[idx].id = ref.id;
+      // Update localStorage with real ID
+      try{
+        const lp = JSON.parse(localStorage.getItem('hamila_forumPosts')||'[]');
+        const li = lp.findIndex(p=>p.id===post.id);
+        if(li>=0){ lp[li].id=ref.id; localStorage.setItem('hamila_forumPosts',JSON.stringify(lp)); }
+      }catch(e){}
+      setTimeout(loadForumPosts, 1000);
     }catch(e){
       console.log('Firebase save error:',e);
     }
