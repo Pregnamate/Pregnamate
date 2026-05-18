@@ -363,7 +363,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 <body>
 <div class="phone">
   <div class="notch"></div>
-  <div class="sbar"><span id="live-clock">9:41</span><span>Pregnamate 🤱</span><span>📶🔋</span></div>
+  <div class="sbar"><span>9:41</span><span>Pregnamate 🤱</span><span>📶🔋</span></div>
   <div class="save-toast" id="toast">💾 تم الحفظ</div>
 
 <!-- AUTH SCREEN -->
@@ -877,28 +877,6 @@ function save(k,v){
 
 // Init Firebase on page load
 document.addEventListener('DOMContentLoaded',function(){
-  const isPreview=location.hostname.includes('replit.dev')||location.hostname.includes('github.io')||location.hostname==='localhost'||location.hostname==='127.0.0.1';
-  if(isPreview){
-    auth=null; db=null;
-    currentUser={uid:'demo'};
-    userName=load('userName')||'رباب';
-    totalDays=load('totalDays')||112;
-    homeNotes=load('homeNotes')||[{t:'شربت المياه الكافية اليوم 💧',d:'18 مايو'}];
-    customMeds=load('customMeds')||[{id:1,name:'فوليك أسيد',dose:'5mg',times:['صباحاً'],status:'on',startDate:''}];
-    pastAppts=load('pastAppts')||[{id:1,name:'كشف الثلث الأول',doctor:'د. سارة',day:'10',mon:'مارس',note:'تم بنجاح'}];
-    futureAppts=load('futureAppts')||[{id:2,name:'كشف الثلث الثاني',doctor:'د. سارة',date:'25 يونيو 2026',note:'الموجات فوق الصوتية'}];
-    symptoms=load('symptoms')||[];
-    momWeights=load('momWeights')||[{date:'2026-05-01',val:68},{date:'2026-05-10',val:68.5},{date:'2026-05-18',val:69}];
-    fetWeights=load('fetWeights')||[];
-    doseLog=load('doseLog')||{};
-    userProfile=load('userProfile')||{};
-    uid=load('uid')||10;
-    document.getElementById('auth-screen').style.display='none';
-    document.getElementById('onboard').style.display='none';
-    showApp();
-    initApp();
-    return;
-  }
   try{
     if(!firebase.apps.length){
       firebase.initializeApp({
@@ -1018,7 +996,6 @@ function updateUI(){
   const lmpCalc=new Date(); lmpCalc.setDate(lmpCalc.getDate()-totalDays);
   const due=new Date(lmpCalc); due.setDate(due.getDate()+280);
   document.getElementById('due-chip').textContent='📅 '+due.getDate()+' '+MONTHS[due.getMonth()]+' '+due.getFullYear();
-  const todayNow=new Date(); document.getElementById('today-chip').textContent='📅 '+todayNow.getDate()+' '+MONTHS[todayNow.getMonth()];
   document.getElementById('info-week-badge').textContent='🌱 الأسبوع '+(ORDS[dw-1]||dw);
   document.getElementById('week-tip').textContent=TIPS[w]||'الجنين بيكبر بشكل صحي كل يوم! 💕';
 }
@@ -1735,16 +1712,6 @@ function sendNotif(title,body){
 }
 // ===== START =====
 checkOnboard();
-
-function updateClock(){
-  const n=new Date();
-  const h=String(n.getHours()).padStart(2,'0');
-  const m=String(n.getMinutes()).padStart(2,'0');
-  const el=document.getElementById('live-clock');
-  if(el) el.textContent=h+':'+m;
-}
-updateClock();
-setInterval(updateClock,1000);
 </script>
 
 <script>
