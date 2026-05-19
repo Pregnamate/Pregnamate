@@ -398,6 +398,25 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;}
 .admin-tabs::-webkit-scrollbar{display:none;}
  
+ 
+/* FORUM CARDS */
+.pinned-post{border-color:#ff9800 !important;background:#fffde7;}
+.pin-badge{background:#fff3e0;color:#e65100;font-size:8px;font-weight:700;padding:2px 7px;border-radius:8px;}
+.react-btn{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:16px;padding:3px 9px;font-size:11px;cursor:pointer;font-family:'Cairo',sans-serif;}
+.react-btn.reacted{background:#fce4ec;border-color:#e91e8c;font-weight:700;}
+.react-count{font-size:10px;color:#888;}
+.report-btn{font-size:9px;color:#bbb;background:none;border:none;cursor:pointer;font-family:'Cairo',sans-serif;margin-right:auto;}
+.delete-btn-forum{font-size:9px;color:#e91e8c;background:#fce4ec;border:1px solid #f48fb1;border-radius:8px;padding:2px 8px;cursor:pointer;font-family:'Cairo',sans-serif;}
+.forum-img{width:100%;max-height:200px;object-fit:cover;border-radius:12px;margin:8px 0;cursor:pointer;}
+.forum-img-upload{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.forum-img-preview{max-width:80px;max-height:60px;border-radius:8px;object-fit:cover;}
+.img-upload-btn{background:#e3f2fd;border:1.5px solid #90caf9;border-radius:10px;padding:6px 12px;font-size:10px;font-weight:700;color:#1565c0;cursor:pointer;font-family:'Cairo',sans-serif;white-space:nowrap;}
+/* AI CHAT */
+.ai-msg{max-width:85%;padding:10px 13px;border-radius:16px;font-size:11px;line-height:1.6;}
+.ai-msg-user{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;align-self:flex-start;border-radius:16px 16px 4px 16px;}
+.ai-msg-bot{background:#fff;border:1.5px solid #f8bbd0;color:#1a1a2e;align-self:flex-end;border-radius:16px 16px 16px 4px;}
+.ai-msg-bot.loading{color:#aaa;font-style:italic;}
+ 
 </style>
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -509,6 +528,14 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
       <div class="meds-list" id="custom-meds-list"></div>
       <!-- DAILY DOSE LOG -->
       <div id="daily-doses-section" style="margin-bottom:14px;"></div>
+      <!-- REMINDERS -->
+      <div style="background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:12px;margin-bottom:12px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-size:11px;font-weight:700;color:#c2185b;">🔔 تنبيهات الأدوية</span>
+          <button id="notif-toggle-btn" onclick="toggleNotifications()" style="font-size:10px;font-weight:700;padding:4px 10px;border-radius:10px;border:none;cursor:pointer;font-family:'Cairo',sans-serif;background:#fce4ec;color:#c2185b;">تفعيل التنبيهات</button>
+        </div>
+        <div id="reminder-list"><div style="font-size:11px;color:#aaa;text-align:center;padding:8px;">فعّل التنبيهات لإضافة مواعيد الجرعات</div></div>
+      </div>
  
       <div class="add-section" style="border-color:#f48fb1;">
         <div class="add-title">➕ أضيفي دواء جديد</div>
@@ -1531,57 +1558,42 @@ function closeLightbox(){document.getElementById('forum-lightbox').style.display
  
 // ===== FORUM =====
 let forumPosts = [];
-let currentPostType = 'text';
+let forumFilter = 'all';
+let forumUID = 0;
 let forumImgData = null;
+let currentPostType = 'text';
  
-function previewForumImg(e){
-  const file=e.target.files[0]; if(!file) return;
-  if(file.size>500000){alert('الصورة كبيرة جداً — اختاري أقل من 500KB'); return;}
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    forumImgData=ev.target.result;
-    const prev=document.getElementById('forum-img-preview');
-    const clr=document.getElementById('forum-img-clear');
-    if(prev){prev.src=forumImgData; prev.style.display='block';}
-    if(clr) clr.style.display='inline';
-  };
-  reader.readAsDataURL(file);
-}
-function clearForumImg(){
-  forumImgData=null;
-  const prev=document.getElementById('forum-img-preview');
-  const clr=document.getElementById('forum-img-clear');
-  const inp=document.getElementById('forum-img-input');
-  if(prev) prev.style.display='none';
-  if(clr) clr.style.display='none';
-  if(inp) inp.value='';
-}
+const TYPE_LABELS = {question:'❓ سؤال', tip:'💡 نصيحة', experience:'📖 تجربة', symptom:'🤒 عرض'};
+const REACTIONS = ['❤️','💗','🤗','😮','👍'];
+ 
+// ===== POST TYPE =====
 function setPostType(type){
   currentPostType = type;
-  ['text','photo','poll'].forEach(t=>{
-    document.getElementById('ptype-'+t).classList.toggle('active', t===type);
-  });
-  document.getElementById('photo-section').style.display = type==='photo'?'block':'none';
-  document.getElementById('poll-section').style.display = type==='poll'?'block':'none';
-  // Update placeholder
+  document.querySelectorAll('.post-type-btn').forEach(b=>b.classList.remove('active'));
+  const btn = document.getElementById('ptype-'+type);
+  if(btn) btn.classList.add('active');
+  const photo = document.getElementById('photo-section');
+  const poll = document.getElementById('poll-section');
   const ta = document.getElementById('forum-input');
-  if(type==='poll') ta.placeholder='اكتبي سؤال الاستفتاء...';
-  else ta.placeholder='اكتبي هنا... (هويتك هتبقى مخفية)';
+  if(photo) photo.style.display = type==='photo'?'block':'none';
+  if(poll) poll.style.display = type==='poll'?'block':'none';
+  if(ta) ta.placeholder = type==='poll'?'اكتبي سؤال الاستفتاء...':'اكتبي هنا... (هويتك هتبقى مخفية)';
 }
  
 function addPollOption(){
-  const container = document.getElementById('poll-options-container');
-  const count = container.querySelectorAll('.poll-option-row').length;
-  if(count >= 5){ alert('الحد الأقصى 5 خيارات'); return; }
+  const c2 = document.getElementById('poll-options-container');
+  if(!c2) return;
+  const n = c2.querySelectorAll('.poll-option-row').length;
+  if(n>=5){alert('الحد الأقصى 5 خيارات');return;}
   const row = document.createElement('div');
-  row.className = 'poll-option-row';
-  row.innerHTML = '<input class="poll-option-input" placeholder="خيار '+(count+1)+'"/><button class="poll-remove-btn" onclick="removePollOption(this)">✕</button>';
-  container.appendChild(row);
+  row.className='poll-option-row';
+  row.innerHTML='<input class="poll-option-input" placeholder="خيار '+(n+1)+'"/><button class="poll-remove-btn" onclick="removePollOption(this)">✕</button>';
+  c2.appendChild(row);
 }
  
 function removePollOption(btn){
-  const container = document.getElementById('poll-options-container');
-  if(container.querySelectorAll('.poll-option-row').length <= 2){ alert('لازم يكون فيه خيارين على الأقل'); return; }
+  const c2=document.getElementById('poll-options-container');
+  if(!c2||c2.querySelectorAll('.poll-option-row').length<=2){alert('لازم يكون فيه خيارين على الأقل');return;}
   btn.parentElement.remove();
 }
  
@@ -1589,161 +1601,216 @@ function getPollOptions(){
   return Array.from(document.querySelectorAll('.poll-option-input'))
     .map(i=>i.value.trim()).filter(v=>v.length>0);
 }
-let forumFilter = 'all';
-let forumUID = 0;
-const TYPE_LABELS = {question:'❓ سؤال', tip:'💡 نصيحة', experience:'📖 تجربة', symptom:'🤒 عرض'};
-const MONTHS_F = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-function getDisplayName(){ return userName ? userName.charAt(0).toUpperCase()+'***' : 'أم 🌸'; }
-function getWeekLabel(){ return 'الأسبوع '+(Math.floor(totalDays/7)||'?'); }
-function fmtForumTime(ts){
-  const d=new Date(ts), now=new Date(), diff=Math.floor((now-d)/60000);
-  if(diff<1)return 'الآن'; if(diff<60)return 'منذ '+diff+' دقيقة';
-  if(diff<1440)return 'منذ '+Math.floor(diff/60)+' ساعة';
-  return d.getDate()+' '+MONTHS_F[d.getMonth()];
+ 
+// ===== IMAGE =====
+function previewForumImg(e){
+  const file=e.target.files[0]; if(!file) return;
+  if(file.size>500000){alert('الصورة كبيرة — اختاري أقل من 500KB'); return;}
+  const reader=new FileReader();
+  reader.onload=ev=>{
+    forumImgData=ev.target.result;
+    const prev=document.getElementById('forum-img-preview');
+    const clr=document.getElementById('forum-img-clear');
+    if(prev){prev.src=forumImgData;prev.style.display='block';}
+    if(clr) clr.style.display='inline';
+  };
+  reader.readAsDataURL(file);
 }
+ 
+function clearForumImg(){
+  forumImgData=null;
+  const prev=document.getElementById('forum-img-preview');
+  const clr=document.getElementById('forum-img-clear');
+  const inp=document.getElementById('forum-img-input');
+  if(prev){prev.src='';prev.style.display='none';}
+  if(clr) clr.style.display='none';
+  if(inp) inp.value='';
+}
+ 
+// ===== FILTER =====
 function filterForum(type,btn){
   forumFilter=type;
   document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+  if(btn) btn.classList.add('active');
   renderForumPosts();
 }
-async function loadForumPosts(){
-  // First load from localStorage for instant display
-  try{
-    const localPosts = JSON.parse(localStorage.getItem('hamila_forumPosts')||'[]');
-    if(localPosts.length > 0 && forumPosts.length === 0){
-      forumPosts = localPosts;
-      renderForumPosts();
-    }
-  }catch(e){}
  
+// ===== LOAD =====
+async function loadForumPosts(){
   if(!db){ renderForumPosts(); return; }
-  
   try{
-    const snap=await db.collection('forum').orderBy('ts','desc').limit(100).get();
-    const fbPosts=snap.docs.map(d=>({id:d.id,...d.data()}));
-    // Merge: keep temp posts + Firebase posts
-    const tempPosts=forumPosts.filter(p=>p.id&&p.id.startsWith('temp_'));
-    forumPosts=[...tempPosts,...fbPosts];
-    forumPosts.sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0)||(b.ts-a.ts));
-    // Update localStorage with latest
-    try{ localStorage.setItem('hamila_forumPosts', JSON.stringify(forumPosts.slice(0,100))); }catch(e){}
+    const snap = await db.collection('forum').orderBy('ts','desc').limit(100).get();
+    forumPosts = snap.docs.map(d=>({id:d.id,...d.data()}));
     renderForumPosts();
   }catch(e){
-    console.log('Forum load error:',e);
+    console.log('Load error:',e);
     renderForumPosts();
   }
 }
-async function addForumPost(){
-  const text=document.getElementById('forum-input').value.trim();
-  const type=document.getElementById('forum-type').value;
-  const ptype=currentPostType||'text';
-  
-  if(!text||text.length<3){alert('اكتبي أكثر من 3 حروف');return;}
  
-  // Poll validation
-  let pollData=null;
-  if(ptype==='poll'){
-    const opts=getPollOptions();
-    if(opts.length<2){alert('أضيفي خيارين على الأقل للاستفتاء');return;}
-    pollData={options:opts,votes:opts.map(()=>0),votedBy:[]};
+// ===== ADD POST =====
+async function addForumPost(){
+  const textEl = document.getElementById('forum-input');
+  const typeEl = document.getElementById('forum-type');
+  if(!textEl||!typeEl) return;
+  
+  const text = textEl.value.trim();
+  const type = typeEl.value;
+  
+  if(!text){ alert('اكتبي نصاً للمنشور'); return; }
+ 
+  let pollData = null;
+  if(currentPostType==='poll'){
+    const opts = getPollOptions();
+    if(opts.length<2){ alert('أضيفي خيارين على الأقل'); return; }
+    pollData = {options:opts, votes:opts.map(()=>0), votedBy:[]};
   }
  
-  const post={
+  const post = {
     text, type,
-    postType: ptype,
-    img: ptype==='photo'?(forumImgData||null):null,
+    postType: currentPostType,
+    img: currentPostType==='photo' ? (forumImgData||null) : null,
     poll: pollData,
-    author:getDisplayName(),
-    week:getWeekLabel(),
-    ts:Date.now(),
-    likes:0, likedBy:[],
-    reactions:{},
-    comments:[],
-    views:0, pinned:false,
-    uid:currentUser?currentUser.uid:'anon'
+    author: getDisplayName(),
+    week: getWeekLabel(),
+    ts: Date.now(),
+    likes: 0, likedBy: [],
+    reactions: {}, comments: [],
+    views: 0, pinned: false,
+    uid: currentUser ? currentUser.uid : 'anon'
   };
  
-  // Show post immediately (optimistic update)
-  post.id = 'temp_'+(forumUID++);
-  forumPosts.unshift(post);
-  document.getElementById('forum-input').value='';
+  // 1. Clear form
+  textEl.value = '';
   clearForumImg();
-  if(ptype==='poll'){
-    const cont=document.getElementById('poll-options-container');
-    if(cont) cont.innerHTML='<div class="poll-option-row"><input class="poll-option-input" placeholder="خيار 1"/><button class="poll-remove-btn" onclick="removePollOption(this)">✕</button></div><div class="poll-option-row"><input class="poll-option-input" placeholder="خيار 2"/><button class="poll-remove-btn" onclick="removePollOption(this)">✕</button></div>';
-  }
   setPostType('text');
-  renderForumPosts();
-  
-  // Save to localStorage as backup
-  try{
-    const localPosts = JSON.parse(localStorage.getItem('hamila_forumPosts')||'[]');
-    localPosts.unshift(post);
-    localStorage.setItem('hamila_forumPosts', JSON.stringify(localPosts.slice(0,100)));
-  }catch(e){}
  
-  // Save to Firebase
+  // 2. Save to Firebase
   if(db){
     try{
       const ref = await db.collection('forum').add(post);
-      const idx = forumPosts.findIndex(p=>p.id===post.id);
-      if(idx>=0) forumPosts[idx].id = ref.id;
-      // Update localStorage with real ID
-      try{
-        const lp = JSON.parse(localStorage.getItem('hamila_forumPosts')||'[]');
-        const li = lp.findIndex(p=>p.id===post.id);
-        if(li>=0){ lp[li].id=ref.id; localStorage.setItem('hamila_forumPosts',JSON.stringify(lp)); }
-      }catch(e){}
-      setTimeout(loadForumPosts, 1000);
+      post.id = ref.id;
+      console.log('Post saved:', ref.id);
     }catch(e){
-      console.log('Firebase save error:',e);
+      console.log('Firebase error:', e);
+      post.id = 'local_'+(forumUID++);
     }
+  } else {
+    post.id = 'local_'+(forumUID++);
   }
-}
-async function likePost(id){
-  const post=forumPosts.find(p=>p.id===id);if(!post)return;
-  const uid=currentUser?currentUser.uid:'anon';
-  const liked=post.likedBy&&post.likedBy.includes(uid);
-  if(liked){post.likes=Math.max(0,(post.likes||0)-1);post.likedBy=(post.likedBy||[]).filter(u=>u!==uid);}
-  else{post.likes=(post.likes||0)+1;post.likedBy=[...(post.likedBy||[]),uid];}
-  if(db&&!id.startsWith('local_'))db.collection('forum').doc(id).update({likes:post.likes,likedBy:post.likedBy}).catch(e=>e);
+ 
+  // 3. Add to local array and render
+  forumPosts.unshift(post);
   renderForumPosts();
-}
-function toggleComments(id){const el=document.getElementById('comments_'+id);if(el)el.style.display=el.style.display==='none'?'block':'none';}
-async function addComment(postId){
-  const inp=document.getElementById('cinp_'+postId);
-  const text=inp?inp.value.trim():'';if(!text)return;
-  const post=forumPosts.find(p=>p.id===postId);if(!post)return;
-  const comment={text,author:getDisplayName(),ts:Date.now()};
-  post.comments=[...(post.comments||[]),comment];inp.value='';
-  if(db&&!postId.startsWith('local_'))db.collection('forum').doc(postId).update({comments:post.comments}).catch(e=>e);
-  renderForumPosts();
-  setTimeout(()=>{const el=document.getElementById('comments_'+postId);if(el)el.style.display='block';},50);
 }
  
-async function voteInPoll(postId, optionIdx){
-  const post=forumPosts.find(p=>p.id===postId);
-  if(!post||!post.poll)return;
+// ===== LIKE =====
+async function likePost(postId){
+  const post = forumPosts.find(p=>p.id===postId); if(!post) return;
+  const uid = currentUser?currentUser.uid:'anon';
+  const liked = (post.likedBy||[]).includes(uid);
+  if(liked){ post.likes=Math.max(0,(post.likes||0)-1); post.likedBy=post.likedBy.filter(u=>u!==uid); }
+  else { post.likes=(post.likes||0)+1; post.likedBy=[...(post.likedBy||[]),uid]; }
+  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).update({likes:post.likes,likedBy:post.likedBy}).catch(e=>e);
+  renderForumPosts();
+}
+ 
+// ===== REACT =====
+async function reactPost(postId,emoji){
+  const post=forumPosts.find(p=>p.id===postId); if(!post) return;
   const uid=currentUser?currentUser.uid:'anon';
-  if(post.poll.votedBy && post.poll.votedBy.includes(uid)){
-    alert('صوتِ بالفعل في هذا الاستفتاء'); return;
-  }
+  if(!post.reactions) post.reactions={};
+  if(!post.reactions[emoji]) post.reactions[emoji]=[];
+  const idx=post.reactions[emoji].indexOf(uid);
+  if(idx>=0) post.reactions[emoji].splice(idx,1);
+  else post.reactions[emoji].push(uid);
+  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).update({reactions:post.reactions}).catch(e=>e);
+  renderForumPosts();
+}
+ 
+// ===== VOTE POLL =====
+async function voteInPoll(postId,optionIdx){
+  const post=forumPosts.find(p=>p.id===postId); if(!post||!post.poll) return;
+  const uid=currentUser?currentUser.uid:'anon';
+  if((post.poll.votedBy||[]).includes(uid)){alert('صوتِ بالفعل');return;}
   if(!post.poll.votes) post.poll.votes=post.poll.options.map(()=>0);
   if(!post.poll.votedBy) post.poll.votedBy=[];
   post.poll.votes[optionIdx]=(post.poll.votes[optionIdx]||0)+1;
   post.poll.votedBy.push(uid);
-  if(db&&!postId.startsWith('local_'))
-    db.collection('forum').doc(postId).update({'poll':post.poll}).catch(e=>e);
+  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).update({poll:post.poll}).catch(e=>e);
   renderForumPosts();
 }
  
+// ===== DELETE =====
+async function deletePost(postId){
+  if(!confirm('حذف المنشور؟')) return;
+  forumPosts=forumPosts.filter(p=>p.id!==postId);
+  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).delete().catch(e=>e);
+  renderForumPosts();
+}
  
-function renderPollHTML(p, uid){
+// ===== PIN =====
+async function pinPost(postId){
+  const post=forumPosts.find(p=>p.id===postId); if(!post) return;
+  post.pinned=!post.pinned;
+  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).update({pinned:post.pinned}).catch(e=>e);
+  renderForumPosts();
+}
+ 
+// ===== REPORT =====
+function reportPost(postId){
+  if(confirm('تبلغي عن هذا المنشور؟')){
+    reportsList.push({postId,ts:Date.now()});
+    save('reportsList',reportsList);
+    alert('شكراً — تم الإبلاغ ✅');
+  }
+}
+ 
+// ===== COMMENTS =====
+function toggleComments(id){
+  const el=document.getElementById('comments_'+id);
+  if(el) el.style.display=el.style.display==='none'?'block':'none';
+}
+ 
+async function addComment(postId){
+  const inp=document.getElementById('cinp_'+postId);
+  const text=inp?inp.value.trim():''; if(!text) return;
+  const post=forumPosts.find(p=>p.id===postId); if(!post) return;
+  const comment={text,author:getDisplayName(),ts:Date.now()};
+  post.comments=[...(post.comments||[]),comment];
+  inp.value='';
+  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).update({comments:post.comments}).catch(e=>e);
+  renderForumPosts();
+  setTimeout(()=>{const el=document.getElementById('comments_'+postId);if(el)el.style.display='block';},50);
+}
+ 
+// ===== LIGHTBOX =====
+function openLightbox(src){
+  const lb=document.getElementById('forum-lightbox');
+  const img=document.getElementById('lightbox-img');
+  if(lb&&img){img.src=src;lb.style.display='flex';}
+}
+function closeLightbox(){
+  const lb=document.getElementById('forum-lightbox');
+  if(lb) lb.style.display='none';
+}
+ 
+// ===== HELPERS =====
+function getDisplayName(){ return userName?userName.charAt(0).toUpperCase()+'***':'أم 🌸'; }
+function getWeekLabel(){ return 'الأسبوع '+(Math.floor(totalDays/7)||'?'); }
+function fmtForumTime(ts){
+  const d=new Date(ts),now=new Date(),diff=Math.floor((now-d)/60000);
+  if(diff<1)return 'الآن'; if(diff<60)return 'منذ '+diff+' دقيقة';
+  if(diff<1440)return 'منذ '+Math.floor(diff/60)+' ساعة';
+  return d.getDate()+' '+['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'][d.getMonth()];
+}
+ 
+// ===== POLL HTML =====
+function renderPollHTML(p,uid){
   if(!p.poll||!p.poll.options) return '';
   const votes=p.poll.votes||p.poll.options.map(()=>0);
   const total=votes.reduce((a,b)=>a+b,0);
-  const hasVoted=p.poll.votedBy&&p.poll.votedBy.includes(uid);
+  const hasVoted=(p.poll.votedBy||[]).includes(uid);
   let html='<div class="poll-container">';
   p.poll.options.forEach((opt,i)=>{
     const pct=total>0?Math.round(votes[i]/total*100):0;
@@ -1757,36 +1824,42 @@ function renderPollHTML(p, uid){
   return html;
 }
  
+// ===== RENDER =====
 function renderForumPosts(){
-  const el=document.getElementById('forum-posts');if(!el)return;
-  let filtered=forumFilter==='all'?[...forumPosts]:forumPosts.filter(p=>p.type===forumFilter);
-  filtered.sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0));
-  if(!filtered.length){el.innerHTML='<div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>';return;}
+  const el=document.getElementById('forum-posts'); if(!el) return;
   const uid=currentUser?currentUser.uid:'anon';
+  let filtered=forumFilter==='all'?[...forumPosts]:forumPosts.filter(p=>p.type===forumFilter);
+  filtered.sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0)||(b.ts-a.ts));
+  
+  if(!filtered.length){
+    el.innerHTML='<div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>';
+    return;
+  }
+  
   el.innerHTML=filtered.map(p=>{
-    const liked=p.likedBy&&p.likedBy.includes(uid);
+    const liked=(p.likedBy||[]).includes(uid);
     const comments=p.comments||[];
     const isOwner=p.uid===uid;
-    const isPinned=p.pinned||false;
     const reactions=p.reactions||{};
     const reactRow=REACTIONS.map(e=>{
       const arr=reactions[e]||[];
       return '<button class="react-btn '+(arr.includes(uid)?'reacted':'')+'" data-pid="'+p.id+'" data-e="'+e+'" onclick="reactPost(this.dataset.pid,this.dataset.e)">'+e+(arr.length?'<span class="react-count">'+arr.length+'</span>':'')+' </button>';
     }).join('');
-    return '<div class="forum-post'+(isPinned?' pinned-post':'')+'">'+
+ 
+    return '<div class="forum-post'+(p.pinned?' pinned-post':'')+'">'+
       '<div class="forum-post-header">'+
         '<div class="forum-avatar">'+p.author.charAt(0)+'</div>'+
         '<div class="forum-meta">'+
           '<div style="display:flex;align-items:center;gap:5px;">'+
             '<span class="forum-username">'+p.author+'</span>'+
-            (isPinned?'<span class="pin-badge">📌 مثبت</span>':'')+
+            (p.pinned?'<span class="pin-badge">📌 مثبت</span>':'')+
           '</div>'+
           '<div style="display:flex;gap:5px;align-items:center;margin-top:2px;">'+
             '<span class="forum-week-badge">'+p.week+'</span>'+
             '<span class="forum-time">'+fmtForumTime(p.ts)+'</span>'+
           '</div>'+
         '</div>'+
-        '<span style="font-size:9px;background:#fce4ec;color:#c2185b;padding:2px 7px;border-radius:8px;font-weight:700;">'+TYPE_LABELS[p.type]+'</span>'+
+        '<span style="font-size:9px;background:#fce4ec;color:#c2185b;padding:2px 7px;border-radius:8px;font-weight:700;">'+(TYPE_LABELS[p.type]||'')+'</span>'+
       '</div>'+
       '<div class="forum-content">'+p.text+'</div>'+
       (p.img?'<img class="forum-img" src="'+p.img+'" onclick="openLightbox(this.src)" alt="صورة"/>':'')+
@@ -1796,7 +1869,7 @@ function renderForumPosts(){
         '<button class="forum-like-btn '+(liked?'liked':'')+'" data-pid="'+p.id+'" onclick="likePost(this.dataset.pid)">❤️ '+(p.likes||0)+'</button>'+
         '<button class="forum-comment-btn" data-pid="'+p.id+'" onclick="toggleComments(this.dataset.pid)">💬 '+comments.length+' تعليق</button>'+
         (isOwner?'<button class="delete-btn-forum" data-pid="'+p.id+'" onclick="deletePost(this.dataset.pid)">🗑 حذف</button>':'')+
-        (uid===ADMIN_UID?'<button class="delete-btn-forum" style="background:#fff3e0;border-color:#ffb74d;color:#e65100;" data-pid="'+p.id+'" onclick="pinPost(this.dataset.pid)">'+(isPinned?'📌 إلغاء تثبيت':'📌 تثبيت')+'</button>':'')+
+        (typeof ADMIN_UID!=="undefined"&&uid===ADMIN_UID?'<button class="delete-btn-forum" style="background:#fff3e0;border-color:#ffb74d;color:#e65100;" data-pid="'+p.id+'" onclick="pinPost(this.dataset.pid)">'+(p.pinned?'📌 إلغاء':'📌 تثبيت')+'</button>':'')+
         '<button class="report-btn" data-pid="'+p.id+'" onclick="reportPost(this.dataset.pid)">⚑ إبلاغ</button>'+
       '</div>'+
       '<div id="comments_'+p.id+'" style="display:none;">'+
@@ -1805,7 +1878,7 @@ function renderForumPosts(){
           '<div style="font-size:10px;color:#aaa;text-align:center;padding:6px;">لا توجد تعليقات بعد</div>')+
         '</div>'+
         '<div class="forum-comment-input">'+
-          '<button data-pid="'+p.id+'" onclick="addComment(this.dataset.pid)" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">'+
+          '<button data-pid="'+p.id+'" onclick="addComment(this.dataset.pid)" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;">'+
             '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>'+
           '</button>'+
           '<input id="cinp_'+p.id+'" placeholder="اكتبي تعليقك..." data-pid="'+p.id+'" onkeydown="if(event.keyCode===13)addComment(this.dataset.pid)"/>'+
@@ -1814,7 +1887,6 @@ function renderForumPosts(){
     '</div>';
   }).join('');
 }
- 
  
 // ===== AI CHAT =====
 let aiHistory = [];
