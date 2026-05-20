@@ -301,7 +301,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
  
 /* PROFILE */
 .profile-icon{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;flex-shrink:0;}
-.profile-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:60;display:none;align-items:flex-end;justify-content:center;}
+.profile-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:85;display:none;align-items:flex-end;justify-content:center;}
 .profile-overlay.show{display:flex;}
 .profile-modal{background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;max-height:85%;overflow-y:auto;}
 .profile-modal::-webkit-scrollbar{display:none;}
@@ -875,7 +875,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
  
  
   <!-- PROFILE MODAL -->
-  <div id="profile-overlay" onclick="if(event.target===this)closeProfile()" style="position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:70;display:none;align-items:flex-end;justify-content:center;">
+  <div id="profile-overlay" onclick="if(event.target===this)closeProfile()">
     <div style="background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;max-height:85%;overflow-y:auto;">
       <div id="profile-avatar" style="width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#1976d2);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 10px;">👤</div>
       <div id="profile-name-big" style="font-size:18px;font-weight:700;color:#1a1a2e;text-align:center;margin-bottom:4px;">—</div>
@@ -2135,6 +2135,9 @@ function openProfile(){
   document.getElementById('profile-name-big').textContent=n;
   document.getElementById('profile-email-sm').textContent=currentUser?currentUser.email:'';
   document.getElementById('profile-avatar').textContent=n.charAt(0).toUpperCase()||'👤';
+  // Show admin button only for admin
+  const adminBtn=document.getElementById('admin-access-btn');
+  if(adminBtn) adminBtn.style.display=(currentUser&&currentUser.uid===ADMIN_UID)?'block':'none';
   document.getElementById('profile-overlay').classList.add('show');
 }
 function closeProfile(){document.getElementById('profile-overlay').classList.remove('show');}
