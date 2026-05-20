@@ -417,6 +417,41 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
 .ai-msg-bot{background:#fff;border:1.5px solid #f8bbd0;color:#1a1a2e;align-self:flex-end;border-radius:16px 16px 16px 4px;}
 .ai-msg-bot.loading{color:#aaa;font-style:italic;}
  
+ 
+/* ADMIN PANEL */
+.admin-overlay{position:absolute;inset:0;background:#f0f2f5;z-index:90;display:none;overflow-y:auto;direction:rtl;}
+.admin-header{background:linear-gradient(135deg,#1a237e,#880e4f);padding:14px 16px;position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;}
+.admin-back{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:5px 12px;font-size:10px;font-weight:700;color:#fff;cursor:pointer;font-family:'Cairo',sans-serif;}
+.admin-title{font-size:14px;font-weight:700;color:#fff;flex:1;}
+.admin-card{background:#fff;border-radius:16px;margin:10px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.admin-card-title{font-size:11px;font-weight:700;color:#1a1a2e;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:0;}
+.stat-box{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:12px;text-align:center;}
+.stat-box-blue{background:#e3f2fd;border-color:#90caf9;}
+.stat-box-orange{background:#fff3e0;border-color:#ffcc02;}
+.stat-box-red{background:#ffebee;border-color:#ef9a9a;}
+.stat-n{font-size:22px;font-weight:700;color:#e91e8c;}
+.stat-n-blue{color:#1565c0;}
+.stat-n-orange{color:#e65100;}
+.stat-n-red{color:#c62828;}
+.stat-l{font-size:9px;color:#888;margin-top:2px;}
+.admin-tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;}
+.admin-tabs::-webkit-scrollbar{display:none;}
+.admin-tab{padding:6px 14px;border-radius:20px;font-size:10px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;background:#e9ecef;color:#666;white-space:nowrap;}
+.admin-tab.on{background:linear-gradient(135deg,#e91e8c,#1976d2);color:#fff;}
+.admin-post-row{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:10px;margin-bottom:8px;}
+.admin-post-meta{font-size:9px;color:#aaa;margin-bottom:4px;}
+.admin-post-body{font-size:11px;color:#1a1a2e;line-height:1.5;margin-bottom:8px;}
+.admin-btns{display:flex;gap:6px;flex-wrap:wrap;}
+.abtn{padding:4px 10px;border-radius:8px;font-size:9px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
+.abtn-del{background:#ffebee;color:#c62828;}
+.abtn-pin{background:#fff3e0;color:#e65100;}
+.abtn-ban{background:#f3e5f5;color:#6a1b9a;}
+.abtn-ok{background:#e8f5e9;color:#2e7d32;}
+.admin-notify-input{width:100%;font-size:11px;padding:10px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fff;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;resize:none;min-height:60px;margin-bottom:8px;}
+.admin-week-select{width:100%;font-size:11px;padding:8px 10px;border:1.5px solid #f8bbd0;border-radius:10px;background:#fff;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;margin-bottom:8px;}
+.admin-week-input{width:100%;font-size:11px;padding:10px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fff;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;resize:none;min-height:80px;margin-bottom:8px;}
+ 
 </style>
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -437,7 +472,7 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
   <div class="save-toast" id="toast">💾 تم الحفظ</div>
  
 <!-- AUTH SCREEN -->
-  <div class="auth-screen" id="auth-screen">
+  <div class="auth-screen" style="z-index:200;" id="auth-screen">
     <div class="auth-logo">🤰</div>
     <div class="auth-appname">Pregnamate</div>
     <div class="auth-tagline">Your Pregnancy Companion 🌸</div>
@@ -863,47 +898,51 @@ html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 
   </div>
  
   <!-- ADMIN PANEL -->
-  <div id="admin-panel" style="position:absolute;inset:0;background:#f5f5f5;z-index:90;display:none;overflow-y:auto;direction:rtl;">
+  <div id="admin-panel" style="position:absolute;inset:0;background:#f0f2f5;z-index:80;display:none;overflow-y:auto;direction:rtl;">
     <div class="admin-header">
       <button class="admin-back" onclick="closeAdmin()">← رجوع</button>
-      <div class="admin-header-title">🛡️ لوحة الإدارة</div>
-      <div class="admin-header-sub">Pregnamate Admin</div>
+      <div class="admin-title">🛡️ لوحة الإدارة</div>
     </div>
-    <div style="padding:4px;">
-      <div class="admin-section">
-        <div class="admin-section-title">📊 إحصائيات</div>
-        <div class="stat-grid">
-          <div class="stat-card"><div class="stat-num" id="admin-stat-posts">—</div><div class="stat-lbl">منشور</div></div>
-          <div class="stat-card"><div class="stat-num" id="admin-stat-reports">—</div><div class="stat-lbl">بلاغ</div></div>
-          <div class="stat-card"><div class="stat-num" id="admin-stat-banned">—</div><div class="stat-lbl">محظور</div></div>
-          <div class="stat-card"><div class="stat-num" id="admin-stat-users">—</div><div class="stat-lbl">مستخدم</div></div>
+    <div style="padding:4px 0 80px;">
+      <div class="admin-card">
+        <div class="admin-card-title">📊 إحصائيات</div>
+        <div class="stat-row">
+          <div class="stat-box"><div class="stat-n" id="adm-posts">—</div><div class="stat-l">منشور</div></div>
+          <div class="stat-box stat-box-blue"><div class="stat-n stat-n-blue" id="adm-users">—</div><div class="stat-l">مستخدم</div></div>
+          <div class="stat-box stat-box-orange"><div class="stat-n stat-n-orange" id="adm-reports">—</div><div class="stat-l">بلاغ</div></div>
+          <div class="stat-box stat-box-red"><div class="stat-n stat-n-red" id="adm-banned">—</div><div class="stat-l">محظور</div></div>
         </div>
       </div>
-      <div class="admin-section">
+      <div class="admin-card">
         <div class="admin-tabs">
-          <button class="admin-tab on" onclick="adminTab('posts',this)">📝 المنشورات</button>
-          <button class="admin-tab" onclick="adminTab('reports',this)">🚨 البلاغات</button>
-          <button class="admin-tab" onclick="adminTab('banned',this)">🚫 المحظورين</button>
+          <button class="admin-tab on" onclick="admTab('posts',this)">💬 المنشورات</button>
+          <button class="admin-tab" onclick="admTab('reports',this)">🚨 البلاغات</button>
+          <button class="admin-tab" onclick="admTab('banned',this)">🚫 المحظورين</button>
+          <button class="admin-tab" onclick="admTab('notify',this)">📢 إشعار</button>
+          <button class="admin-tab" onclick="admTab('tips',this)">⚕️ نصايح</button>
         </div>
-        <div id="admin-content"><div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">جاري التحميل...</div></div>
+        <div id="adm-content">
+          <div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">⏳ جاري التحميل...</div>
+        </div>
       </div>
     </div>
   </div>
+ 
   <div class="bnav-wrap">
     <div class="bnav-drag"></div>
     <div class="bnav">
-    <button class="nb on" onclick="go('home',this)"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg>الرئيسية</button>
-    <button class="nb" onclick="go('meds',this)"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M4 6h16v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><line x1="12" y1="10" x2="12" y2="16"/><line x1="9" y1="13" x2="15" y2="13"/></svg>الأدوية</button>
-    <button class="nb" onclick="go('info',this)"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>معلومات</button>
-    <button class="nb" onclick="go('appts',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>مواعيد</button>
-    <button class="nb" onclick="go('track',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>الوزن</button>
-    <button class="nb" id="nb-syms" onclick="go('syms',this,true)"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>أعراض</button>
-    <button class="nb" onclick="go('forum',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>مجتمع</button>
-    <button class="nb" onclick="go('ai',this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>AI</button>
+      <button class="nb on" onclick="go('home',this)"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg>الرئيسية</button>
+      <button class="nb" onclick="go('meds',this)"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M4 6h16v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><line x1="12" y1="10" x2="12" y2="16"/><line x1="9" y1="13" x2="15" y2="13"/></svg>الأدوية</button>
+      <button class="nb" onclick="go('info',this)"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>معلومات</button>
+      <button class="nb" onclick="go('appts',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>مواعيد</button>
+      <button class="nb" onclick="go('track',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>الوزن</button>
+      <button class="nb" id="nb-syms" onclick="go('syms',this,true)"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>أعراض</button>
+      <button class="nb" onclick="go('forum',this)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>مجتمع</button>
+      <button class="nb" onclick="go('ai',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>AI</button>
+    </div>
   </div>
+ 
 </div>
- 
- 
  
 <script>
 </script>
@@ -1468,93 +1507,225 @@ function renderDailyDoses(){
  
  
  
+ 
+ 
 // ===== ADMIN PANEL =====
 const ADMIN_UID = '3BS9kTS6BkWqVc5z44LvDssLxjZ2';
-let bannedUsers = load('bannedUsers',[]);
-let reportsList = load('reportsList',[]);
-let currentAdminTab = 'posts';
+let bannedUsers = load('bannedUsers', []);
+let reportsList = load('reportsList', []);
+let currentAdmTab = 'posts';
+let systemNotif = load('systemNotif', null);
  
 function openAdmin(){
-  if(!currentUser||currentUser.uid!==ADMIN_UID) return;
+  if(!currentUser || currentUser.uid !== ADMIN_UID){ 
+    alert('غير مصرح لك بالدخول');
+    return; 
+  }
   closeProfile();
-  document.getElementById('admin-panel').style.display='block';
-  loadAdminStats(); loadAdminPosts();
+  const panel = document.getElementById('admin-panel');
+  if(panel) panel.style.display = 'block';
+  loadAdmStats();
+  const firstTab = document.querySelector('.admin-tab');
+  if(firstTab) admTab('posts', firstTab);
 }
-function closeAdmin(){ document.getElementById('admin-panel').style.display='none'; }
+function closeAdmin(){ document.getElementById('admin-panel').style.display = 'none'; }
  
-async function loadAdminStats(){
+async function loadAdmStats(){
+  const posts = document.getElementById('adm-posts');
+  const users = document.getElementById('adm-users');
+  const rpts  = document.getElementById('adm-reports');
+  const bnnd  = document.getElementById('adm-banned');
+  if(rpts) rpts.textContent = reportsList.length;
+  if(bnnd) bnnd.textContent = bannedUsers.length;
   if(!db) return;
   try{
-    const snap=await db.collection('forum').get();
-    document.getElementById('admin-stat-posts').textContent=snap.size;
-    document.getElementById('admin-stat-reports').textContent=reportsList.length;
-    document.getElementById('admin-stat-banned').textContent=bannedUsers.length;
-    document.getElementById('admin-stat-users').textContent='—';
+    const snap = await db.collection('forum').get();
+    if(posts) posts.textContent = snap.size;
+  }catch(e){}
+  try{
+    const usnap = await db.collection('users').get();
+    if(users) users.textContent = usnap.size;
   }catch(e){}
 }
  
-function adminTab(tab,btn){
-  currentAdminTab=tab;
-  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  if(tab==='posts') loadAdminPosts();
-  else if(tab==='reports') loadAdminReports();
-  else if(tab==='banned') loadAdminBanned();
+function admTab(tab, btn){
+  currentAdmTab = tab;
+  document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  const el = document.getElementById('adm-content');
+  if(!el) return;
+  if(tab==='posts') loadAdmPosts();
+  else if(tab==='reports') loadAdmReports();
+  else if(tab==='banned') loadAdmBanned();
+  else if(tab==='notify') showAdmNotify();
+  else if(tab==='tips') showAdmTips();
 }
  
-async function loadAdminPosts(){
-  const el=document.getElementById('admin-content'); if(!el) return;
-  if(!db){el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">Firebase غير متصل</div>';return;}
-  el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">⏳ جاري التحميل...</div>';
+async function loadAdmPosts(){
+  const el = document.getElementById('adm-content'); if(!el) return;
+  el.innerHTML = '<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">⏳ جاري التحميل...</div>';
+  if(!db){ el.innerHTML = '<div style="text-align:center;color:#aaa;padding:16px;">Firebase غير متصل</div>'; return; }
   try{
-    const snap=await db.collection('forum').orderBy('ts','desc').limit(30).get();
-    if(!snap.size){el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا توجد منشورات</div>';return;}
-    el.innerHTML=snap.docs.map(doc=>{
-      const p={id:doc.id,...doc.data()};
-      return '<div class="admin-post-card">'+
-        '<div class="admin-post-meta">'+p.author+' · '+p.week+'</div>'+
-        '<div class="admin-post-text">'+p.text+'</div>'+
-        '<div class="admin-actions">'+
-          '<button class="admin-btn admin-btn-del" data-pid="'+p.id+'" onclick="adminDeletePost(this.dataset.pid)">🗑 حذف</button>'+
-          '<button class="admin-btn admin-btn-pin" data-pid="'+p.id+'" data-pinned="'+(p.pinned||false)+'" onclick="adminPinPost(this.dataset.pid,this.dataset.pinned)">'+(p.pinned?'📌 إلغاء':'📌 تثبيت')+'</button>'+
-          '<button class="admin-btn admin-btn-ban" data-uid="'+p.uid+'" onclick="adminBanUser(this.dataset.uid)">🚫 حظر</button>'+
-        '</div></div>';
+    const snap = await db.collection('forum').orderBy('ts','desc').limit(50).get();
+    if(!snap.size){ el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا توجد منشورات</div>'; return; }
+    el.innerHTML = snap.docs.map(doc => {
+      const p = {id:doc.id, ...doc.data()};
+      const pinned = p.pinned||false;
+      return '<div class="admin-post-row">'+
+        '<div class="admin-post-meta">'+p.author+' · '+p.week+' · '+(new Date(p.ts).toLocaleDateString('ar'))+'</div>'+
+        '<div class="admin-post-body">'+p.text.substring(0,120)+(p.text.length>120?'...':'')+'</div>'+
+        '<div class="admin-btns">'+
+          '<button class="abtn abtn-del" data-pid="'+p.id+'" onclick="admDelete(this.dataset.pid)">🗑 حذف</button>'+
+          '<button class="abtn abtn-pin" data-pid="'+p.id+'" data-pinned="'+pinned+'" onclick="admPin(this.dataset.pid,this.dataset.pinned)">'+(pinned?'📌 إلغاء تثبيت':'📌 تثبيت')+'</button>'+
+          '<button class="abtn abtn-ban" data-uid="'+p.uid+'" onclick="admBan(this.dataset.uid)">🚫 حظر</button>'+
+        '</div>'+
+      '</div>';
     }).join('');
-  }catch(e){el.innerHTML='<div style="color:red;font-size:10px;padding:10px;">'+e.message+'</div>';}
+  }catch(e){ el.innerHTML='<div style="color:red;font-size:10px;padding:10px;">'+e.message+'</div>'; }
 }
  
-function loadAdminReports(){
-  const el=document.getElementById('admin-content');if(!el)return;
-  if(!reportsList.length){el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا توجد بلاغات</div>';return;}
-  el.innerHTML=reportsList.map((r,i)=>'<div class="admin-post-card"><div class="admin-post-meta">بلاغ #'+(i+1)+' — '+new Date(r.ts).toLocaleDateString('ar')+'</div><div class="admin-post-text">Post: '+r.postId+'</div><button class="admin-btn admin-btn-del" onclick="clearReport('+i+')">✓ تم</button></div>').join('');
+async function admDelete(postId){
+  if(!confirm('حذف المنشور؟')) return;
+  try{
+    await db.collection('forum').doc(postId).delete();
+    forumPosts = forumPosts.filter(p=>p.id!==postId);
+    loadAdmPosts(); loadAdmStats();
+    alert('✅ تم الحذف');
+  }catch(e){ alert('خطأ: '+e.message); }
 }
  
-function loadAdminBanned(){
-  const el=document.getElementById('admin-content');if(!el)return;
-  if(!bannedUsers.length){el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا يوجد محظورون</div>';return;}
-  el.innerHTML=bannedUsers.map((uid,i)=>'<div class="admin-post-card"><div class="admin-post-text">'+uid+'</div><button class="admin-btn" style="background:#e8f5e9;color:#2e7d32;" onclick="adminUnban('+i+')">✓ رفع الحظر</button></div>').join('');
+async function admPin(postId, pinned){
+  const newPin = pinned === 'true' ? false : true;
+  try{
+    await db.collection('forum').doc(postId).update({pinned: newPin});
+    const p = forumPosts.find(x=>x.id===postId);
+    if(p) p.pinned = newPin;
+    loadAdmPosts();
+    alert(newPin ? '📌 تم التثبيت' : '✅ تم إلغاء التثبيت');
+  }catch(e){ alert('خطأ: '+e.message); }
 }
  
-async function adminDeletePost(postId){
-  if(!confirm('حذف المنشور؟'))return;
-  try{await db.collection('forum').doc(postId).delete();forumPosts=forumPosts.filter(p=>p.id!==postId);loadAdminPosts();loadAdminStats();}
-  catch(e){alert('خطأ: '+e.message);}
+function admBan(uid){
+  if(!uid || uid===ADMIN_UID){ alert('مش تقدر تحظر نفسك 😄'); return; }
+  if(!bannedUsers.includes(uid)){
+    bannedUsers.push(uid);
+    save('bannedUsers', bannedUsers);
+    document.getElementById('adm-banned').textContent = bannedUsers.length;
+    alert('✅ تم حظر المستخدم');
+  } else {
+    alert('المستخدم ده محظور بالفعل');
+  }
 }
-async function adminPinPost(postId,pinned){
-  const np=pinned==='true'?false:true;
-  try{await db.collection('forum').doc(postId).update({pinned:np});loadAdminPosts();}catch(e){alert('خطأ');}
+ 
+function loadAdmReports(){
+  const el=document.getElementById('adm-content'); if(!el) return;
+  if(!reportsList.length){
+    el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا توجد بلاغات 🎉</div>';
+    return;
+  }
+  el.innerHTML = reportsList.map((r,i)=>
+    '<div class="admin-post-row">'+
+    '<div class="admin-post-meta">بلاغ #'+(i+1)+' — '+new Date(r.ts).toLocaleDateString('ar')+'</div>'+
+    '<div class="admin-post-body">Post ID: '+r.postId+'</div>'+
+    '<div class="admin-btns">'+
+      '<button class="abtn abtn-ok" onclick="admClearReport('+i+')">✓ تم المراجعة</button>'+
+      '<button class="abtn abtn-del" data-pid="'+r.postId+'" onclick="admDelete(this.dataset.pid);admClearReport('+i+')">🗑 احذف المنشور</button>'+
+    '</div></div>'
+  ).join('');
 }
-function adminBanUser(uid){
-  if(uid===ADMIN_UID){alert('مش تقدر تحظر نفسك');return;}
-  if(!bannedUsers.includes(uid)){bannedUsers.push(uid);save('bannedUsers',bannedUsers);}
-  loadAdminBanned();document.getElementById('admin-stat-banned').textContent=bannedUsers.length;
-  alert('تم الحظر ✅');
+ 
+function admClearReport(idx){
+  reportsList.splice(idx,1);
+  save('reportsList', reportsList);
+  document.getElementById('adm-reports').textContent = reportsList.length;
+  loadAdmReports();
 }
-function adminUnban(idx){bannedUsers.splice(idx,1);save('bannedUsers',bannedUsers);loadAdminBanned();}
-function clearReport(idx){reportsList.splice(idx,1);save('reportsList',reportsList);loadAdminReports();document.getElementById('admin-stat-reports').textContent=reportsList.length;}
-function reportPost(postId){if(confirm('تبلغي عن هذا المنشور؟')){reportsList.push({postId,ts:Date.now()});save('reportsList',reportsList);alert('شكراً ✅');}}
-function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('forum-lightbox').style.display='flex';}
-function closeLightbox(){document.getElementById('forum-lightbox').style.display='none';}
+ 
+function loadAdmBanned(){
+  const el=document.getElementById('adm-content'); if(!el) return;
+  if(!bannedUsers.length){
+    el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا يوجد محظورون</div>';
+    return;
+  }
+  el.innerHTML = bannedUsers.map((uid,i)=>
+    '<div class="admin-post-row">'+
+    '<div class="admin-post-body" style="font-size:10px;word-break:break-all;">'+uid+'</div>'+
+    '<div class="admin-btns"><button class="abtn abtn-ok" onclick="admUnban('+i+')">✓ رفع الحظر</button></div>'+
+    '</div>'
+  ).join('');
+}
+ 
+function admUnban(idx){
+  bannedUsers.splice(idx,1);
+  save('bannedUsers', bannedUsers);
+  document.getElementById('adm-banned').textContent = bannedUsers.length;
+  loadAdmBanned();
+  alert('✅ تم رفع الحظر');
+}
+ 
+function showAdmNotify(){
+  const el=document.getElementById('adm-content'); if(!el) return;
+  const notifDiv = document.createElement('div');
+  notifDiv.innerHTML = '<div style="font-size:10px;color:#888;margin-bottom:8px;">الرسالة دي هتظهر لكل المستخدمين لما يفتحوا التطبيق</div>';
+  const ta = document.createElement('textarea');
+  ta.className='admin-notify-input'; ta.id='adm-notif-text'; ta.placeholder='اكتب إشعار للمستخدمين...';
+  const btn = document.createElement('button');
+  btn.textContent='📢 إرسال الإشعار';
+  btn.onclick=sendAdmNotif;
+  btn.style.cssText='background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;width:100%;';
+  el.innerHTML='';
+  el.appendChild(notifDiv); el.appendChild(ta); el.appendChild(btn);
+  if(systemNotif){
+    const cur=document.createElement('div');
+    cur.style.cssText='margin-top:10px;background:#e8f5e9;border-radius:10px;padding:8px;font-size:10px;color:#2e7d32;';
+    cur.textContent='✅ الإشعار الحالي: '+systemNotif;
+    el.appendChild(cur);
+  }
+}
+ 
+async function sendAdmNotif(){
+  const text = document.getElementById('adm-notif-text').value.trim();
+  if(!text){ alert('اكتب نص الإشعار'); return; }
+  systemNotif = text;
+  save('systemNotif', systemNotif);
+  if(db){
+    try{
+      await db.collection('system').doc('notification').set({text, ts:Date.now()});
+    }catch(e){}
+  }
+  alert('✅ تم إرسال الإشعار');
+  showAdmNotify();
+}
+ 
+function showAdmTips(){
+  const el=document.getElementById('adm-content'); if(!el) return;
+  const lbl=document.createElement('div');
+  lbl.style.cssText='font-size:10px;color:#888;margin-bottom:8px;';
+  lbl.textContent='عدّل نصيحة أسبوع معين';
+  const sel=document.createElement('select');
+  sel.className='admin-week-select'; sel.id='adm-week-num';
+  for(let i=1;i<=40;i++){const o=document.createElement('option');o.value=i;o.textContent='الأسبوع '+i;sel.appendChild(o);}
+  const ta=document.createElement('textarea');
+  ta.className='admin-week-input'; ta.id='adm-week-tip'; ta.placeholder='اكتب النصيحة...';
+  const btn=document.createElement('button');
+  btn.textContent='💾 حفظ النصيحة';
+  btn.onclick=saveAdmTip;
+  btn.style.cssText='background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;width:100%;';
+  el.innerHTML=''; el.appendChild(lbl); el.appendChild(sel); el.appendChild(ta); el.appendChild(btn);
+}
+ 
+async function saveAdmTip(){
+  const week = document.getElementById('adm-week-num').value;
+  const tip = document.getElementById('adm-week-tip').value.trim();
+  if(!tip){ alert('اكتب النصيحة'); return; }
+  if(db){
+    try{
+      await db.collection('system').doc('tips').set({['w'+week]:tip},{merge:true});
+      alert('✅ تم حفظ نصيحة الأسبوع '+week);
+    }catch(e){ alert('خطأ: '+e.message); }
+  }
+}
+ 
  
 // ===== FORUM =====
 let forumPosts = [];
