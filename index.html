@@ -1,2420 +1,749 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Pregnamate</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+<title>BA II Plus</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 *{box-sizing:border-box;margin:0;padding:0;}
-@media(max-width:420px){html,body{padding:0;background:#fdf4f9;}.phone{width:100vw;height:100vh;border-radius:0;border:none;box-shadow:none;}.notch{display:none;}.sbar{color:#1a1a2e;}}
-html,body{min-height:100vh;background:linear-gradient(135deg,#1a237e 0%,#880e4f 100%);display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;padding:24px;}
-.phone{width:360px;height:740px;background:#fdf4f9;border-radius:44px;overflow:hidden;position:relative;border:8px solid #1a1a2e;box-shadow:0 0 0 1px #333,0 50px 120px rgba(0,0,0,.8);}
-.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:26px;background:#1a1a2e;border-radius:0 0 16px 16px;z-index:20;}
-.sbar{position:absolute;top:6px;left:0;right:0;display:flex;justify-content:space-between;padding:0 20px;font-size:10px;font-weight:700;z-index:19;color:#fff;}
-.inner{position:absolute;top:36px;left:0;right:0;bottom:64px;overflow-y:auto;direction:rtl;background:#fdf4f9;}
-.inner::-webkit-scrollbar{display:none;}
-.scr{display:none;padding:0 13px 16px;}
-.scr.act{display:block;}
- 
-/* ONBOARDING */
-.onboard{position:absolute;inset:0;background:linear-gradient(145deg,#e91e8c,#1976d2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;z-index:100;}
-.ob-logo{font-size:48px;margin-bottom:12px;}
-.ob-title{font-size:26px;font-weight:700;color:#fff;margin-bottom:6px;}
-.ob-sub{font-size:12px;color:rgba(255,255,255,.8);margin-bottom:32px;text-align:center;}
-.ob-card{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:20px;width:100%;backdrop-filter:blur(8px);}
-.ob-field{margin-bottom:14px;}
-.ob-field label{font-size:11px;font-weight:700;color:rgba(255,255,255,.9);display:block;margin-bottom:6px;}
-.ob-field input{width:100%;font-size:13px;padding:11px 14px;border:1.5px solid rgba(255,255,255,.4);border-radius:13px;background:rgba(255,255,255,.2);color:#fff;outline:none;direction:rtl;font-family:'Cairo',sans-serif;}
-.ob-field input::placeholder{color:rgba(255,255,255,.6);}
-.ob-field input:focus{border-color:#fff;background:rgba(255,255,255,.28);}
-.ob-hint{font-size:9px;color:rgba(255,255,255,.65);margin-top:4px;}
-.ob-btn{background:#fff;border:none;border-radius:14px;padding:13px;font-size:13px;font-weight:700;color:#e91e8c;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-top:6px;}
- 
-/* HEADER */
-.hdr{background:linear-gradient(145deg,#e91e8c 0%,#1976d2 100%);padding:18px 15px 22px;margin:0 -13px 14px;border-radius:0 0 28px 28px;position:relative;overflow:hidden;}
-.hdr::before{content:'';position:absolute;top:-40px;right:-25px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.1);}
-.hdr::after{content:'';position:absolute;bottom:-30px;left:-15px;width:95px;height:95px;border-radius:50%;background:rgba(255,255,255,.07);}
-.htop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;position:relative;z-index:1;}
-.greet{font-size:10px;color:rgba(255,255,255,.85);}
-.uname{font-size:21px;font-weight:700;color:#fff;}
-.chip{background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.35);border-radius:16px;padding:4px 10px;font-size:9px;color:#fff;cursor:pointer;}
-.wlbl{font-size:11px;color:rgba(255,255,255,.9);margin-bottom:3px;position:relative;z-index:1;}
-.wrow{display:flex;align-items:baseline;gap:5px;margin-bottom:4px;position:relative;z-index:1;}
-.wn{font-size:44px;font-weight:700;color:#fff;line-height:1;}
-.wu{font-size:13px;color:rgba(255,255,255,.9);}
-.dn{font-size:24px;font-weight:600;color:rgba(255,255,255,.8);line-height:1;}
-.du{font-size:10px;color:rgba(255,255,255,.65);}
-.edit-preg-btn{display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:3px 9px;font-size:9px;color:#fff;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:600;margin-bottom:9px;position:relative;z-index:1;}
-.bgs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:11px;position:relative;z-index:1;}
-.bg{padding:3px 10px;border-radius:16px;font-size:9px;font-weight:600;background:rgba(255,255,255,.22);color:#fff;border:1px solid rgba(255,255,255,.3);}
-.pb{height:6px;background:rgba(255,255,255,.25);border-radius:3px;overflow:hidden;position:relative;z-index:1;}
-.pf{height:100%;background:#fff;border-radius:3px;transition:width .5s;}
-.pl{display:flex;justify-content:space-between;font-size:8px;color:rgba(255,255,255,.65);margin-top:3px;position:relative;z-index:1;}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
-.ic{border-radius:16px;padding:11px 6px;text-align:center;border:1.5px solid;}
-.ic1{background:#fce4ec;border-color:#f48fb1;}.ic2{background:#e3f2fd;border-color:#90caf9;}.ic3{background:#fce4ec;border-color:#f48fb1;}
-.ie{font-size:20px;margin-bottom:4px;}.iv{font-size:15px;font-weight:700;color:#1a1a2e;}.il{font-size:8px;color:#888;margin-top:1px;}
-.stitle{font-size:10px;font-weight:700;letter-spacing:.05em;margin-bottom:8px;display:flex;align-items:center;gap:5px;}
-.stitle-pink{color:#c2185b;}.stitle-blue{color:#1565c0;}.stitle-purple{color:#7b1fa2;}
-.tip{background:linear-gradient(135deg,#fce4ec,#e3f2fd);border-radius:16px;padding:13px;margin-bottom:13px;font-size:11px;color:#1a1a2e;line-height:1.75;border:1.5px solid #f8bbd0;}
-.mc{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:12px;display:flex;align-items:center;gap:9px;margin-bottom:9px;box-shadow:0 3px 10px rgba(233,30,140,.07);}
-.mc.blue-card{border-color:#bbdefb;}.mc.gray-card{border-color:#e0e0e0;opacity:.55;}
-.mi{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-.mi-p{background:#fce4ec;}.mi-b{background:#e3f2fd;}.mi-x{background:#f5f5f5;}
-.minfo{flex:1;min-width:0;}
-.mnm{font-size:11px;font-weight:700;color:#1a1a2e;}.mds{font-size:9px;color:#888;margin-top:1px;}
-.mdays{display:flex;gap:3px;margin-top:6px;}
-.dd{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;}
-.ddy{background:#fce4ec;color:#c2185b;}.ddt{background:#e3f2fd;color:#1565c0;border:2px solid #42a5f5;}.ddf{background:#f5f5f5;color:#bbb;}
-.mbdg{font-size:8px;padding:3px 8px;border-radius:9px;font-weight:700;flex-shrink:0;}
-.mb-on{background:#fce4ec;color:#c2185b;}.mb-off{background:#f5f5f5;color:#aaa;}
-.meds-list{margin-bottom:8px;}
-.custom-med{background:#fff;border:1.5px solid #f8bbd0;border-radius:14px;padding:10px 12px;display:flex;align-items:center;gap:8px;margin-bottom:7px;position:relative;}
-.custom-med .del-btn{position:static;flex-shrink:0;}
-.wtabs{display:flex;gap:4px;margin-bottom:11px;overflow-x:auto;}
-.wtabs::-webkit-scrollbar{display:none;}
-.wt{padding:5px 11px;border-radius:16px;font-size:10px;font-weight:700;border:1.5px solid #e0e0e0;background:#fff;color:#888;cursor:pointer;white-space:nowrap;font-family:'Cairo',sans-serif;}
-.wt.s{background:linear-gradient(135deg,#e91e8c,#1976d2);color:#fff;border-color:transparent;}
-.wcard{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:14px;margin-bottom:10px;}
-.wbdg{display:inline-block;background:linear-gradient(135deg,#fce4ec,#e3f2fd);color:#c2185b;font-size:9px;font-weight:700;padding:3px 10px;border-radius:10px;margin-bottom:9px;border:1px solid #f48fb1;}
-.wi{display:flex;gap:7px;align-items:flex-start;margin-bottom:6px;}
-.wdot{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#1976d2);margin-top:4px;flex-shrink:0;}
-.wtxt{font-size:10px;color:#333;line-height:1.65;}
-.istat{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:11px;}
-.is{border-radius:12px;padding:9px 5px;text-align:center;border:1.5px solid;}
-.is-p{background:#fce4ec;border-color:#f48fb1;}.is-b{background:#e3f2fd;border-color:#90caf9;}
-.is-l{font-size:8px;color:#888;margin-bottom:2px;}.is-v{font-size:13px;font-weight:700;}
-.is-pv{color:#c2185b;}.is-bv{color:#1565c0;}
-.upcoming-wrap{margin-bottom:14px;}
-.next-appt{background:linear-gradient(135deg,#e91e8c,#1976d2);border-radius:18px;padding:14px;margin-bottom:8px;position:relative;overflow:hidden;}
-.next-appt::before{content:'';position:absolute;top:-20px;left:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.1);}
-.next-label{font-size:9px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:5px;}
-.next-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px;}
-.next-sub{font-size:9px;color:rgba(255,255,255,.8);}
-.next-cnt{display:inline-block;background:rgba(255,255,255,.25);border-radius:10px;padding:3px 10px;font-size:9px;color:#fff;font-weight:700;margin-top:7px;}
-.upcoming-card{background:#fff;border:1.5px solid #bbdefb;border-radius:16px;padding:11px 12px;margin-bottom:7px;position:relative;}
-.uc-top{display:flex;align-items:center;gap:9px;padding-left:26px;}
-.uc-date{background:linear-gradient(135deg,#e3f2fd,#bbdefb);border-radius:10px;padding:7px 9px;text-align:center;flex-shrink:0;min-width:42px;}
-.uc-day{font-size:17px;font-weight:700;color:#1565c0;}.uc-mon{font-size:8px;color:#1976d2;font-weight:700;}
-.uc-title{font-size:11px;font-weight:700;color:#1a1a2e;}.uc-sub{font-size:9px;color:#888;margin-top:1px;}
-.timeline{position:relative;padding-right:20px;margin-bottom:14px;}
-.timeline::before{content:'';position:absolute;right:7px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#f48fb1,#90caf9);}
-.appt-entry{position:relative;margin-bottom:12px;}
-.appt-dot{position:absolute;right:-20px;top:14px;width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#1976d2);border:2px solid #fff;box-shadow:0 0 0 2px #f8bbd0;}
-.appt-card{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:12px;position:relative;}
-.appt-card.blue-border{border-color:#bbdefb;}
-.del-btn{width:22px;height:22px;border-radius:50%;background:#fce4ec;border:1.5px solid #f48fb1;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:10px;color:#e91e8c;font-weight:700;line-height:1;flex-shrink:0;}
-.del-btn:hover{background:#e91e8c;color:#fff;}
-.del-btn-blue{background:#e3f2fd;border-color:#90caf9;color:#1565c0;}
-.del-btn-blue:hover{background:#1976d2;color:#fff;}
-.del-btn-abs{position:absolute;top:9px;left:9px;}
-.appt-header{display:flex;align-items:center;gap:9px;padding-left:26px;}
-.appt-date-box{background:linear-gradient(135deg,#fce4ec,#f8bbd0);border-radius:10px;padding:7px 10px;text-align:center;flex-shrink:0;min-width:44px;}
-.appt-date-box.blue-box{background:linear-gradient(135deg,#e3f2fd,#bbdefb);}
-.appt-day{font-size:18px;font-weight:700;color:#c2185b;}.appt-day.blue-day{color:#1565c0;}
-.appt-mon{font-size:8px;color:#e91e8c;font-weight:700;}.appt-mon.blue-mon{color:#1976d2;}
-.appt-title{font-size:11px;font-weight:700;color:#1a1a2e;}.appt-dr{font-size:9px;color:#888;margin-top:1px;}
-.appt-details{margin-top:9px;padding-top:9px;border-top:1.5px dashed #fce4ec;}
-.detail-row{display:flex;gap:6px;align-items:flex-start;margin-bottom:6px;}
-.detail-icon{font-size:12px;flex-shrink:0;margin-top:1px;}
-.detail-label{font-size:8px;font-weight:700;color:#c2185b;margin-bottom:2px;}.detail-label.blue{color:#1565c0;}
-.detail-text{font-size:9px;color:#444;line-height:1.55;}
-.rx-chips{display:flex;gap:4px;flex-wrap:wrap;margin-top:3px;}
-.rx-chip{padding:2px 8px;border-radius:8px;font-size:8px;font-weight:700;}
-.rx-pink{background:#fce4ec;color:#c2185b;}.rx-blue{background:#e3f2fd;color:#1565c0;}
-.type-toggle{display:flex;background:#f0e6f0;border-radius:12px;padding:3px;margin-bottom:10px;}
-.tog-btn{flex:1;padding:7px 4px;border-radius:9px;font-size:10px;font-weight:700;border:none;background:transparent;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;}
-.tog-btn.active-past{background:linear-gradient(135deg,#e91e8c,#d81b60);color:#fff;}
-.tog-btn.active-future{background:linear-gradient(135deg,#1976d2,#42a5f5);color:#fff;}
-.add-section{background:#fff;border:1.5px dashed #f48fb1;border-radius:18px;padding:13px;}
-.add-title{font-size:11px;font-weight:700;color:#c2185b;margin-bottom:10px;}
-.add-field{margin-bottom:8px;}
-.add-field label{font-size:9px;font-weight:700;color:#888;display:block;margin-bottom:3px;}
-.add-field input{width:100%;font-size:10px;padding:8px 11px;border:1.5px solid #f8bbd0;border-radius:11px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;}
-.add-field input:focus{border-color:#e91e8c;}
-.save-btn{background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;}
-.addrow{display:flex;gap:6px;margin-top:9px;}
-.addrow input{flex:1;font-size:10px;padding:9px 11px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fff;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;}
-.abtn-sm{background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:9px 13px;font-size:10px;font-weight:700;color:#fff;cursor:pointer;white-space:nowrap;font-family:'Cairo',sans-serif;}
-.note{background:#fff;border:1.5px solid #f8bbd0;border-radius:10px;padding:7px 11px;font-size:10px;color:#333;margin-top:5px;display:flex;align-items:center;justify-content:space-between;}
-.note-txt{flex:1;}
-.sym-quick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
-.sym-quick-btn{padding:6px 12px;border-radius:20px;font-size:10px;font-weight:700;border:1.5px solid #e1bee7;background:#fff;color:#7b1fa2;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;display:flex;align-items:center;gap:4px;}
-.sym-quick-btn:hover{background:linear-gradient(135deg,#ce93d8,#9c27b0);color:#fff;border-color:transparent;}
-.sym-add-box{background:#fff;border:1.5px dashed #ce93d8;border-radius:18px;padding:13px;margin-bottom:14px;}
-.sym-add-title{font-size:11px;font-weight:700;color:#7b1fa2;margin-bottom:10px;}
-.sym-add-row{display:flex;gap:7px;align-items:center;}
-.sym-add-row input{flex:1;font-size:10px;padding:9px 11px;border:1.5px solid #e1bee7;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;}
-.sym-save-btn{background:linear-gradient(135deg,#9c27b0,#e91e8c);border:none;border-radius:12px;padding:9px 13px;font-size:10px;font-weight:700;color:#fff;cursor:pointer;white-space:nowrap;font-family:'Cairo',sans-serif;}
-.sym-intensity{display:flex;gap:5px;margin-top:8px;align-items:center;}
-.sym-intensity label{font-size:9px;color:#888;font-weight:700;}
-.intensity-btns{display:flex;gap:4px;}
-.int-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid #e1bee7;background:#fff;font-size:10px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;color:#9c27b0;transition:all .2s;}
-.int-btn.on{background:linear-gradient(135deg,#9c27b0,#e91e8c);color:#fff;border-color:transparent;}
-.sym-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
-.sym-card{background:#fff;border:1.5px solid #e1bee7;border-radius:16px;padding:12px 13px;display:flex;align-items:center;gap:10px;position:relative;box-shadow:0 3px 10px rgba(156,39,176,.06);}
-.sym-emoji-box{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#f3e5f5,#e1bee7);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.sym-info{flex:1;min-width:0;}
-.sym-name{font-size:12px;font-weight:700;color:#1a1a2e;}
-.sym-meta{font-size:9px;color:#888;margin-top:2px;display:flex;align-items:center;gap:6px;}
-.int-dots{display:flex;gap:2px;}
-.int-dot{width:6px;height:6px;border-radius:50%;}
-.int-dot.filled{background:#9c27b0;}.int-dot.empty{background:#e1bee7;}
-.sym-del{width:20px;height:20px;border-radius:50%;background:#f3e5f5;border:1.5px solid #ce93d8;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:9px;color:#9c27b0;font-weight:700;flex-shrink:0;}
-.sym-del:hover{background:#9c27b0;color:#fff;}
-.sym-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:14px;}
-.ss{border-radius:14px;padding:10px 6px;text-align:center;border:1.5px solid #e1bee7;background:#f3e5f5;}
-.ss-val{font-size:18px;font-weight:700;color:#7b1fa2;}
-.ss-lbl{font-size:8px;color:#888;margin-top:2px;}
-.sym-empty{text-align:center;padding:20px;color:#aaa;font-size:11px;}
- 
-/* Save indicator */
-.save-toast{position:absolute;top:44px;left:50%;transform:translateX(-50%);background:rgba(46,125,50,.9);color:#fff;font-size:10px;font-weight:700;padding:6px 16px;border-radius:20px;z-index:200;opacity:0;transition:opacity .3s;white-space:nowrap;}
-.save-toast.show{opacity:1;}
- 
-/* MODAL */
-.modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:50;display:none;align-items:flex-end;justify-content:center;}
-.modal-overlay.show{display:flex;}
-.modal{background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 28px;width:100%;}
-.modal-title{font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:4px;}
-.modal-sub{font-size:10px;color:#888;margin-bottom:16px;}
-.modal-tabs{display:flex;gap:4px;background:#f0e6f0;border-radius:12px;padding:3px;margin-bottom:14px;}
-.mtab{flex:1;padding:7px 4px;border-radius:9px;font-size:10px;font-weight:700;border:none;background:transparent;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;}
-.mtab.on-lmp{background:linear-gradient(135deg,#e91e8c,#d81b60);color:#fff;}
-.mtab.on-manual{background:linear-gradient(135deg,#1976d2,#42a5f5);color:#fff;}
-.modal-field{margin-bottom:10px;}
-.modal-field label{font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:5px;}
-.modal-field input{width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;}
-.modal-row{display:flex;gap:8px;margin-bottom:10px;}
-.mf2{flex:1;}
-.mf2 label{font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:5px;}
-.mf2 input{width:100%;font-size:14px;font-weight:700;padding:10px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;text-align:center;font-family:'Cairo',sans-serif;}
-.modal-hint{font-size:9px;color:#aaa;margin-bottom:14px;text-align:center;}
-.modal-save{background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:11px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;}
-.modal-cancel{background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;}
- 
-.bnav-wrap{position:absolute;bottom:0;left:0;right:0;background:#fff;border-top:1.5px solid #fce4ec;box-shadow:0 -4px 20px rgba(233,30,140,.1);}
-.bnav-drag{width:36px;height:4px;background:#e0e0e0;border-radius:2px;margin:6px auto 2px;}
-.bnav{display:flex;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;padding:4px 6px 10px;gap:0;}
-.bnav::-webkit-scrollbar{display:none;}
- 
-.nb{flex:0 0 60px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;background:none;border:none;font-size:7px;font-weight:700;color:#ccc;font-family:'Cairo',sans-serif;transition:color .2s;}
-.nb.on{color:#e91e8c;}
-.nb.on svg{stroke:#e91e8c;}
-.nb.on.purple{color:#9c27b0;}
-.nb.on.purple svg{stroke:#9c27b0;}
-.nb svg{width:18px;height:18px;stroke-width:2.2;stroke:#ccc;fill:none;}
- 
- 
-/* DOSE TRACKING */
-.dose-day-card{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:12px 13px;margin-bottom:9px;box-shadow:0 2px 8px rgba(233,30,140,.06);}
-.dose-med-name{font-size:12px;font-weight:700;color:#1a1a2e;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.dose-btns{display:flex;gap:7px;flex-wrap:wrap;}
-.dose-btn{flex:1;min-width:60px;padding:9px 6px;border-radius:12px;border:1.5px solid #f8bbd0;background:#fdf4f9;font-size:10px;font-weight:700;color:#c2185b;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;text-align:center;}
-.dose-btn.taken{background:linear-gradient(135deg,#e91e8c,#f06292);border-color:transparent;color:#fff;}
-.dose-btn.missed{background:#f5f5f5;border-color:#e0e0e0;color:#aaa;}
-.dose-date-header{font-size:10px;font-weight:700;color:#888;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
-.dose-progress{height:5px;background:#fce4ec;border-radius:3px;overflow:hidden;margin-top:8px;}
-.dose-progress-fill{height:100%;background:linear-gradient(90deg,#e91e8c,#f06292);border-radius:3px;transition:width .3s;}
-/* TRACKING */
-.seg{display:flex;background:#f0e6f0;border-radius:14px;padding:3px;margin-bottom:14px;}
-.seg-btn{flex:1;padding:7px 4px;border-radius:11px;font-size:10px;font-weight:700;border:none;background:transparent;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;}
-.seg-btn.on-blue{background:linear-gradient(135deg,#1976d2,#42a5f5);color:#fff;}
-.seg-btn.on-pink{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;}
-.track-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-bottom:12px;}
-.st{border-radius:14px;padding:10px 6px;text-align:center;border:1.5px solid;}
-.st-blue{background:#e3f2fd;border-color:#90caf9;}.st-pink{background:#fce4ec;border-color:#f48fb1;}
-.st-val{font-size:16px;font-weight:700;}.st-blue .st-val{color:#1565c0;}.st-pink .st-val{color:#c2185b;}
-.st-lbl{font-size:8px;color:#888;margin-top:2px;}
-.chart-wrap{background:#f0f6ff;border:1.5px solid #90caf9;border-radius:16px;padding:10px 8px 6px;margin-bottom:12px;}
-.chart-wrap.pink{background:#fff8fb;border-color:#f48fb1;}
-.chart-title{font-size:9px;font-weight:700;color:#1565c0;margin-bottom:6px;}
-.chart-wrap.pink .chart-title{color:#c2185b;}
-.track-form{background:#fff;border:1.5px dashed #90caf9;border-radius:16px;padding:13px;margin-bottom:10px;}
-.track-form.pink{border-color:#f48fb1;}
-.track-form-row{display:flex;gap:8px;margin-bottom:10px;}
-.ff{flex:1;}.ff label{font-size:9px;font-weight:700;color:#888;display:block;margin-bottom:4px;}
-.ff input{width:100%;font-size:11px;padding:8px 10px;border:1.5px solid #bbdefb;border-radius:10px;background:#f0f6ff;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;}
-.track-form.pink .ff input{border-color:#f8bbd0;background:#fff8fb;}
-.ff input:focus{border-color:#1976d2;}.track-form.pink .ff input:focus{border-color:#e91e8c;}
-.track-records{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;}
-.track-rec{background:#fff;border:1.5px solid #e3f2fd;border-radius:12px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;}
-.track-rec.pink{border-color:#fce4ec;}
-.tr-left{display:flex;align-items:center;gap:10px;}
-.tr-date{font-size:9px;color:#aaa;}
-.tr-val{font-size:14px;font-weight:700;color:#1565c0;}.tr-val.pink{color:#c2185b;}
-.tr-unit{font-size:9px;color:#aaa;}
-.tr-diff{font-size:9px;padding:2px 7px;border-radius:8px;font-weight:700;}
-.tr-up{background:#e8f5e9;color:#2e7d32;}.tr-dn{background:#ffebee;color:#c62828;}.tr-eq{background:#f5f5f5;color:#888;}
-.trk-empty{text-align:center;padding:16px;color:#bbb;font-size:11px;}
-.trk-err{display:none;color:#e91e8c;font-size:10px;font-weight:700;text-align:center;margin-bottom:5px;}
-/* FORUM */
-.forum-post{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:13px;margin-bottom:10px;box-shadow:0 2px 8px rgba(233,30,140,.06);}
-.forum-post-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.forum-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#1976d2);display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;font-weight:700;flex-shrink:0;}
-.forum-meta{flex:1;}
-.forum-username{font-size:11px;font-weight:700;color:#1a1a2e;}
-.forum-time{font-size:9px;color:#aaa;margin-top:1px;}
-.forum-week-badge{background:#fce4ec;color:#c2185b;font-size:8px;font-weight:700;padding:2px 7px;border-radius:8px;}
-.forum-content{font-size:11px;color:#333;line-height:1.7;margin-bottom:10px;}
-.forum-actions{display:flex;align-items:center;gap:8px;}
-.forum-like-btn{display:flex;align-items:center;gap:4px;background:#fce4ec;border:none;border-radius:10px;padding:4px 10px;font-size:10px;font-weight:700;color:#c2185b;cursor:pointer;font-family:'Cairo',sans-serif;}
-.forum-like-btn.liked{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;}
-.forum-comment-btn{display:flex;align-items:center;gap:4px;background:#e3f2fd;border:none;border-radius:10px;padding:4px 10px;font-size:10px;font-weight:700;color:#1565c0;cursor:pointer;font-family:'Cairo',sans-serif;}
-.forum-comments{margin-top:10px;padding-top:10px;border-top:1px dashed #fce4ec;}
-.forum-comment{background:#fdf4f9;border-radius:10px;padding:8px 10px;margin-bottom:6px;}
-.forum-comment-user{font-size:9px;font-weight:700;color:#c2185b;margin-bottom:2px;}
-.forum-comment-text{font-size:10px;color:#444;line-height:1.5;}
-.forum-comment-input{display:flex;gap:6px;margin-top:8px;}
-.forum-comment-input input{flex:1;font-size:10px;padding:7px 11px;border:1.5px solid #f8bbd0;border-radius:20px;background:#fff;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;}
-.forum-add-box{background:#fff;border:1.5px dashed #f48fb1;border-radius:18px;padding:14px;margin-bottom:14px;}
-.forum-add-title{font-size:11px;font-weight:700;color:#c2185b;margin-bottom:10px;}
-.forum-add-input{width:100%;font-size:11px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;resize:none;min-height:70px;display:block;margin-bottom:8px;}
-.forum-send-btn{background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;}
-.forum-empty{text-align:center;padding:24px;color:#aaa;font-size:11px;}
-.forum-filter{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;}
-.forum-filter::-webkit-scrollbar{display:none;}
-.ftag{padding:4px 12px;border-radius:16px;font-size:10px;font-weight:700;border:1.5px solid #f8bbd0;background:#fff;color:#c2185b;cursor:pointer;white-space:nowrap;font-family:'Cairo',sans-serif;}
-.ftag.active{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;border-color:transparent;}
- 
-/* AUTH SCREEN */
-.auth-screen{position:absolute;inset:0;background:linear-gradient(145deg,#e91e8c,#1976d2);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;z-index:200;}
-.auth-logo{font-size:52px;margin-bottom:8px;}
-.auth-appname{font-size:28px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:4px;}
-.auth-tagline{font-size:12px;color:rgba(255,255,255,.8);margin-bottom:28px;}
-.auth-card{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:22px;padding:22px;width:100%;backdrop-filter:blur(8px);}
-.auth-tabs{display:flex;background:rgba(255,255,255,.15);border-radius:12px;padding:3px;margin-bottom:18px;}
-.auth-tab{flex:1;padding:8px;border-radius:9px;font-size:11px;font-weight:700;border:none;background:transparent;color:rgba(255,255,255,.7);cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;}
-.auth-tab.on{background:#fff;color:#e91e8c;}
-.auth-field{margin-bottom:13px;}
-.auth-field label{font-size:10px;font-weight:700;color:rgba(255,255,255,.9);display:block;margin-bottom:5px;}
-.auth-field input{width:100%;font-size:13px;padding:11px 14px;border:1.5px solid rgba(255,255,255,.4);border-radius:13px;background:rgba(255,255,255,.2);color:#fff;outline:none;direction:ltr;font-family:'Cairo',sans-serif;}
-.auth-field input::placeholder{color:rgba(255,255,255,.55);}
-.auth-field input:focus{border-color:#fff;background:rgba(255,255,255,.28);}
-.auth-btn{background:#fff;border:none;border-radius:14px;padding:13px;font-size:13px;font-weight:700;color:#e91e8c;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-top:4px;}
-.auth-err{font-size:10px;color:#ffcdd2;text-align:center;margin-top:8px;min-height:16px;font-weight:600;}
-.auth-loading{display:none;text-align:center;color:#fff;font-size:12px;margin-top:8px;}
- 
- 
- 
- 
-/* PROFILE */
-.profile-icon{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;flex-shrink:0;}
-.profile-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:85;display:none;align-items:flex-end;justify-content:center;}
-.profile-overlay.show{display:flex;}
-.profile-modal{background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;max-height:85%;overflow-y:auto;}
-.profile-modal::-webkit-scrollbar{display:none;}
-.profile-avatar{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#1976d2);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 10px;}
-.profile-name-big{font-size:18px;font-weight:700;color:#1a1a2e;text-align:center;margin-bottom:4px;}
-.profile-email-sm{font-size:11px;color:#aaa;text-align:center;margin-bottom:16px;}
-.profile-field{margin-bottom:12px;}
-.profile-field label{font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;}
-.profile-field input{width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;}
-.profile-field input:focus{border-color:#e91e8c;}
-.profile-save-btn{background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-top:6px;}
-.profile-cancel-btn{background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:6px;margin-top:4px;}
- 
-/* EDIT MED MODAL */
-.edit-med-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:60;display:none;align-items:flex-end;justify-content:center;}
-.edit-med-overlay.show{display:flex;}
-.edit-med-modal{background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;}
- 
- 
-/* REMINDERS */
-.reminder-section{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:13px;margin-bottom:12px;}
-.reminder-title{font-size:11px;font-weight:700;color:#c2185b;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
-.notif-btn{font-size:10px;font-weight:700;padding:5px 12px;border-radius:10px;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
-.notif-on{background:#e8f5e9;color:#2e7d32;}
-.notif-off{background:#fce4ec;color:#c2185b;}
-.reminder-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #fce4ec;}
-.reminder-row:last-child{border-bottom:none;}
-.reminder-med-name{font-size:11px;font-weight:700;color:#1a1a2e;flex:1;}
-.reminder-times{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;}
-.time-chip{display:flex;align-items:center;gap:4px;background:#fce4ec;border:1px solid #f48fb1;border-radius:10px;padding:3px 8px;font-size:10px;font-weight:700;color:#c2185b;cursor:pointer;}
-.time-chip.active{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;border-color:transparent;}
-.add-time-btn{background:#e3f2fd;border:1px solid #90caf9;border-radius:10px;padding:3px 8px;font-size:10px;font-weight:700;color:#1565c0;cursor:pointer;font-family:'Cairo',sans-serif;}
- 
- 
-/* DOSE TRACKING */
-.dose-day-card{background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:12px 13px;margin-bottom:9px;box-shadow:0 2px 8px rgba(233,30,140,.06);}
-.dose-med-name{font-size:12px;font-weight:700;color:#1a1a2e;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.dose-btns{display:flex;gap:7px;flex-wrap:wrap;}
-.dose-btn{flex:1;min-width:60px;padding:9px 6px;border-radius:12px;border:1.5px solid #f8bbd0;background:#fdf4f9;font-size:10px;font-weight:700;color:#c2185b;cursor:pointer;font-family:'Cairo',sans-serif;transition:all .2s;text-align:center;}
-.dose-btn.taken{background:linear-gradient(135deg,#e91e8c,#f06292);border-color:transparent;color:#fff;}
-.dose-btn.missed{background:#f5f5f5;border-color:#e0e0e0;color:#aaa;}
-.dose-date-header{font-size:10px;font-weight:700;color:#888;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
-.dose-progress{height:5px;background:#fce4ec;border-radius:3px;overflow:hidden;margin-top:8px;}
-.dose-progress-fill{height:100%;background:linear-gradient(90deg,#e91e8c,#f06292);border-radius:3px;transition:width .3s;}
- 
- 
-.google-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;border:none;border-radius:14px;padding:13px;font-size:12px;font-weight:700;color:#1a1a2e;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:4px;}
-.google-btn:hover{background:#f5f5f5;}
- 
- 
-/* POST TYPE SELECTOR */
-.post-type-selector{display:flex;gap:8px;margin-bottom:12px;}
-.post-type-btn{flex:1;padding:10px 6px;border-radius:14px;border:1.5px solid #f8bbd0;background:#fff;font-size:10px;font-weight:700;color:#c2185b;cursor:pointer;font-family:'Cairo',sans-serif;text-align:center;transition:all .2s;}
-.post-type-btn.active{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;border-color:transparent;}
-/* POLL */
-.poll-options{margin-bottom:10px;}
-.poll-option-row{display:flex;gap:6px;align-items:center;margin-bottom:6px;}
-.poll-option-input{flex:1;font-size:11px;padding:8px 11px;border:1.5px solid #f8bbd0;border-radius:10px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;}
-.poll-remove-btn{width:24px;height:24px;border-radius:50%;background:#fce4ec;border:1px solid #f48fb1;color:#e91e8c;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.add-option-btn{background:#e3f2fd;border:1px solid #90caf9;border-radius:10px;padding:5px 12px;font-size:10px;font-weight:700;color:#1565c0;cursor:pointer;font-family:'Cairo',sans-serif;width:100%;margin-bottom:8px;}
-/* POLL DISPLAY */
-.poll-container{margin:8px 0;}
-.poll-option-display{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:9px 12px;margin-bottom:6px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
-.poll-option-display:hover{border-color:#e91e8c;}
-.poll-option-display.voted{border-color:#e91e8c;background:#fce4ec;}
-.poll-bar{position:absolute;top:0;left:0;height:100%;background:rgba(233,30,140,.1);border-radius:12px;transition:width .5s;}
-.poll-option-text{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;color:#1a1a2e;}
-.poll-pct{font-size:10px;color:#e91e8c;font-weight:700;}
-.poll-total{font-size:9px;color:#aaa;text-align:center;margin-top:4px;}
- 
- 
-.admin-overlay{position:absolute;inset:0;background:#f5f5f5;z-index:90;display:none;overflow-y:auto;direction:rtl;}
-.admin-overlay.show{display:block;}
-.admin-header{background:linear-gradient(135deg,#1a237e,#880e4f);padding:16px;position:sticky;top:0;z-index:10;}
-.admin-header-title{font-size:16px;font-weight:700;color:#fff;}
-.admin-header-sub{font-size:10px;color:rgba(255,255,255,.8);margin-top:2px;}
-.admin-back{background:rgba(255,255,255,.2);border:none;border-radius:10px;padding:5px 12px;font-size:10px;font-weight:700;color:#fff;cursor:pointer;font-family:'Cairo',sans-serif;float:left;}
-.admin-section{background:#fff;border-radius:16px;padding:14px;margin:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.admin-section-title{font-size:12px;font-weight:700;color:#1a1a2e;margin-bottom:12px;}
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.stat-card{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:12px;text-align:center;}
-.stat-num{font-size:24px;font-weight:700;color:#e91e8c;}
-.stat-lbl{font-size:9px;color:#888;margin-top:2px;}
-.admin-post-card{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:10px;margin-bottom:8px;}
-.admin-post-meta{font-size:9px;color:#aaa;margin-bottom:6px;}
-.admin-post-text{font-size:11px;color:#1a1a2e;margin-bottom:8px;line-height:1.5;}
-.admin-actions{display:flex;gap:6px;flex-wrap:wrap;}
-.admin-btn{padding:4px 10px;border-radius:8px;font-size:9px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
-.admin-btn-del{background:#ffebee;color:#c62828;}
-.admin-btn-pin{background:#fff3e0;color:#e65100;}
-.admin-btn-ban{background:#f3e5f5;color:#6a1b9a;}
-.admin-tab{padding:7px 14px;border-radius:10px;font-size:10px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;background:#f0f0f0;color:#888;}
-.admin-tab.on{background:linear-gradient(135deg,#e91e8c,#1976d2);color:#fff;}
-.admin-tabs{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;}
-.admin-tabs::-webkit-scrollbar{display:none;}
- 
- 
-/* FORUM CARDS */
-.pinned-post{border-color:#ff9800 !important;background:#fffde7;}
-.pin-badge{background:#fff3e0;color:#e65100;font-size:8px;font-weight:700;padding:2px 7px;border-radius:8px;}
-.react-btn{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:16px;padding:3px 9px;font-size:11px;cursor:pointer;font-family:'Cairo',sans-serif;}
-.react-btn.reacted{background:#fce4ec;border-color:#e91e8c;font-weight:700;}
-.react-count{font-size:10px;color:#888;}
-.report-btn{font-size:9px;color:#bbb;background:none;border:none;cursor:pointer;font-family:'Cairo',sans-serif;margin-right:auto;}
-.delete-btn-forum{font-size:9px;color:#e91e8c;background:#fce4ec;border:1px solid #f48fb1;border-radius:8px;padding:2px 8px;cursor:pointer;font-family:'Cairo',sans-serif;}
-.forum-img{width:100%;max-height:200px;object-fit:cover;border-radius:12px;margin:8px 0;cursor:pointer;}
-.forum-img-upload{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-.forum-img-preview{max-width:80px;max-height:60px;border-radius:8px;object-fit:cover;}
-.img-upload-btn{background:#e3f2fd;border:1.5px solid #90caf9;border-radius:10px;padding:6px 12px;font-size:10px;font-weight:700;color:#1565c0;cursor:pointer;font-family:'Cairo',sans-serif;white-space:nowrap;}
-/* AI CHAT */
-.ai-msg{max-width:85%;padding:10px 13px;border-radius:16px;font-size:11px;line-height:1.6;}
-.ai-msg-user{background:linear-gradient(135deg,#e91e8c,#f06292);color:#fff;align-self:flex-start;border-radius:16px 16px 4px 16px;}
-.ai-msg-bot{background:#fff;border:1.5px solid #f8bbd0;color:#1a1a2e;align-self:flex-end;border-radius:16px 16px 16px 4px;}
-.ai-msg-bot.loading{color:#aaa;font-style:italic;}
- 
- 
-/* ADMIN PANEL */
-.admin-overlay{position:absolute;inset:0;background:#f0f2f5;z-index:90;display:none;overflow-y:auto;direction:rtl;}
-.admin-header{background:linear-gradient(135deg,#1a237e,#880e4f);padding:14px 16px;position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;}
-.admin-back{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:5px 12px;font-size:10px;font-weight:700;color:#fff;cursor:pointer;font-family:'Cairo',sans-serif;}
-.admin-title{font-size:14px;font-weight:700;color:#fff;flex:1;}
-.admin-card{background:#fff;border-radius:16px;margin:10px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);}
-.admin-card-title{font-size:11px;font-weight:700;color:#1a1a2e;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
-.stat-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:0;}
-.stat-box{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:12px;text-align:center;}
-.stat-box-blue{background:#e3f2fd;border-color:#90caf9;}
-.stat-box-orange{background:#fff3e0;border-color:#ffcc02;}
-.stat-box-red{background:#ffebee;border-color:#ef9a9a;}
-.stat-n{font-size:22px;font-weight:700;color:#e91e8c;}
-.stat-n-blue{color:#1565c0;}
-.stat-n-orange{color:#e65100;}
-.stat-n-red{color:#c62828;}
-.stat-l{font-size:9px;color:#888;margin-top:2px;}
-.admin-tabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;}
-.admin-tabs::-webkit-scrollbar{display:none;}
-.admin-tab{padding:6px 14px;border-radius:20px;font-size:10px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;background:#e9ecef;color:#666;white-space:nowrap;}
-.admin-tab.on{background:linear-gradient(135deg,#e91e8c,#1976d2);color:#fff;}
-.admin-post-row{background:#fdf4f9;border:1.5px solid #f8bbd0;border-radius:12px;padding:10px;margin-bottom:8px;}
-.admin-post-meta{font-size:9px;color:#aaa;margin-bottom:4px;}
-.admin-post-body{font-size:11px;color:#1a1a2e;line-height:1.5;margin-bottom:8px;}
-.admin-btns{display:flex;gap:6px;flex-wrap:wrap;}
-.abtn{padding:4px 10px;border-radius:8px;font-size:9px;font-weight:700;border:none;cursor:pointer;font-family:'Cairo',sans-serif;}
-.abtn-del{background:#ffebee;color:#c62828;}
-.abtn-pin{background:#fff3e0;color:#e65100;}
-.abtn-ban{background:#f3e5f5;color:#6a1b9a;}
-.abtn-ok{background:#e8f5e9;color:#2e7d32;}
-.admin-notify-input{width:100%;font-size:11px;padding:10px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fff;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;resize:none;min-height:60px;margin-bottom:8px;}
-.admin-week-select{width:100%;font-size:11px;padding:8px 10px;border:1.5px solid #f8bbd0;border-radius:10px;background:#fff;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;margin-bottom:8px;}
-.admin-week-input{width:100%;font-size:11px;padding:10px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fff;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;resize:none;min-height:80px;margin-bottom:8px;}
- 
+body{
+  background:linear-gradient(160deg,#0f0f0f 0%,#1e1e1e 100%);
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;font-family:Arial,Helvetica,sans-serif;
+  touch-action:manipulation;overflow-y:auto;padding:12px 0;
+}
+.calc{
+  width:300px;
+  background:linear-gradient(180deg,#2a2a2a 0%,#1e1e1e 100%);
+  border-radius:22px;
+  padding:14px 10px 18px;
+  border:2px solid #555;
+  box-shadow:0 8px 48px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.08);
+  position:relative;
+}
+/* Brand */
+.brand{text-align:center;margin-bottom:8px;}
+.brand-name{font-size:21px;font-weight:900;color:#ddd;letter-spacing:.5px;}
+.brand-name em{font-style:italic;color:#fff;}
+.brand-ti{font-size:7px;color:#888;letter-spacing:3px;margin-top:1px;}
+
+/* Display */
+.disp-wrap{
+  background:#1a1f0e;border:3px solid #4a4a3a;border-radius:5px;
+  padding:5px 8px 7px;margin-bottom:8px;
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.6);
+}
+.disp-inds{
+  display:flex;gap:6px;font-size:7px;font-weight:700;
+  color:#2a3020;margin-bottom:1px;letter-spacing:.5px;
+}
+.disp-inds .on{color:#c8b800;}
+.disp-reg{font-size:10px;color:#6a8050;font-family:monospace;min-height:13px;letter-spacing:.5px;}
+.disp-num{
+  font-size:30px;color:#b8cc70;font-family:'Courier New',monospace;
+  font-weight:bold;text-align:right;min-height:38px;
+  letter-spacing:2px;text-shadow:0 0 10px rgba(160,200,80,.35);
+  overflow:hidden;white-space:nowrap;
+}
+.disp-bot{font-size:7px;color:#3a4030;text-align:center;margin-top:2px;letter-spacing:2px;}
+
+/* Keypad */
+.keypad{display:flex;flex-direction:column;gap:4px;}
+.krow{display:flex;gap:4px;}
+.key{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:flex-end;cursor:pointer;border-radius:5px;
+  padding:3px 1px 5px;user-select:none;-webkit-tap-highlight-color:transparent;
+  position:relative;transition:filter .06s;min-width:0;
+}
+.key:active,.key.p{filter:brightness(.55);}
+.k2{font-size:6px;color:#c8a800;font-weight:bold;min-height:8px;
+    text-align:center;line-height:1;margin-bottom:1px;letter-spacing:.3px;}
+.km{font-size:11px;font-weight:bold;color:#e8e8e8;text-align:center;line-height:1.1;}
+.ks{font-size:6px;color:#888;margin-top:1px;text-align:center;}
+
+/* Key types */
+.kfunc{background:linear-gradient(180deg,#585858,#424242);border:1px solid #666;}
+.kyellow{background:linear-gradient(180deg,#e0b800,#c09800);border:1px solid #906000;}
+.kyellow .km{color:#111;font-size:12px;}
+.kyellow .k2{color:#7a5000;}
+.ktvm{background:linear-gradient(180deg,#363636,#2c2c2c);border:1px solid #505050;}
+.kmath{background:linear-gradient(180deg,#383838,#2e2e2e);border:1px solid #505050;}
+.knum{background:linear-gradient(180deg,#484848,#3a3a3a);border:1px solid #606060;}
+.kop{background:linear-gradient(180deg,#38384a,#2e2e3e);border:1px solid #50506a;}
+
+/* Error flash */
+@keyframes errFlash{0%,100%{color:#b8cc70;}50%{color:#ff4444;}}
+.err{animation:errFlash .4s ease 3;}
 </style>
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-  <!-- PWA -->
-  <meta name="theme-color" content="#e91e8c"/>
-  <meta name="mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-  <meta name="apple-mobile-web-app-title" content="Pregnamate"/>
-  <link rel="manifest" href="manifest.json"/>
 </head>
 <body>
-<div class="phone">
-  <div class="notch"></div>
-  <div class="sbar"><span>9:41</span><span>Pregnamate 🤱</span><span>📶🔋</span></div>
-  <div class="save-toast" id="toast">💾 تم الحفظ</div>
- 
-<!-- AUTH SCREEN -->
-  <div class="auth-screen" style="z-index:200;" id="auth-screen">
-    <div class="auth-logo">🤰</div>
-    <div class="auth-appname">Pregnamate</div>
-    <div class="auth-tagline">Your Pregnancy Companion 🌸</div>
-    <div class="auth-card">
-      <div class="auth-tabs">
-        <button class="auth-tab on" id="tab-login" onclick="switchAuthTab('login')">تسجيل الدخول</button>
-        <button class="auth-tab" id="tab-signup" onclick="switchAuthTab('signup')">حساب جديد</button>
-      </div>
-      <div class="auth-field">
-        <label>📧 الإيميل</label>
-        <input type="email" id="auth-email" placeholder="example@email.com"/>
-      </div>
-      <div class="auth-field">
-        <label>🔒 كلمة السر</label>
-        <input type="password" id="auth-password" placeholder="••••••••"/>
-      </div>
-      <div id="auth-name-field" class="auth-field" style="display:none;">
-        <label>👤 اسمك</label>
-        <input type="text" id="auth-name" placeholder="مثال: رباب"/>
-      </div>
-      <button class="auth-btn" id="auth-btn" onclick="handleAuth()">دخول 🚀</button>
-      <div style="display:flex;align-items:center;gap:8px;margin:12px 0;">
-        <div style="flex:1;height:1px;background:rgba(255,255,255,0.3);"></div>
-        <span style="font-size:10px;color:rgba(255,255,255,0.7);">أو</span>
-        <div style="flex:1;height:1px;background:rgba(255,255,255,0.3);"></div>
-      </div>
-      <button class="google-btn" onclick="handleGoogle()">
-        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        متابعة مع Google
-      </button>
-      <div class="auth-err" id="auth-err"></div>
-      <div class="auth-loading" id="auth-loading">⏳ جاري التحميل...</div>
+<div class="calc" id="calc">
+  <div class="brand">
+    <div class="brand-name">BA II <em>Plus</em></div>
+    <div class="brand-ti">TEXAS INSTRUMENTS</div>
+  </div>
+
+  <div class="disp-wrap">
+    <div class="disp-inds">
+      <span id="i2nd">2nd</span>
+      <span id="iinv">INV</span>
+      <span id="ihyp">HYP</span>
+      <span style="margin-left:auto" id="ibgn">BGN</span>
+      <span id="irad">RAD</span>
+    </div>
+    <div class="disp-reg" id="dreg"></div>
+    <div class="disp-num" id="dnum">0.</div>
+    <div class="disp-bot">BUSINESS ANALYST</div>
+  </div>
+
+  <div class="keypad">
+    <!-- Row 1 -->
+    <div class="krow">
+      <div class="key kfunc" data-k="CPT">   <div class="k2">QUIT</div><div class="km">CPT</div></div>
+      <div class="key kfunc" data-k="ENTER"> <div class="k2">SET</div><div class="km">ENTER</div></div>
+      <div class="key kfunc" data-k="UP">    <div class="k2">DEL</div><div class="km">↑</div></div>
+      <div class="key kfunc" data-k="DOWN">  <div class="k2">INS</div><div class="km">↓</div></div>
+      <div class="key kfunc" data-k="ONOFF"> <div class="k2"></div><div class="km" style="font-size:9px">ON|OFF</div></div>
+    </div>
+    <!-- Row 2 -->
+    <div class="krow">
+      <div class="key kyellow" data-k="2ND"> <div class="k2"></div><div class="km">2ND</div></div>
+      <div class="key kfunc" data-k="CF">    <div class="k2">xP/Y</div><div class="km">CF</div></div>
+      <div class="key kfunc" data-k="NPV">   <div class="k2">P/Y</div><div class="km">NPV</div></div>
+      <div class="key kfunc" data-k="IRR">   <div class="k2">AMORT</div><div class="km">IRR</div></div>
+      <div class="key kfunc" data-k="ARROW"> <div class="k2">CLR TVM</div><div class="km">→</div></div>
+    </div>
+    <!-- Row 3: TVM -->
+    <div class="krow">
+      <div class="key ktvm" data-k="N">   <div class="k2">xP/Y</div><div class="km">N</div></div>
+      <div class="key ktvm" data-k="IY">  <div class="k2">P/Y</div><div class="km">I/Y</div></div>
+      <div class="key ktvm" data-k="PV">  <div class="k2">AMORT</div><div class="km">PV</div></div>
+      <div class="key ktvm" data-k="PMT"> <div class="k2">BGN</div><div class="km">PMT</div></div>
+      <div class="key ktvm" data-k="FV">  <div class="k2">CLR TVM</div><div class="km">FV</div></div>
+    </div>
+    <!-- Row 4 -->
+    <div class="krow">
+      <div class="key kmath" data-k="PCT">  <div class="k2">K</div><div class="km">%</div></div>
+      <div class="key kmath" data-k="SQRT"> <div class="k2"></div><div class="km">√x</div></div>
+      <div class="key kmath" data-k="SQ">   <div class="k2"></div><div class="km">x²</div></div>
+      <div class="key kmath" data-k="RECIP"><div class="k2"></div><div class="km">1/x</div></div>
+      <div class="key kop"   data-k="DIV">  <div class="k2">RAND</div><div class="km">÷</div></div>
+    </div>
+    <!-- Row 5 -->
+    <div class="krow">
+      <div class="key kmath" data-k="SIN"><div class="k2">HYP</div><div class="km">SIN</div></div>
+      <div class="key kmath" data-k="COS"><div class="k2">INV</div><div class="km">COS</div></div>
+      <div class="key kmath" data-k="TAN"><div class="k2"></div><div class="km">TAN</div></div>
+      <div class="key kmath" data-k="YX"> <div class="k2">x!</div><div class="km">yˣ</div></div>
+      <div class="key kop"   data-k="MUL"><div class="k2">×!</div><div class="km">×</div></div>
+    </div>
+    <!-- Row 6 -->
+    <div class="krow">
+      <div class="key kmath" data-k="LN"><div class="k2">ROUND</div><div class="km">LN</div></div>
+      <div class="key knum"  data-k="7"> <div class="k2">DATA</div><div class="km">7</div></div>
+      <div class="key knum"  data-k="8"> <div class="k2">STAT</div><div class="km">8</div></div>
+      <div class="key knum"  data-k="9"> <div class="k2">BOND</div><div class="km">9</div></div>
+      <div class="key kop"   data-k="SUB"><div class="k2">nPr</div><div class="km">−</div></div>
+    </div>
+    <!-- Row 7 -->
+    <div class="krow">
+      <div class="key kmath" data-k="STO"><div class="k2">DEPR</div><div class="km">STO</div></div>
+      <div class="key knum"  data-k="4">  <div class="k2">Δ%</div><div class="km">4</div></div>
+      <div class="key knum"  data-k="5">  <div class="k2">BRKEVN</div><div class="km">5</div></div>
+      <div class="key knum"  data-k="6">  <div class="k2"></div><div class="km">6</div></div>
+      <div class="key kop"   data-k="ADD"> <div class="k2">nCr</div><div class="km">+</div></div>
+    </div>
+    <!-- Row 8 -->
+    <div class="krow">
+      <div class="key kmath" data-k="RCL"><div class="k2">CLR WRK</div><div class="km">RCL</div></div>
+      <div class="key knum"  data-k="1">  <div class="k2">DATE</div><div class="km">1</div></div>
+      <div class="key knum"  data-k="2">  <div class="k2">ICONV</div><div class="km">2</div></div>
+      <div class="key knum"  data-k="3">  <div class="k2">PROFIT</div><div class="km">3</div></div>
+      <div class="key kop"   data-k="EQ2"> <div class="k2">ANS</div><div class="km">=</div></div>
+    </div>
+    <!-- Row 9 -->
+    <div class="krow">
+      <div class="key kfunc" data-k="CEC"><div class="k2">MEM</div><div class="km">CE|C</div></div>
+      <div class="key knum"  data-k="0">  <div class="k2"></div><div class="km">0</div></div>
+      <div class="key knum"  data-k="DOT"><div class="k2">FORMAT</div><div class="km">.</div></div>
+      <div class="key knum"  data-k="NEG"><div class="k2">RESET</div><div class="km">+|−</div></div>
+      <div class="key kop"   data-k="EQ"> <div class="k2"></div><div class="km">=</div></div>
     </div>
   </div>
- 
-  <!-- ONBOARDING -->
-  <div class="onboard" id="onboard">
-    <div class="ob-logo">🤰</div>
-    <div class="ob-title">Pregnamate</div>
-    <div class="ob-sub">Your Pregnancy Companion 🌸</div>
-    <div class="ob-card">
-      <div class="ob-field">
-        <label>اسمك</label>
-        <input id="ob-name" placeholder="مثال: رباب" maxlength="20"/>
-      </div>
-      <div class="ob-field">
-        <label>📅 تاريخ آخر دورة شهرية</label>
-        <input type="date" id="ob-lmp" style="direction:ltr;color:#fff;"/>
-        <div class="ob-hint">سيتم حساب عمر الحمل والموعد المتوقع تلقائياً</div>
-      </div>
-      <button class="ob-btn" onclick="startApp()">ابدأي رحلتك 🚀</button>
-    </div>
-  </div>
- 
-  <div class="inner">
-    <!-- HOME -->
-    <div class="scr act" id="s-home">
-      <div class="hdr">
-        <div class="htop"><div><div class="greet">أهلاً بكِ 🌸</div><div class="uname" id="disp-name">رباب</div></div><div style="display:flex;gap:5px;align-items:center;"><div class="chip" id="today-chip">📅 —</div><div class="profile-icon" onclick="openProfile()">👤</div><button onclick="logOut()" style="background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:4px 8px;font-size:9px;color:#fff;cursor:pointer;font-family:Cairo,sans-serif;">خروج</button></div><div id="due-chip" style="display:none;"></div></div>
-        <div class="wlbl" id="wlbl">الأسبوع السابع</div>
-        <div class="wrow"><span class="wn" id="wn">6</span><span class="wu">أسابيع</span><span class="dn" id="dn">3</span><span class="du">أيام</span></div>
-        <button class="edit-preg-btn" onclick="openModal()">✏️ تعديل عمر الحمل</button>
-        <div class="bgs"><span class="bg" id="mbg">الشهر الثاني</span><span class="bg" id="tbg">الثلث الأول</span><span class="bg" id="fbg">🍓 فراولة</span></div>
-        <div class="pb"><div class="pf" id="pf" style="width:16%"></div></div>
-        <div class="pl"><span>أسبوع 1</span><span id="pcurr">أسبوع 6</span><span>أسبوع 40</span></div>
-      </div>
-      <div class="g3">
-        <div class="ic ic1"><div class="ie">💊</div><div class="iv" id="doses-today-count">0/0</div><div class="il">جرعات اليوم</div></div>
-        <div class="ic ic2"><div class="ie">👶</div><div class="iv" id="fetus-size">1.2cm</div><div class="il">حجم الجنين</div></div>
-        <div class="ic ic3"><div class="ie">🤒</div><div class="iv" id="sym-count-home">0</div><div class="il">أعراض مسجلة</div></div>
-      </div>
-      <div class="stitle stitle-pink">✨ نصيحة الأسبوع</div>
-      <div class="tip" id="week-tip">الجنين بيكبر بشكل صحي. 💕</div>
-      <div class="stitle stitle-pink">💊 أدويتك النشطة</div>
-      <div id="active-meds-home"></div>
-      <div class="stitle stitle-blue">📝 ملاحظة سريعة</div>
-      <div class="addrow"><input id="hni" placeholder="عرض أو ملاحظة اليوم..."/><button class="abtn-sm" onclick="addHomeNote()">+ سجّلي</button></div>
-      <div id="hns"></div>
-    </div>
- 
-    <!-- MEDS -->
-    <div class="scr" id="s-meds">
-      <div style="height:14px"></div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-        <div class="stitle stitle-pink" style="margin-bottom:0;">💊 الأدوية والجرعات</div>
-        <button onclick="clearAllMeds()" style="font-size:9px;font-weight:700;color:#e91e8c;background:#fce4ec;border:1px solid #f48fb1;border-radius:8px;padding:4px 9px;cursor:pointer;font-family:'Cairo',sans-serif;">🗑 مسح الكل</button>
-      </div>
-      <div class="meds-list" id="custom-meds-list"></div>
-      <!-- DAILY DOSE LOG -->
-      <div id="daily-doses-section" style="margin-bottom:14px;"></div>
-      <!-- REMINDERS -->
-      <div style="background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:12px;margin-bottom:12px;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-          <span style="font-size:11px;font-weight:700;color:#c2185b;">🔔 تنبيهات الأدوية</span>
-          <button id="notif-toggle-btn" onclick="toggleNotifications()" style="font-size:10px;font-weight:700;padding:4px 10px;border-radius:10px;border:none;cursor:pointer;font-family:'Cairo',sans-serif;background:#fce4ec;color:#c2185b;">تفعيل التنبيهات</button>
-        </div>
-        <div id="reminder-list"><div style="font-size:11px;color:#aaa;text-align:center;padding:8px;">فعّل التنبيهات لإضافة مواعيد الجرعات</div></div>
-      </div>
- 
-      <div class="add-section" style="border-color:#f48fb1;">
-        <div class="add-title">➕ أضيفي دواء جديد</div>
-        <div class="add-field"><label>💊 اسم الدواء والجرعة</label><input id="med-name" placeholder="مثال: Folic Acid 400mcg"/></div>
-        <div class="add-field"><label>🕐 طريقة الاستخدام</label><input id="med-dose" placeholder="مثال: قرص يومي مع الفطار"/></div>
-        <div class="add-field"><label>🔢 عدد الجرعات يومياً</label>
-          <select id="med-times" style="width:100%;font-size:10px;padding:8px 11px;border:1.5px solid #f8bbd0;border-radius:11px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;">
-            <option value="1">1 مرة يومياً</option>
-            <option value="2">2 مرات يومياً</option>
-            <option value="3">3 مرات يومياً</option>
-            <option value="4">4 مرات يومياً</option>
-          </select>
-        </div>
-        <div class="add-field"><label>📊 الحالة</label>
-          <select id="med-status" style="width:100%;font-size:10px;padding:8px 11px;border:1.5px solid #f8bbd0;border-radius:11px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;">
-            <option value="on">مستمر ✅</option>
-            <option value="off">موقوف ❌</option>
-          </select>
-        </div>
-        <button class="save-btn" onclick="addMed()">✅ حفظ</button>
-      </div>
-    </div>
- 
-    <!-- INFO -->
-    <div class="scr" id="s-info">
-      <div style="height:14px"></div>
-      <div class="stitle stitle-blue">📚 دليل الأسابيع</div>
-      <div class="wtabs">
-        <button class="wt s" onclick="setWT(this,0)">👶 الجنين</button>
-        <button class="wt" onclick="setWT(this,1)">🤱 الأم</button>
-        <button class="wt" onclick="setWT(this,2)">🥗 تغذية</button>
-        <button class="wt" onclick="setWT(this,3)">⚠️ تحذيرات</button>
-      </div>
-      <div class="wcard"><div class="wbdg" id="info-week-badge">🌱 الأسبوع السابع</div><div id="wic"></div></div>
-      <div class="istat">
-        <div class="is is-p"><div class="is-l">الحجم</div><div class="is-v is-pv" id="info-size">1.2cm</div></div>
-        <div class="is is-b"><div class="is-l">الوزن</div><div class="is-v is-bv">~1g</div></div>
-        <div class="is is-p"><div class="is-l">يشبه</div><div style="font-size:20px;margin-top:2px" id="info-emoji">🍓</div></div>
-      </div>
-    </div>
- 
-    <!-- APPOINTMENTS -->
-    <div class="scr" id="s-appts">
-      <div style="height:14px"></div>
-      <div class="stitle stitle-blue">📅 المواعيد القادمة</div>
-      <div class="upcoming-wrap" id="upcoming-wrap">
-        <div id="upcoming-list"><div style="font-size:11px;color:#aaa;text-align:center;padding:10px;">لا توجد مواعيد قادمة</div></div>
-      </div>
-      <div class="stitle stitle-pink">🕐 سجل المواعيد</div>
-      <div class="timeline"><div id="past-list"><div style="font-size:11px;color:#aaa;text-align:center;padding:10px;">لا توجد مواعيد سابقة</div></div></div>
-      <div class="add-section">
-        <div class="add-title">➕ أضيفي موعد</div>
-        <div class="type-toggle"><button class="tog-btn active-past" id="tog-past" onclick="setType('past')">🕐 حالي / سابق</button><button class="tog-btn" id="tog-future" onclick="setType('future')">📅 قادم</button></div>
-        <div class="add-field"><label>📋 اسم الموعد</label><input id="f-name" placeholder="مثال: كشف الأسبوع التاسع"/></div>
-        <div id="past-fields"><div class="add-field"><label>🔍 اللي حصل</label><input id="f-happened" placeholder="مثال: إيكو طبيعي"/></div><div class="add-field"><label>💊 المطلوب</label><input id="f-required" placeholder="مثال: Folic Acid، راحة"/></div></div>
-        <div id="future-fields" style="display:none;"><div class="add-field"><label>📆 التاريخ</label><input id="f-date" placeholder="مثال: 10 يونيو 2026"/></div><div class="add-field"><label>📝 ملاحظة</label><input id="f-note" placeholder="اختياري"/></div></div>
-        <button class="save-btn" onclick="saveAppt()">✅ حفظ</button>
-      </div>
-    </div>
- 
-    <!-- SYMPTOMS -->
-    <div class="scr" id="s-syms">
-      <div style="height:14px"></div>
-      <div class="stitle stitle-purple">🤒 الأعراض</div>
-      <div class="sym-stats">
-        <div class="ss"><div class="ss-val" id="ss-total">0</div><div class="ss-lbl">إجمالي</div></div>
-        <div class="ss"><div class="ss-val" id="ss-today">0</div><div class="ss-lbl">اليوم</div></div>
-        <div class="ss"><div class="ss-val" id="ss-common">—</div><div class="ss-lbl">الأكثر</div></div>
-      </div>
-      <div class="stitle stitle-purple">⚡ إضافة سريعة</div>
-      <div class="sym-quick">
-        <button class="sym-quick-btn" onclick="quickAdd('غثيان','🤢')">🤢 غثيان</button>
-        <button class="sym-quick-btn" onclick="quickAdd('تعب','😴')">😴 تعب</button>
-        <button class="sym-quick-btn" onclick="quickAdd('صداع','🤕')">🤕 صداع</button>
-        <button class="sym-quick-btn" onclick="quickAdd('حرقة','🔥')">🔥 حرقة</button>
-        <button class="sym-quick-btn" onclick="quickAdd('إمساك','😣')">😣 إمساك</button>
-        <button class="sym-quick-btn" onclick="quickAdd('دوخة','😵')">😵 دوخة</button>
-        <button class="sym-quick-btn" onclick="quickAdd('ألم ظهر','😬')">😬 ألم ظهر</button>
-        <button class="sym-quick-btn" onclick="quickAdd('نفخة','🫃')">🫃 نفخة</button>
-        <button class="sym-quick-btn" onclick="quickAdd('أرق','🌙')">🌙 أرق</button>
-        <button class="sym-quick-btn" onclick="quickAdd('نزلة برد','🤧')">🤧 نزلة برد</button>
-      </div>
-      <div class="sym-add-box">
-        <div class="sym-add-title">✍️ عرض مخصص</div>
-        <div class="sym-add-row"><input id="sym-input" placeholder="اكتبي العرض..."/><button class="sym-save-btn" onclick="addCustomSym()">+ أضيفي</button></div>
-        <div class="sym-intensity">
-          <label>الشدة:</label>
-          <div class="intensity-btns">
-            <button class="int-btn on" id="int1" onclick="setInt(1)">1</button>
-            <button class="int-btn" id="int2" onclick="setInt(2)">2</button>
-            <button class="int-btn" id="int3" onclick="setInt(3)">3</button>
-          </div>
-          <span style="font-size:9px;color:#aaa;margin-right:6px;">خفيف — متوسط — شديد</span>
-        </div>
-      </div>
-      <div class="stitle stitle-purple">📋 السجل</div>
-      <div class="sym-list" id="sym-list"><div class="sym-empty">لا توجد أعراض مسجلة بعد<br><span style="font-size:18px;margin-top:6px;display:block">🌸</span></div></div>
-    </div>
- 
-    <!-- TRACKING -->
-    <div class="scr" id="s-track">
-      <div style="height:14px"></div>
-      <div class="seg">
-        <button class="seg-btn on-blue" id="tab-mom" onclick="switchTrackTab('mom')">&#9878;&#65039; وزن الأم</button>
-        <button class="seg-btn" id="tab-fet" onclick="switchTrackTab('fet')">&#128118; وزن الجنين</button>
-      </div>
-      <!-- MOM -->
-      <div id="sec-mom">
-        <div class="track-stats">
-          <div class="st st-blue"><div class="st-val" id="mom-cur">&#8212;</div><div class="st-lbl">الوزن الحالي</div></div>
-          <div class="st st-blue"><div class="st-val" id="mom-gain">&#8212;</div><div class="st-lbl">الزيادة الكلية</div></div>
-          <div class="st st-blue"><div class="st-val" id="mom-cnt">0</div><div class="st-lbl">قياسات</div></div>
-        </div>
-        <div class="chart-wrap">
-          <div class="chart-title">&#128200; منحنى وزن الأم (كجم)</div>
-          <canvas id="mom-canvas" height="120" style="width:100%;display:block;"></canvas>
-        </div>
-        <div class="track-form">
-          <div class="track-form-row">
-            <div class="ff"><label>&#128197; التاريخ</label><input type="date" id="mom-date"/></div>
-            <div class="ff"><label>الوزن (كجم)</label><input type="number" id="mom-w" placeholder="65.5" step="0.1"/></div>
-          </div>
-          <div class="trk-err" id="mom-err"></div>
-          <button class="save-btn" onclick="addMom()">+ أضيفي قياس</button>
-        </div>
-        <div class="track-records" id="mom-recs"><div class="trk-empty">لا توجد قياسات بعد &#127800;</div></div>
-      </div>
-      <!-- FETUS -->
-      <div id="sec-fet" style="display:none;">
-        <div class="track-stats">
-          <div class="st st-pink"><div class="st-val" id="fet-cur" style="color:#c2185b;">&#8212;</div><div class="st-lbl">الوزن الحالي</div></div>
-          <div class="st st-pink"><div class="st-val" id="fet-gain" style="color:#c2185b;">&#8212;</div><div class="st-lbl">النمو الكلي</div></div>
-          <div class="st st-pink"><div class="st-val" id="fet-cnt" style="color:#c2185b;">0</div><div class="st-lbl">قياسات</div></div>
-        </div>
-        <div class="chart-wrap pink">
-          <div class="chart-title">&#128200; منحنى وزن الجنين (جرام)</div>
-          <canvas id="fet-canvas" height="120" style="width:100%;display:block;"></canvas>
-        </div>
-        <div class="track-form pink">
-          <div class="track-form-row">
-            <div class="ff"><label>&#128197; التاريخ</label><input type="date" id="fet-date"/></div>
-            <div class="ff"><label>الوزن (جرام)</label><input type="number" id="fet-w" placeholder="350" step="1"/></div>
-          </div>
-          <div class="trk-err" id="fet-err"></div>
-          <button class="save-btn" style="background:linear-gradient(135deg,#e91e8c,#f06292);" onclick="addFet()">+ أضيفي قياس إيكو</button>
-        </div>
-        <div class="track-records" id="fet-recs"><div class="trk-empty">لا توجد قياسات بعد &#128118;</div></div>
-      </div>
-    </div>
- 
-    <!-- FORUM -->
-    <div class="scr" id="s-forum">
-      <div style="height:14px"></div>
-      <div style="background:linear-gradient(135deg,#e91e8c,#1976d2);border-radius:18px;padding:14px;margin-bottom:14px;text-align:center;">
-        <div style="font-size:15px;font-weight:700;color:#fff;">💬 مجتمع Pregnamate</div>
-        <div style="font-size:10px;color:rgba(255,255,255,.85);margin-top:3px;">شاركي تجربتك مع أمهات زيك 🌸</div>
-      </div>
-      <div class="forum-filter">
-        <button class="ftag active" onclick="filterForum('all',this)">🌸 الكل</button>
-        <button class="ftag" onclick="filterForum('question',this)">❓ سؤال</button>
-        <button class="ftag" onclick="filterForum('tip',this)">💡 نصيحة</button>
-        <button class="ftag" onclick="filterForum('experience',this)">📖 تجربة</button>
-        <button class="ftag" onclick="filterForum('symptom',this)">🤒 عرض</button>
-      </div>
-      <div class="forum-add-box">
-        <div class="forum-add-title">✍️ شاركي مع المجتمع</div>
- 
-        <!-- Post type -->
-        <div class="post-type-selector">
-          <button class="post-type-btn active" id="ptype-text" onclick="setPostType('text')">📝 نص</button>
-          <button class="post-type-btn" id="ptype-photo" onclick="setPostType('photo')">📸 صورة</button>
-          <button class="post-type-btn" id="ptype-poll" onclick="setPostType('poll')">📊 استفتاء</button>
-        </div>
- 
-        <!-- Category -->
-        <select id="forum-type" style="width:100%;font-size:10px;padding:7px 11px;border:1.5px solid #f8bbd0;border-radius:10px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;margin-bottom:8px;">
-          <option value="question">❓ سؤال</option>
-          <option value="tip">💡 نصيحة</option>
-          <option value="experience">📖 تجربة</option>
-          <option value="symptom">🤒 عرض</option>
-        </select>
- 
-        <!-- Text -->
-        <textarea class="forum-add-input" id="forum-input" placeholder="اكتبي هنا... (هويتك هتبقى مخفية)"></textarea>
- 
-        <!-- Photo -->
-        <div id="photo-section" style="display:none;margin-bottom:8px;">
-          <label class="img-upload-btn" for="forum-img-input">📷 اختاري صورة</label>
-          <input type="file" id="forum-img-input" accept="image/*" style="display:none;" onchange="previewForumImg(event)"/>
-          <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
-            <img id="forum-img-preview" style="max-width:80px;max-height:60px;border-radius:8px;object-fit:cover;display:none;"/>
-            <button id="forum-img-clear" style="display:none;background:none;border:none;color:#e91e8c;font-size:14px;cursor:pointer;" onclick="clearForumImg()">✕</button>
-          </div>
-        </div>
- 
-        <!-- Poll -->
-        <div id="poll-section" style="display:none;">
-          <div id="poll-options-container">
-            <div class="poll-option-row"><input class="poll-option-input" placeholder="خيار 1"/><button class="poll-remove-btn" onclick="removePollOption(this)">✕</button></div>
-            <div class="poll-option-row"><input class="poll-option-input" placeholder="خيار 2"/><button class="poll-remove-btn" onclick="removePollOption(this)">✕</button></div>
-          </div>
-          <button class="add-option-btn" onclick="addPollOption()">+ أضيفي خيار</button>
-        </div>
- 
-        <button class="forum-send-btn" onclick="addForumPost()">📤 نشر</button>
-      </div>
- 
-      <div id="forum-posts">
-        <div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>
-      </div>
-    </div>
- 
- 
-    <!-- AI CHAT -->
-    <div class="scr" id="s-ai">
-      <div style="height:14px"></div>
-      <div style="background:linear-gradient(135deg,#e91e8c,#1976d2);border-radius:18px;padding:14px;margin-bottom:12px;text-align:center;">
-        <div style="font-size:15px;font-weight:700;color:#fff;">🤖 Pregnamate AI</div>
-        <div style="font-size:10px;color:rgba(255,255,255,.85);margin-top:2px;">مساعدك الذكي المتخصص في الحمل</div>
-      </div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
-        <div style="background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:5px 11px;font-size:10px;font-weight:600;color:#c2185b;cursor:pointer;" onclick="askAI('الغثيان في الحمل — ازاي أتعامل معاه؟')">🤢 الغثيان</div>
-        <div style="background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:5px 11px;font-size:10px;font-weight:600;color:#c2185b;cursor:pointer;" onclick="askAI('إيه الأكل المناسب في الثلث الأول؟')">🥗 تغذية</div>
-        <div style="background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:5px 11px;font-size:10px;font-weight:600;color:#c2185b;cursor:pointer;" onclick="askAI('إمتى لازم أروح للدكتورة فوراً؟')">⚠️ تحذيرات</div>
-        <div style="background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:5px 11px;font-size:10px;font-weight:600;color:#c2185b;cursor:pointer;" onclick="askAI('ازاي أخفف ألم الظهر في الحمل؟')">😣 ألم ظهر</div>
-      </div>
-      <div style="font-size:9px;color:#aaa;text-align:center;margin-bottom:8px;">⚕️ المعلومات للتوعية فقط — استشيري طبيبتك دائماً</div>
-      <div id="ai-messages" style="flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;margin-bottom:10px;min-height:200px;">
-        <div style="background:#fff;border:1.5px solid #f8bbd0;color:#1a1a2e;border-radius:16px 16px 16px 4px;padding:10px 13px;font-size:11px;line-height:1.6;max-width:85%;align-self:flex-end;">أهلاً! 🌸 أنا Pregnamate AI — مساعدك الذكي. اسأليني أي سؤال عن حملك!</div>
-      </div>
-      <div style="display:flex;gap:7px;align-items:center;padding:8px 0;">
-        <div onclick="sendAIMsg()" style="width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#1976d2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </div>
-        <input id="ai-input" style="flex:1;font-size:11px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:20px;background:#fff;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;" placeholder="اسأليني أي سؤال عن حملك..." onkeydown="if(event.keyCode===13)sendAIMsg()"/>
-      </div>
-    </div>
- 
-  </div>
- 
- 
-  <!-- MODAL -->
-  <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
-    <div class="modal">
-      <div class="modal-title">✏️ تعديل عمر الحمل</div>
-      <div class="modal-sub">غيّري بناءً على كلام الدكتورة أو الإيكو</div>
-      <div class="modal-tabs"><button class="mtab on-lmp" id="mtab-lmp" onclick="setModalTab('lmp')">من تاريخ الدورة</button><button class="mtab" id="mtab-manual" onclick="setModalTab('manual')">إدخال يدوي</button></div>
-      <div id="modal-lmp"><div class="modal-field"><label>📅 تاريخ آخر دورة شهرية</label><input type="date" id="lmp-input" style="font-size:13px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;width:100%;direction:ltr;outline:none;font-family:'Cairo',sans-serif;"/></div><div class="modal-hint">سيتم حساب عمر الحمل تلقائياً</div></div>
-      <div id="modal-manual" style="display:none;"><div class="modal-row"><div class="mf2"><label>الأسابيع</label><input type="number" id="m-weeks" min="1" max="42" placeholder="6"/></div><div class="mf2"><label>الأيام</label><input type="number" id="m-days" min="0" max="6" placeholder="3"/></div></div><div class="modal-hint">مثال: 6 أسابيع و 3 أيام</div></div>
-      <button class="modal-save" onclick="applyEdit()">✅ حفظ التعديل</button>
-      <button class="modal-cancel" onclick="closeModal()">إلغاء</button>
-    </div>
-  </div>
-  <!-- EDIT MED DATE MODAL -->
-  <div id="emd-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,0.5);z-index:60;display:none;align-items:flex-end;justify-content:center;" onclick="if(event.target===this)closeEditMedDate()">
-    <div style="background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 28px;width:100%;">
-      <div style="font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:4px;" id="emd-title">تعديل تاريخ البداية</div>
-      <div style="font-size:10px;color:#888;margin-bottom:14px;">غيّري تاريخ بداية الدواء</div>
-      <input type="hidden" id="emd-id"/>
-      <div style="margin-bottom:14px;">
-        <label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:6px;">📅 تاريخ بداية العلاج</label>
-        <input type="date" id="emd-input" style="width:100%;font-size:13px;padding:11px 14px;border:1.5px solid #f8bbd0;border-radius:13px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/>
-      </div>
-      <button onclick="saveEditMedDate()" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;">✅ حفظ التاريخ</button>
-      <button onclick="closeEditMedDate()" style="background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;">إلغاء</button>
-    </div>
-  </div>
- 
- 
-  <!-- EDIT MED DATE MODAL -->
-  <div id="emd-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,0.5);z-index:60;display:none;align-items:flex-end;justify-content:center;" onclick="if(event.target===this)closeEditMedDate()">
-    <div style="background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 28px;width:100%;">
-      <div style="font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:4px;" id="emd-title">تعديل تاريخ البداية</div>
-      <div style="font-size:10px;color:#888;margin-bottom:14px;">غيّري تاريخ بداية الدواء</div>
-      <input type="hidden" id="emd-id"/>
-      <div style="margin-bottom:14px;">
-        <label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:6px;">📅 تاريخ بداية العلاج</label>
-        <input type="date" id="emd-input" style="width:100%;font-size:13px;padding:11px 14px;border:1.5px solid #f8bbd0;border-radius:13px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/>
-      </div>
-      <button onclick="saveEditMedDate()" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;">✅ حفظ التاريخ</button>
-      <button onclick="closeEditMedDate()" style="background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;">إلغاء</button>
-    </div>
-  </div>
- 
- 
- 
-  <!-- EDIT MED MODAL -->
-  <div id="edit-med-overlay" onclick="if(event.target===this)closeEditMed()" style="position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:60;display:none;align-items:flex-end;justify-content:center;">
-    <div style="background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;">
-      <div style="font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:16px;">✏️ تعديل الدواء</div>
-      <input type="hidden" id="edit-med-id"/>
-      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">💊 اسم الدواء</label><input type="text" id="edit-med-name" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;"/></div>
-      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">🕐 طريقة الاستخدام</label><input type="text" id="edit-med-dose" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;"/></div>
-      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📅 تاريخ البداية</label><input type="date" id="edit-med-date" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/></div>
-      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">🔢 عدد الجرعات يومياً</label><select id="edit-med-times" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;"><option value="1">1 مرة يومياً</option><option value="2">2 مرات يومياً</option><option value="3">3 مرات يومياً</option><option value="4">4 مرات يومياً</option></select></div>
-      <div style="margin-bottom:10px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📊 الحالة</label><select id="edit-med-status" onchange="toggleStopDate()" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;font-family:'Cairo',sans-serif;"><option value="on">مستمر ✅</option><option value="off">موقوف ❌</option></select></div>
-      <div id="stop-date-field" style="margin-bottom:14px;display:none;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📅 تاريخ الوقف</label><input type="date" id="edit-med-stopdate" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/></div>
-      <button onclick="saveEditMed()" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;">✅ حفظ التعديل</button>
-      <button onclick="closeEditMed()" style="background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;">إلغاء</button>
-    </div>
-  </div>
- 
- 
-  <!-- PROFILE MODAL -->
-  <div id="profile-overlay" onclick="if(event.target===this)closeProfile()">
-    <div style="background:#fff;border-radius:24px 24px 0 0;padding:20px 18px 32px;width:100%;max-height:85%;overflow-y:auto;">
-      <div id="profile-avatar" style="width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,#e91e8c,#1976d2);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 10px;">👤</div>
-      <div id="profile-name-big" style="font-size:18px;font-weight:700;color:#1a1a2e;text-align:center;margin-bottom:4px;">—</div>
-      <div id="profile-email-sm" style="font-size:11px;color:#aaa;text-align:center;margin-bottom:16px;"></div>
-      <div style="margin-bottom:12px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">👤 الاسم</label><input type="text" id="prof-name" placeholder="اسمك" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:rtl;font-family:'Cairo',sans-serif;"/></div>
-      <div style="margin-bottom:12px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">🎂 تاريخ الميلاد</label><input type="date" id="prof-dob" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/></div>
-      <div style="margin-bottom:12px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📱 رقم الموبايل</label><input type="tel" id="prof-phone" placeholder="01xxxxxxxxx" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/></div>
-      <div style="margin-bottom:14px;"><label style="font-size:10px;font-weight:700;color:#888;display:block;margin-bottom:4px;">📧 الإيميل</label><input type="email" id="prof-email" placeholder="example@email.com" style="width:100%;font-size:12px;padding:10px 13px;border:1.5px solid #f8bbd0;border-radius:12px;background:#fdf4f9;color:#1a1a2e;outline:none;direction:ltr;font-family:'Cairo',sans-serif;"/></div>
-      <div id="prof-err" style="display:none;color:#e91e8c;font-size:10px;font-weight:700;text-align:center;margin-bottom:8px;padding:8px;background:#fce4ec;border-radius:10px;"></div>
-      <button onclick="saveProfile()" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:13px;padding:12px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;margin-bottom:8px;">✅ حفظ</button>
-      <button onclick="closeProfile()" style="background:transparent;border:none;width:100%;font-size:11px;color:#aaa;cursor:pointer;font-family:'Cairo',sans-serif;padding:4px;">إلغاء</button>
-      <div id="admin-access-btn" style="display:none;margin-top:8px;"><button onclick="openAdmin()" style="background:linear-gradient(135deg,#1a237e,#880e4f);border:none;border-radius:13px;padding:10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;width:100%;font-family:'Cairo',sans-serif;">🛡️ لوحة الإدارة</button></div>
-    </div>
-  </div>
- 
- 
-  <!-- LIGHTBOX -->
-  <div id="forum-lightbox" onclick="closeLightbox()" style="position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:200;display:none;align-items:center;justify-content:center;">
-    <img id="lightbox-img" src="" style="max-width:95vw;max-height:90vh;border-radius:8px;" alt=""/>
-  </div>
- 
-  <!-- ADMIN PANEL -->
-  <div id="admin-panel" style="position:absolute;inset:0;background:#f0f2f5;z-index:80;display:none;overflow-y:auto;direction:rtl;">
-    <div class="admin-header">
-      <button class="admin-back" onclick="closeAdmin()">← رجوع</button>
-      <div class="admin-title">🛡️ لوحة الإدارة</div>
-    </div>
-    <div style="padding:4px 0 80px;">
-      <div class="admin-card">
-        <div class="admin-card-title">📊 إحصائيات</div>
-        <div class="stat-row">
-          <div class="stat-box"><div class="stat-n" id="adm-posts">—</div><div class="stat-l">منشور</div></div>
-          <div class="stat-box stat-box-blue"><div class="stat-n stat-n-blue" id="adm-users">—</div><div class="stat-l">مستخدم</div></div>
-          <div class="stat-box stat-box-orange"><div class="stat-n stat-n-orange" id="adm-reports">—</div><div class="stat-l">بلاغ</div></div>
-          <div class="stat-box stat-box-red"><div class="stat-n stat-n-red" id="adm-banned">—</div><div class="stat-l">محظور</div></div>
-        </div>
-      </div>
-      <div class="admin-card">
-        <div class="admin-tabs">
-          <button class="admin-tab on" onclick="admTab('posts',this)">💬 المنشورات</button>
-          <button class="admin-tab" onclick="admTab('reports',this)">🚨 البلاغات</button>
-          <button class="admin-tab" onclick="admTab('banned',this)">🚫 المحظورين</button>
-          <button class="admin-tab" onclick="admTab('notify',this)">📢 إشعار</button>
-          <button class="admin-tab" onclick="admTab('tips',this)">⚕️ نصايح</button>
-        </div>
-        <div id="adm-content">
-          <div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">⏳ جاري التحميل...</div>
-        </div>
-      </div>
-    </div>
-  </div>
- 
-  <div class="bnav-wrap">
-    <div class="bnav-drag"></div>
-    <div class="bnav">
-      <button class="nb on" onclick="go('home',this)"><svg viewBox="0 0 24 24"><path d="M3 12L12 3l9 9"/><path d="M9 21V12h6v9"/></svg>الرئيسية</button>
-      <button class="nb" onclick="go('meds',this)"><svg viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M4 6h16v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><line x1="12" y1="10" x2="12" y2="16"/><line x1="9" y1="13" x2="15" y2="13"/></svg>الأدوية</button>
-      <button class="nb" onclick="go('info',this)"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>معلومات</button>
-      <button class="nb" onclick="go('appts',this)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>مواعيد</button>
-      <button class="nb" onclick="go('track',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>الوزن</button>
-      <button class="nb" id="nb-syms" onclick="go('syms',this,true)"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>أعراض</button>
-      <button class="nb" onclick="go('forum',this)"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>مجتمع</button>
-      <button class="nb" onclick="go('ai',this)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>AI</button>
-    </div>
-  </div>
- 
 </div>
- 
+
 <script>
-</script>
-<script>
-// ===== CONSTANTS =====
-const ORDS=['الأول','الثاني','الثالث','الرابع','الخامس','السادس','السابع','الثامن','التاسع','العاشر','الحادي عشر','الثاني عشر','الثالث عشر','الرابع عشر','الخامس عشر','السادس عشر','السابع عشر','الثامن عشر','التاسع عشر','العشرون','الحادي والعشرون','الثاني والعشرون','الثالث والعشرون','الرابع والعشرون','الخامس والعشرون','السادس والعشرون','السابع والعشرون','الثامن والعشرون','التاسع والعشرون','الثلاثون','الحادي والثلاثون','الثاني والثلاثون','الثالث والثلاثون','الرابع والثلاثون','الخامس والثلاثون','السادس والثلاثون','السابع والثلاثون','الثامن والثلاثون','التاسع والثلاثون','الأربعون'];
-const MOS=['الأول','الثاني','الثالث','الرابع','الخامس','السادس','السابع','الثامن','التاسع'];
-const MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-const FSIZE=[['',''],['',''],['',''],['3mm','🌱'],['4mm','🌱'],['5mm','🌱'],['6mm','🫐'],['1cm','🍓'],['1.6cm','🍒'],['2.3cm','🍇'],['3cm','🍒'],['4cm','🫑'],['5cm','🍋'],['7cm','🍑'],['8.7cm','🍎'],['10cm','🍏'],['11.6cm','🥑'],['13cm','🍐'],['14.2cm','🥭'],['15.3cm','🌽'],['16.4cm','🥦'],['26cm','🍆'],['28cm','🌽'],['29cm','🥕'],['30cm','🧅'],['34cm','🥬'],['35cm','🥒'],['36cm','🥒'],['37cm','🍆'],['38cm','🎃'],['39cm','🎃'],['40cm','🎃'],['41cm','🍉'],['42cm','🍉'],['43cm','🍉'],['44cm','🍉'],['45cm','🍉'],['46cm','🍉'],['47cm','🍉'],['48cm','🍉'],['50cm','👶']];
-const TIPS=['','','','','الجنين في أولى مراحل التشكّل 🌱','القلب بيبدأ يدق! 🫀','الكيس الجنيني واضح بالإيكو 🔍','ملامح الوجه بتتشكل 👀','الجنين حجمه زي فراولة 🍓','الجنين بيتحرك وإنتِ مش حاسة 🤸','بدأ الثلث التاني 🎉','الشعر والأظافر بتنمو 💅','الجنين بيسمع صوتك 👂','الجنين بيبتسم في النوم 😴','بدأت تحسي بالحركة 🤸','الجنين بيبص ببصيرة محدودة 👁','الجنين بيبكي بكاء صامت 😢','الجنين بيستجيب للضوء والصوت 🔊','الجنين في نمو سريع جداً 📈','الجنين بيكبر كتير هذا الأسبوع 💪'];
- 
-// ===== LOCAL STORAGE =====
-function save(key, val){
-  try{ localStorage.setItem('hamila_'+key, JSON.stringify(val)); }catch(e){}
-  clearTimeout(window._ct);
-  window._ct=setTimeout(function(){ if(typeof saveToCloud==='function') saveToCloud(); }, 2000);
+// ──────────────────────────────────────────────
+//  STATE
+// ──────────────────────────────────────────────
+const S = {
+  entry: '0',
+  newEntry: true,       // next digit replaces
+  second: false,
+  hyp: false,
+  inv: false,
+  op: null,             // pending arithmetic operator
+  opnd: null,           // left-hand operand
+  lastAns: 0,
+  mem: 0,               // STO/RCL memory
+  // TVM
+  tvm: { N:null, IY:null, PV:null, PMT:null, FV:null },
+  bgn: false,
+  PY: 1,                // payments per year
+  // CF worksheet
+  cfWS: false,
+  cfStep: 0,            // 0=CF0, 1=C01, 2=F01, 3=C02, 4=F02 ...
+  cf0: 0,
+  cfC: [],              // cash flows
+  cfF: [],              // frequencies
+  // display state
+  reg: '',
+};
+
+// ──────────────────────────────────────────────
+//  DISPLAY
+// ──────────────────────────────────────────────
+function fmt(n) {
+  if (n === null || n === undefined) return '0.';
+  if (!isFinite(n)) return 'Error   ';
+  // Round to 10 sig figs
+  const s = parseFloat(n.toPrecision(10)).toString();
+  return s.includes('.') || s.includes('e') ? s : s + '.';
 }
-function load(key, def){ try{ const v=localStorage.getItem('hamila_'+key); return v!==null?JSON.parse(v):def; }catch(e){ return def; } }
- 
-function showToast(){
-  const t=document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),1500);
+
+function showDisplay(val, reg) {
+  document.getElementById('dnum').textContent = val !== undefined ? val : (S.entry.includes('.') ? S.entry : S.entry + '.');
+  document.getElementById('dreg').textContent = reg !== undefined ? reg : S.reg;
+  document.getElementById('i2nd').className = S.second ? 'on' : '';
+  document.getElementById('iinv').className = S.inv   ? 'on' : '';
+  document.getElementById('ihyp').className = S.hyp   ? 'on' : '';
+  document.getElementById('ibgn').className = S.bgn   ? 'on' : '';
 }
- 
-// ===== STATE =====
-let totalDays = load('totalDays', 45);
-let userName   = load('userName', '');
-let homeNotes  = load('homeNotes', []);
-let customMeds = load('customMeds', []);
-let pastAppts  = load('pastAppts', []);
-let futureAppts= load('futureAppts', []);
-let symptoms   = load('symptoms', []);
-let uid        = load('uid', 0);
-let doseLog    = load('doseLog', {});
- 
-// ===== ONBOARDING =====
-function checkOnboard(){
-  if(!userName){ document.getElementById('onboard').style.display='flex'; }
-  else{ document.getElementById('onboard').style.display='none'; initApp(); }
+
+function errFlash() {
+  const el = document.getElementById('dnum');
+  el.classList.remove('err');
+  void el.offsetWidth;
+  el.classList.add('err');
+  setTimeout(() => el.classList.remove('err'), 1200);
 }
-function startApp(){
-  const name=document.getElementById('ob-name').value.trim();
-  const lmpVal=document.getElementById('ob-lmp').value;
-  if(!name){ alert('من فضلك ادخلي اسمك'); return; }
-  if(!lmpVal){ alert('من فضلك ادخلي تاريخ آخر دورة'); return; }
-  userName=name;
-  totalDays=Math.floor((new Date()-new Date(lmpVal))/86400000);
-  if(totalDays<0)totalDays=0;
-  save('userName', userName);
-  save('totalDays', totalDays);
-  document.getElementById('onboard').style.display='none';
-  initApp();
-}
- 
-// ===== INIT =====
-function initApp(){
-  updateUI();
-  renderHomeNotes();
-  renderMeds();
-  renderActiveMeds();
-  renderDailyDoses();
-  renderReminders();
-  renderPast();
-  renderFuture();
-  renderSymptoms();
-  renderTracking();
-  setWT(document.querySelector('.wt.s'),0);
-}
- 
-// ===== UI UPDATE =====
-function updateUI(){
-  const w=Math.floor(totalDays/7), d=totalDays%7, dw=w+1;
-  document.getElementById('wn').textContent=w;
-  document.getElementById('dn').textContent=d;
-  document.getElementById('pf').style.width=Math.min(100,Math.round(totalDays/280*100))+'%';
-  document.getElementById('pcurr').textContent='أسبوع '+w;
-  document.getElementById('wlbl').textContent='الأسبوع '+(ORDS[dw-1]||dw);
-  document.getElementById('disp-name').textContent=userName||'حاملة';
-  const mo=Math.ceil(dw/4.3);
-  document.getElementById('mbg').textContent='الشهر '+(MOS[mo-1]||mo);
-  document.getElementById('tbg').textContent=dw<=13?'الثلث الأول':dw<=26?'الثلث الثاني':'الثلث الثالث';
-  const fs=FSIZE[w]||['','👶'];
-  document.getElementById('fbg').textContent=fs[1]+' '+fs[0];
-  document.getElementById('fetus-size').textContent=fs[0]||'—';
-  document.getElementById('info-size').textContent=fs[0]||'—';
-  document.getElementById('info-emoji').textContent=fs[1]||'👶';
-  const lmpCalc=new Date(); lmpCalc.setDate(lmpCalc.getDate()-totalDays);
-  const due=new Date(lmpCalc); due.setDate(due.getDate()+280);
-  document.getElementById('due-chip').textContent='📅 '+due.getDate()+' '+MONTHS[due.getMonth()]+' '+due.getFullYear();
-  // Today's date
-  const todayNow=new Date();
-  const dayNames=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-  const todayEl=document.getElementById('today-chip');
-  if(todayEl) todayEl.textContent='📅 '+dayNames[todayNow.getDay()]+' '+todayNow.getDate()+' '+MONTHS[todayNow.getMonth()];
-  document.getElementById('info-week-badge').textContent='🌱 الأسبوع '+(ORDS[dw-1]||dw);
-  document.getElementById('week-tip').textContent=TIPS[w]||'الجنين بيكبر بشكل صحي كل يوم! 💕';
-}
- 
- 
-function renderActiveMeds(){
-  const el=document.getElementById('active-meds-home');
-  if(!el)return;
-  const active=customMeds.filter(m=>m.status==='on');
-  if(!active.length){
-    el.innerHTML='<div style="background:#fff;border:1.5px solid #f8bbd0;border-radius:12px;padding:10px 13px;font-size:10px;color:#aaa;margin-bottom:12px;">لا توجد أدوية نشطة مسجلة</div>';
-    return;
+
+// ──────────────────────────────────────────────
+//  ARITHMETIC
+// ──────────────────────────────────────────────
+function applyOp() {
+  if (S.op === null || S.opnd === null) return;
+  const cur = parseFloat(S.entry);
+  let res;
+  switch (S.op) {
+    case '+': res = S.opnd + cur; break;
+    case '-': res = S.opnd - cur; break;
+    case '*': res = S.opnd * cur; break;
+    case '/': res = cur !== 0 ? S.opnd / cur : NaN; break;
+    case '^': res = Math.pow(S.opnd, cur); break;
+    default:  res = cur;
   }
-  el.innerHTML='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">'+
-    active.map(m=>`<div style="background:#fce4ec;border:1.5px solid #f48fb1;border-radius:20px;padding:5px 12px;font-size:10px;font-weight:700;color:#c2185b;display:flex;align-items:center;gap:5px;"><span>💊</span><span>${m.name}</span>${m.dose?`<span style="font-size:8px;color:#e91e8c;opacity:.8;">· ${m.dose}</span>`:''}</div>`).join('')+
-  '</div>';
+  S.lastAns = isFinite(res) ? res : NaN;
+  S.entry = isFinite(res) ? fmt(res) : 'Error   ';
+  S.op = null; S.opnd = null; S.newEntry = true;
 }
-// ===== HOME NOTES =====
-function addHomeNote(){
-  const v=document.getElementById('hni').value.trim();
-  if(!v)return;
-  homeNotes.unshift({t:v, d:getToday()});
-  document.getElementById('hni').value='';
-  save('homeNotes', homeNotes);
-  renderHomeNotes(); showToast();
+
+// ──────────────────────────────────────────────
+//  TVM SOLVER
+// ──────────────────────────────────────────────
+function tvmEq(r, N, PV, PMT, FV, bgn) {
+  const bgnF = bgn ? 1 : 0;
+  if (Math.abs(r) < 1e-12) return PV + PMT * N * (1 + bgnF * r) + FV;
+  const pvif = Math.pow(1 + r, -N);
+  const pvifa = (1 - pvif) / r;
+  return PV + PMT * pvifa * (1 + bgnF * r) + FV * pvif;
 }
-function deleteHomeNote(i){ homeNotes.splice(i,1); save('homeNotes',homeNotes); renderHomeNotes(); showToast(); }
-function renderHomeNotes(){
-  document.getElementById('hns').innerHTML=homeNotes.map((n,i)=>`
-    <div class="note"><span class="note-txt">• ${n.t} <span style="font-size:8px;color:#aaa;">${n.d}</span></span>
-    <button class="del-btn" onclick="deleteHomeNote(${i})">✕</button></div>`).join('');
-}
- 
-// ===== MEDS =====
-function addMed(){
-  const name=document.getElementById('med-name').value.trim();
-  const dose=document.getElementById('med-dose').value.trim();
-  const timesPerDay=parseInt(document.getElementById('med-times').value)||1;
-  const status=document.getElementById('med-status').value;
-  if(!name)return;
-  const startDate=new Date().toISOString().split('T')[0];
-  customMeds.push({id:uid++, name, dose, timesPerDay, status, startDate});
-  document.getElementById('med-name').value='';
-  document.getElementById('med-dose').value='';
-  document.getElementById('med-times').value='1';
-  document.getElementById('med-status').value='on';
-  save('customMeds',customMeds); save('uid',uid);
-  renderMeds(); showToast();
-}
- 
- 
-function editMedDate(id){
-  const m=customMeds.find(x=>x.id===id);
-  if(!m)return;
-  document.getElementById('emd-title').textContent='تعديل تاريخ بداية: '+m.name;
-  document.getElementById('emd-input').value=m.startDate||'';
-  document.getElementById('emd-id').value=id;
-  document.getElementById('emd-overlay').style.display='flex';
-}
-function saveEditMedDate(){
-  const id=parseInt(document.getElementById('emd-id').value);
-  const date=document.getElementById('emd-input').value;
-  if(!date){alert('اختاري تاريخ');return;}
-  const m=customMeds.find(x=>x.id===id);
-  if(m){m.startDate=date; save('customMeds',customMeds); renderMeds(); showToast();}
-  document.getElementById('emd-overlay').style.display='none';
-}
-function closeEditMedDate(){document.getElementById('emd-overlay').style.display='none';}
-function clearAllMeds(){
-  if(!customMeds.length) return;
-  if(confirm('هتمسحي كل الأدوية المسجلة؟')) {
-    customMeds=[];
-    save('customMeds', customMeds);
-    renderMeds();
-    showToast();
-  }
-}
-function deleteMed(id){ customMeds=customMeds.filter(m=>m.id!==id); save('customMeds',customMeds); renderMeds(); showToast(); }
-function toggleMedStatus(id){
-  const m=customMeds.find(m=>m.id===id);
-  if(m){ m.status=m.status==='on'?'off':'on'; save('customMeds',customMeds); renderMeds(); showToast(); }
-}
-function renderMeds(){
-  renderActiveMeds();
-  renderDailyDoses();
-  renderReminders();
-  const el=document.getElementById('custom-meds-list');
-  if(!customMeds.length){
-    el.innerHTML='<div style="text-align:center;padding:20px;color:#aaa;font-size:11px;">لا توجد أدوية مسجلة بعد 💊</div>';
-    return;
-  }
-  const MN=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-  function fmtD(d){ if(!d)return ''; const p=d.split('-'); return p[2]+' '+MN[parseInt(p[1])-1]+' '+p[0]; }
-  function getDays(d){ if(!d)return 0; return Math.max(0,Math.floor((new Date()-new Date(d))/86400000)); }
-  el.innerHTML=customMeds.map(m=>{
-    const days=getDays(m.startDate);
-    const doses=days*(m.timesPerDay||1);
-    const isOn=m.status==='on';
-    return '<div class="mc '+(isOn?'':'gray-card')+'" style="flex-direction:column;align-items:stretch;gap:0;padding:12px;">'+
-      '<div style="display:flex;align-items:center;gap:9px;">'+
-        '<div class="mi '+(isOn?'mi-p':'mi-x')+'">💊</div>'+
-        '<div class="minfo">'+
-          '<div class="mnm">'+m.name+'</div>'+
-          (m.dose?'<div class="mds">'+m.dose+'</div>':'')+
-          (m.startDate?'<div style="display:flex;align-items:center;gap:5px;margin-top:2px;">'+
-          '<div class="mds" style="color:#e91e8c;font-size:9px;font-weight:600;">📅 بتاخديه من '+fmtD(m.startDate)+'</div>'+
-          '<button onclick="editMedDate('+m.id+')" style="font-size:8px;color:#1976d2;background:#e3f2fd;border:1px solid #90caf9;border-radius:6px;padding:1px 6px;cursor:pointer;font-family:Cairo,sans-serif;">تعديل</button>'+
-          '</div>'
-        :'<div style="margin-top:2px;"><button onclick="editMedDate('+m.id+')" style="font-size:9px;color:#e91e8c;background:#fce4ec;border:1px solid #f48fb1;border-radius:8px;padding:3px 9px;cursor:pointer;font-family:Cairo,sans-serif;">📅 أضيفي تاريخ البداية</button></div>')+
-        '</div>'+
-        '<div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;flex-shrink:0;">'+
-          '<span class="mbdg '+(isOn?'mb-on':'mb-off')+'" style="cursor:pointer;white-space:nowrap;" onclick="toggleMedStatus('+m.id+')">'+
-            (isOn?'مستمر ✅':'موقوف ❌')+
-          '</span>'+
-          '<button class="del-btn" onclick="deleteMed('+m.id+')">✕</button>'+
-        '</div>'+
-      '</div>'+
-      (m.startDate?
-        '<div style="display:flex;gap:6px;margin-top:10px;padding-top:10px;border-top:1.5px dashed #fce4ec;">'+
-          '<div style="flex:1;background:#fce4ec;border-radius:10px;padding:7px 6px;text-align:center;">'+
-            '<div style="font-size:16px;font-weight:700;color:#c2185b;">'+days+'</div>'+
-            '<div style="font-size:8px;color:#888;">يوم باخداه</div>'+
-          '</div>'+
-          '<div style="flex:1;background:#e3f2fd;border-radius:10px;padding:7px 6px;text-align:center;">'+
-            '<div style="font-size:16px;font-weight:700;color:#1565c0;">'+doses+'</div>'+
-            '<div style="font-size:8px;color:#888;">جرعة اتخدت</div>'+
-          '</div>'+
-          '<div style="flex:1;background:#f3e5f5;border-radius:10px;padding:7px 6px;text-align:center;">'+
-            '<div style="font-size:16px;font-weight:700;color:#7b1fa2;">'+(m.timesPerDay||1)+'x</div>'+
-            '<div style="font-size:8px;color:#888;">في اليوم</div>'+
-          '</div>'+
-        '</div>'
-      :'')+
-    '</div>';
-  }).join('');
-}
- 
-// ===== WEEK INFO
- 
-// ===== WEEK INFO =====
-const WC=[['الجنين حجمه ~1.2 سم 🍓','الدماغ والجهاز العصبي بيتطوروا بسرعة','بدأت تتشكل ملامح الوجه والأذنين','القلب بيدق 150 مرة في الدقيقة'],['الغثيان والتعب طبيعيين جداً','الثدي قد يكون حساساً','النوم الكتير مفيد لجسمك','التبول المتكرر طبيعي'],['زودي حمض الفوليك يومياً','اتجنبي الجبن والسمك غير المطهيين','8 أكواب مياه على الأقل','الزنجبيل والنعناع بيخففوا الغثيان'],['تجنبي الأسبرين والإيبوبروفين','أي نزيف — روحي للدكتورة فوراً','تجنبي الحرارة الشديدة','الأشعة السينية بدون ضرورة تجنبيها']];
-function setWT(btn,i){document.querySelectorAll('.wt').forEach(b=>b.classList.remove('s'));btn.classList.add('s');document.getElementById('wic').innerHTML=WC[i].map(t=>`<div class="wi"><div class="wdot"></div><span class="wtxt">${t}</span></div>`).join('');}
- 
-// ===== MODAL =====
-let modalTab='lmp';
-function openModal(){document.getElementById('modal').classList.add('show');}
-function closeModal(){document.getElementById('modal').classList.remove('show');}
-function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal();}
-function setModalTab(t){modalTab=t;document.getElementById('mtab-lmp').className='mtab'+(t==='lmp'?' on-lmp':'');document.getElementById('mtab-manual').className='mtab'+(t==='manual'?' on-manual':'');document.getElementById('modal-lmp').style.display=t==='lmp'?'block':'none';document.getElementById('modal-manual').style.display=t==='manual'?'block':'none';}
-function applyEdit(){
-  if(modalTab==='lmp'){const v=document.getElementById('lmp-input').value;if(!v)return;totalDays=Math.floor((new Date()-new Date(v))/86400000);}
-  else{const w=parseInt(document.getElementById('m-weeks').value)||0,d=parseInt(document.getElementById('m-days').value)||0;totalDays=w*7+d;}
-  if(totalDays<0)totalDays=0;
-  save('totalDays',totalDays); updateUI(); closeModal(); showToast();
-}
- 
-// ===== NAV =====
-function go(n,btn,isPurple=false){
-  document.querySelectorAll('.scr').forEach(s=>s.classList.remove('act'));
-  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on','purple'));
-  document.getElementById('s-'+n).classList.add('act');
-  btn.classList.add('on'); if(isPurple)btn.classList.add('purple');
-  document.querySelector('.inner').scrollTop=0;
-  if(n==='track') setTimeout(()=>{ renderTracking(); },100);
-  if(n==='forum') loadForumPosts();
-}
- 
-// ===== APPOINTMENTS =====
-let currentType='past';
-function setType(t){currentType=t;document.getElementById('tog-past').className='tog-btn'+(t==='past'?' active-past':'');document.getElementById('tog-future').className='tog-btn'+(t==='future'?' active-future':'');document.getElementById('past-fields').style.display=t==='past'?'block':'none';document.getElementById('future-fields').style.display=t==='future'?'block':'none';}
-function saveAppt(){
-  const name=document.getElementById('f-name').value.trim(); if(!name)return;
-  const id=uid++; const today=new Date(), day=today.getDate(), mon=MONTHS[today.getMonth()];
-  if(currentType==='past'){
-    const happened=document.getElementById('f-happened').value.trim(), required=document.getElementById('f-required').value.trim();
-    pastAppts.push({id,name,happened,required,day,mon});
-    save('pastAppts',pastAppts);
-  } else {
-    const date=document.getElementById('f-date').value.trim(), note=document.getElementById('f-note').value.trim();
-    futureAppts.push({id,name,date,note});
-    save('futureAppts',futureAppts);
-  }
-  save('uid',uid);
-  ['f-name','f-happened','f-required','f-date','f-note'].forEach(i=>{const el=document.getElementById(i);if(el)el.value='';});
-  renderPast(); renderFuture(); showToast();
-}
-function deletePast(id){pastAppts=pastAppts.filter(a=>a.id!==id);save('pastAppts',pastAppts);renderPast();showToast();}
-function deleteFuture(id){futureAppts=futureAppts.filter(a=>a.id!==id);save('futureAppts',futureAppts);renderFuture();showToast();}
-function renderPast(){
-  const el=document.getElementById('past-list');
-  if(!pastAppts.length){el.innerHTML='<div style="font-size:11px;color:#aaa;text-align:center;padding:10px;">لا توجد مواعيد سابقة</div>';return;}
-  el.innerHTML=pastAppts.map(a=>`<div class="appt-entry"><div class="appt-dot"></div><div class="appt-card"><button class="del-btn del-btn-abs" onclick="deletePast(${a.id})">✕</button><div class="appt-header"><div class="appt-date-box"><div class="appt-day">${a.day}</div><div class="appt-mon">${a.mon}</div></div><div><div class="appt-title">${a.name}</div></div></div><div class="appt-details">${a.happened?`<div class="detail-row"><div class="detail-icon">🔍</div><div><div class="detail-label">اللي حصل</div><div class="detail-text">${a.happened}</div></div></div>`:''} ${a.required?`<div class="detail-row"><div class="detail-icon">💊</div><div><div class="detail-label blue">المطلوب</div><div class="detail-text">${a.required}</div></div></div>`:''}</div></div></div>`).join('');
-}
-function renderFuture(){
-  const el=document.getElementById('upcoming-list');
-  if(!futureAppts.length){el.innerHTML='<div style="font-size:11px;color:#aaa;text-align:center;padding:10px;">لا توجد مواعيد قادمة</div>';return;}
-  el.innerHTML=futureAppts.map(a=>`<div class="upcoming-card"><button class="del-btn del-btn-blue del-btn-abs" onclick="deleteFuture(${a.id})">✕</button><div class="uc-top"><div class="uc-date"><div class="uc-day">📅</div><div class="uc-mon">${a.date||'قريباً'}</div></div><div><div class="uc-title">${a.name}</div>${a.note?`<div class="uc-sub">${a.note}</div>`:''}</div></div></div>`).join('');
-}
- 
-// ===== SYMPTOMS =====
-let currentInt=1;
-function setInt(n){currentInt=n;[1,2,3].forEach(i=>{document.getElementById('int'+i).className='int-btn'+(i<=n?' on':'');});}
-function getToday(){const t=new Date();return t.getDate()+' '+MONTHS[t.getMonth()];}
-function addSymptom(name,emoji,intensity){
-  symptoms.unshift({id:uid++, name, emoji, intensity, date:getToday()});
-  save('symptoms',symptoms); save('uid',uid);
-  renderSymptoms(); showToast();
-}
-function quickAdd(name,emoji){addSymptom(name,emoji,currentInt);}
-function addCustomSym(){const v=document.getElementById('sym-input').value.trim();if(!v)return;addSymptom(v,'🤒',currentInt);document.getElementById('sym-input').value='';}
-function deleteSym(id){symptoms=symptoms.filter(s=>s.id!==id);save('symptoms',symptoms);renderSymptoms();showToast();}
-function renderSymptoms(){
-  const today=getToday();
-  const todayCount=symptoms.filter(s=>s.date===today).length;
-  document.getElementById('ss-total').textContent=symptoms.length;
-  document.getElementById('ss-today').textContent=todayCount;
-  document.getElementById('sym-count-home').textContent=symptoms.length;
-  if(symptoms.length>0){const freq={};symptoms.forEach(s=>{freq[s.name]=(freq[s.name]||0)+1;});const top=Object.entries(freq).sort((a,b)=>b[1]-a[1])[0];document.getElementById('ss-common').textContent=top[0];}
-  else document.getElementById('ss-common').textContent='—';
-  const el=document.getElementById('sym-list');
-  if(!symptoms.length){el.innerHTML='<div class="sym-empty">لا توجد أعراض مسجلة بعد<br><span style="font-size:18px;margin-top:6px;display:block">🌸</span></div>';return;}
-  el.innerHTML=symptoms.map(s=>`<div class="sym-card"><button class="sym-del" onclick="deleteSym(${s.id})">✕</button><div class="sym-emoji-box">${s.emoji}</div><div class="sym-info"><div class="sym-name">${s.name}</div><div class="sym-meta"><span class="sym-date">📅 ${s.date}</span><div class="int-dots">${[1,2,3].map(i=>`<div class="int-dot ${i<=s.intensity?'filled':'empty'}"></div>`).join('')}</div><span style="font-size:9px;color:#ce93d8">${s.intensity===1?'خفيف':s.intensity===2?'متوسط':'شديد'}</span></div></div></div>`).join('');
-}
- 
- 
-// ===== TRACKING =====
- 
- 
- 
- 
- 
-// ===== TRACKING =====
-let momWeights = load('momWeights', []);
-let fetWeights = load('fetWeights', []);
- 
-function switchTrackTab(t){
-  document.getElementById('sec-mom').style.display=t==='mom'?'block':'none';
-  document.getElementById('sec-fet').style.display=t==='fet'?'block':'none';
-  document.getElementById('tab-mom').className='seg-btn'+(t==='mom'?' on-blue':'');
-  document.getElementById('tab-fet').className='seg-btn'+(t==='fet'?' on-pink':'');
-  setTimeout(()=>{
-    if(t==='mom') drawTrackChart('mom-canvas',momWeights,'#1976d2');
-    else drawTrackChart('fet-canvas',fetWeights,'#e91e8c');
-  },80);
-}
- 
-function showTrkErr(id,msg){
-  const el=document.getElementById(id);
-  el.textContent='⚠️ '+msg; el.style.display='block';
-  setTimeout(()=>el.style.display='none',2500);
-}
- 
-function addMom(){
-  const date=document.getElementById('mom-date').value;
-  const wRaw=document.getElementById('mom-w').value.trim();
-  const w=parseFloat(wRaw);
-  if(!date){showTrkErr('mom-err','اختاري التاريخ أولاً');return;}
-  if(!wRaw||isNaN(w)||w<=0){showTrkErr('mom-err','ادخلي الوزن بشكل صحيح');return;}
-  momWeights.push({date,w});
-  momWeights.sort((a,b)=>a.date.localeCompare(b.date));
-  save('momWeights',momWeights);
-  document.getElementById('mom-w').value='';
-  renderMomTrack(); showToast();
-}
- 
-function addFet(){
-  const date=document.getElementById('fet-date').value;
-  const wRaw=document.getElementById('fet-w').value.trim();
-  const w=parseFloat(wRaw);
-  if(!date){showTrkErr('fet-err','اختاري التاريخ أولاً');return;}
-  if(!wRaw||isNaN(w)||w<=0){showTrkErr('fet-err','ادخلي الوزن بشكل صحيح');return;}
-  fetWeights.push({date,w});
-  fetWeights.sort((a,b)=>a.date.localeCompare(b.date));
-  save('fetWeights',fetWeights);
-  document.getElementById('fet-w').value='';
-  renderFetTrack(); showToast();
-}
- 
-function delMomW(i){momWeights.splice(i,1);save('momWeights',momWeights);renderMomTrack();showToast();}
-function delFetW(i){fetWeights.splice(i,1);save('fetWeights',fetWeights);renderFetTrack();showToast();}
- 
-function fmtD(d){const p=d.split('-');return p[2]+'/'+p[1];}
-const MNAMES=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
- 
-function drawTrackChart(id,data,color){
-  const canvas=document.getElementById(id);
-  if(!canvas)return;
-  const W=canvas.parentElement.clientWidth-16||300;
-  canvas.width=W; canvas.height=120;
-  const ctx=canvas.getContext('2d');
-  ctx.clearRect(0,0,W,120);
-  if(!data.length){
-    ctx.fillStyle='#ccc';ctx.font='11px Cairo';ctx.textAlign='center';
-    ctx.fillText('أدخلي بيانات لعرض المنحنى',W/2,65); return;
-  }
-  const vals=data.map(d=>d.w);
-  const mn=Math.min(...vals),mx=Math.max(...vals),range=mx-mn||1;
-  const pad={t:20,b:26,l:8,r:8};
-  const cW=W-pad.l-pad.r,cH=120-pad.t-pad.b;
-  ctx.strokeStyle='rgba(0,0,0,0.06)';ctx.lineWidth=1;
-  [0,0.5,1].forEach(r=>{
-    const y=pad.t+r*cH;
-    ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
-    ctx.fillStyle='#bbb';ctx.font='8px Cairo';ctx.textAlign='left';
-    ctx.fillText((mx-r*(mx-mn)).toFixed(data[0].w<100?1:0),pad.l,y-2);
-  });
-  const pts=data.map((d,i)=>({
-    x:pad.l+(data.length>1?i*(cW/(data.length-1)):cW/2),
-    y:pad.t+cH-((d.w-mn)/range*cH)
-  }));
-  if(pts.length>1){
-    const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+cH);
-    grad.addColorStop(0,color+'44');grad.addColorStop(1,color+'00');
-    ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);
-    pts.slice(1).forEach(p=>ctx.lineTo(p.x,p.y));
-    ctx.lineTo(pts[pts.length-1].x,pad.t+cH);ctx.lineTo(pts[0].x,pad.t+cH);
-    ctx.closePath();ctx.fillStyle=grad;ctx.fill();
-  }
-  ctx.beginPath();ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';
-  pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));ctx.stroke();
-  pts.forEach((p,i)=>{
-    ctx.beginPath();ctx.arc(p.x,p.y,4.5,0,Math.PI*2);
-    ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle=color;ctx.lineWidth=2;ctx.stroke();
-    ctx.fillStyle=color;ctx.font='bold 8px Cairo';ctx.textAlign='center';
-    ctx.fillText(data[i].w,p.x,p.y-8);
-    ctx.fillStyle='#999';ctx.font='7px Cairo';
-    ctx.fillText(fmtD(data[i].date),p.x,120-6);
-  });
-}
- 
-function renderMomTrack(){
-  document.getElementById('mom-cnt').textContent=momWeights.length;
-  if(momWeights.length){
-    const cur=momWeights[momWeights.length-1].w,first=momWeights[0].w;
-    const gain=(cur-first).toFixed(1);
-    document.getElementById('mom-cur').textContent=cur+' كجم';
-    document.getElementById('mom-gain').textContent=(gain>0?'+':'')+gain+' كجم';
-  } else {
-    document.getElementById('mom-cur').textContent='—';
-    document.getElementById('mom-gain').textContent='—';
-  }
-  const el=document.getElementById('mom-recs');
-  if(!momWeights.length){el.innerHTML='<div class="trk-empty">لا توجد قياسات بعد 🌸</div>';}
-  else el.innerHTML=momWeights.slice().reverse().map((r,ri)=>{
-    const i=momWeights.length-1-ri;
-    const prev=i>0?momWeights[i-1].w:null;
-    const diff=prev!=null?+(r.w-prev).toFixed(1):null;
-    const bc=diff===null?'tr-eq':diff>0?'tr-up':'tr-dn';
-    const bt=diff===null?'أول قياس':(diff>0?'+':'')+diff+' كجم';
-    return `<div class="track-rec"><div class="tr-left"><div><div class="tr-date">${fmtD(r.date)}</div><div class="tr-val">${r.w}<span class="tr-unit"> كجم</span></div></div><span class="tr-diff ${bc}">${bt}</span></div><button class="del-btn blue" onclick="delMomW(${i})">✕</button></div>`;
-  }).join('');
-  setTimeout(()=>drawTrackChart('mom-canvas',momWeights,'#1976d2'),50);
-}
- 
-function renderFetTrack(){
-  document.getElementById('fet-cnt').textContent=fetWeights.length;
-  if(fetWeights.length){
-    const cur=fetWeights[fetWeights.length-1].w,first=fetWeights[0].w;
-    const gain=cur-first;
-    document.getElementById('fet-cur').textContent=cur+' جم';
-    document.getElementById('fet-gain').textContent='+'+(gain>0?gain:0)+' جم';
-  } else {
-    document.getElementById('fet-cur').textContent='—';
-    document.getElementById('fet-gain').textContent='—';
-  }
-  const el=document.getElementById('fet-recs');
-  if(!fetWeights.length){el.innerHTML='<div class="trk-empty">لا توجد قياسات بعد 👶</div>';}
-  else el.innerHTML=fetWeights.slice().reverse().map((r,ri)=>{
-    const i=fetWeights.length-1-ri;
-    const prev=i>0?fetWeights[i-1].w:null;
-    const diff=prev!=null?+(r.w-prev).toFixed(0):null;
-    const bc=diff===null?'tr-eq':diff>0?'tr-up':'tr-dn';
-    const bt=diff===null?'أول قياس':(diff>0?'+':'')+diff+' جم';
-    return `<div class="track-rec pink"><div class="tr-left"><div><div class="tr-date">${fmtD(r.date)}</div><div class="tr-val" style="color:#c2185b;">${r.w}<span class="tr-unit"> جم</span></div></div><span class="tr-diff ${bc}">${bt}</span></div><button class="del-btn" onclick="delFetW(${i})">✕</button></div>`;
-  }).join('');
-  setTimeout(()=>drawTrackChart('fet-canvas',fetWeights,'#e91e8c'),50);
-}
- 
-function renderTracking(){ renderMomTrack(); renderFetTrack(); }
- 
- 
-// ===== DAILY DOSE TRACKING =====
- 
-function getTodayKey(){
-  return new Date().toISOString().split('T')[0];
-}
-function getTodayLabel(){
-  const t=new Date();
-  const days=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-  return days[t.getDay()]+' '+t.getDate()+' '+MONTHS[t.getMonth()];
-}
- 
-function toggleDose(medId, doseIdx){
-  const today=getTodayKey();
-  if(!doseLog[today]) doseLog[today]={};
-  const key=medId+'_'+doseIdx;
-  doseLog[today][key]=!doseLog[today][key];
-  save('doseLog', doseLog);
-  renderDailyDoses();
-  // also update home screen counter
-  updateDoseCount();
-  showToast();
-}
- 
-function updateDoseCount(){
-  const today=getTodayKey();
-  const activeMeds=customMeds.filter(m=>m.status==='on');
-  const totalDoses=activeMeds.reduce((s,m)=>s+(m.timesPerDay||1),0);
-  const takenDoses=activeMeds.reduce((s,m)=>{
-    for(let i=0;i<(m.timesPerDay||1);i++){
-      if(doseLog[today]&&doseLog[today][m.id+'_'+i]) s++;
+
+function solveTVM(solve) {
+  const { N, IY, PV, PMT, FV } = S.tvm;
+  const PY = S.PY;
+  const bgn = S.bgn;
+  const r = IY !== null ? (IY / 100) / PY : 0;
+  const bgnF = bgn ? 1 : 0;
+
+  if (solve === 'N') {
+    if (Math.abs(r) < 1e-12) {
+      if (Math.abs(PMT) < 1e-12) return null;
+      return -(PV + FV) / PMT;
     }
-    return s;
-  },0);
-  const el=document.getElementById('doses-today-count');
-  if(el) el.textContent=takenDoses+'/'+totalDoses;
-}
- 
-function renderDailyDoses(){
-  const el=document.getElementById('daily-doses-section');
-  if(!el)return;
-  const activeMeds=customMeds.filter(m=>m.status==='on');
-  if(!activeMeds.length){
-    el.innerHTML='';
-    return;
+    const num = -(FV * r - PMT * (1 + bgnF * r));
+    const den =   PV * r + PMT * (1 + bgnF * r);
+    if (den === 0 || num / den <= 0) return null;
+    return Math.log(num / den) / Math.log(1 + r);
   }
-  const today=getTodayKey();
-  const todayData=doseLog[today]||{};
-  const totalDoses=activeMeds.reduce((s,m)=>s+(m.timesPerDay||1),0);
-  const takenDoses=activeMeds.reduce((s,m)=>{
-    for(let i=0;i<(m.timesPerDay||1);i++){
-      if(todayData[m.id+'_'+i]) s++;
+
+  if (solve === 'IY') {
+    let r0 = 0.1 / PY;
+    for (let i = 0; i < 300; i++) {
+      const f  = tvmEq(r0, N, PV, PMT, FV, bgn);
+      const df = (tvmEq(r0 + 1e-8, N, PV, PMT, FV, bgn) - f) / 1e-8;
+      if (Math.abs(df) < 1e-15) break;
+      const r1 = r0 - f / df;
+      if (Math.abs(r1 - r0) < 1e-12) { r0 = r1; break; }
+      if (r1 < -0.9999) r0 = r0 / 2;
+      else r0 = r1;
     }
-    return s;
-  },0);
-  const pct=totalDoses?Math.round(takenDoses/totalDoses*100):0;
- 
-  const doseLabels1=['الصبح','الظهر','العصر','الليل'];
-  const doseLabels2=['صبح','ليل'];
- 
-  let html='<div class="stitle stitle-pink" style="margin-bottom:8px;">✅ جرعات النهارده</div>';
-  html+='<div style="background:#fff;border:1.5px solid #f8bbd0;border-radius:16px;padding:12px 13px;margin-bottom:10px;">';
-  html+='<div class="dose-date-header"><span>'+getTodayLabel()+'</span><span style="color:#e91e8c;font-weight:700;">'+takenDoses+' / '+totalDoses+' جرعة</span></div>';
-  html+='<div class="dose-progress"><div class="dose-progress-fill" style="width:'+pct+'%"></div></div>';
-  html+='</div>';
- 
-  activeMeds.forEach(m=>{
-    const times=m.timesPerDay||1;
-    const labels=times===1?['خدتيها']:times===2?doseLabels2:times>=3?doseLabels1.slice(0,times):doseLabels1;
-    html+='<div class="dose-day-card">';
-    html+='<div class="dose-med-name"><span>💊</span><span>'+m.name+'</span></div>';
-    html+='<div class="dose-btns">';
-    for(let i=0;i<times;i++){
-      const key=m.id+'_'+i;
-      const taken=!!todayData[key];
-      html+='<button class="dose-btn '+(taken?'taken':'')+'" onclick="toggleDose('+m.id+','+i+')">';
-      html+=(taken?'✅ ':'')+(labels[i]||('جرعة '+(i+1)));
-      html+='</button>';
-    }
-    html+='</div>';
-    html+='</div>';
-  });
- 
-  el.innerHTML=html;
-  updateDoseCount();
-}
- 
- 
- 
- 
- 
-// ===== ADMIN PANEL =====
-const ADMIN_UID = '3BS9kTS6BkWqVc5z44LvDssLxjZ2';
-let bannedUsers = load('bannedUsers', []);
-let reportsList = load('reportsList', []);
-let currentAdmTab = 'posts';
-let systemNotif = load('systemNotif', null);
- 
-function openAdmin(){
-  if(!currentUser || currentUser.uid !== ADMIN_UID){ 
-    alert('غير مصرح لك بالدخول');
-    return; 
+    return r0 * PY * 100;
   }
-  closeProfile();
-  const panel = document.getElementById('admin-panel');
-  if(panel) panel.style.display = 'block';
-  loadAdmStats();
-  const firstTab = document.querySelector('.admin-tab');
-  if(firstTab) admTab('posts', firstTab);
+
+  if (solve === 'PV') {
+    if (Math.abs(r) < 1e-12) return -(PMT * N + FV);
+    const pvif  = Math.pow(1 + r, -N);
+    const pvifa = (1 - pvif) / r;
+    return -(PMT * pvifa * (1 + bgnF * r) + FV * pvif);
+  }
+
+  if (solve === 'PMT') {
+    if (Math.abs(r) < 1e-12) return N > 0 ? -(PV + FV) / N : null;
+    const pvif  = Math.pow(1 + r, -N);
+    const pvifa = (1 - pvif) / r;
+    const denom = pvifa * (1 + bgnF * r);
+    if (Math.abs(denom) < 1e-15) return null;
+    return -(PV + FV * pvif) / denom;
+  }
+
+  if (solve === 'FV') {
+    if (Math.abs(r) < 1e-12) return -(PV + PMT * N);
+    const pvif  = Math.pow(1 + r, -N);
+    const pvifa = (1 - pvif) / r;
+    return -(PV + PMT * pvifa * (1 + bgnF * r)) / pvif;
+  }
+  return null;
 }
-function closeAdmin(){ document.getElementById('admin-panel').style.display = 'none'; }
- 
-async function loadAdmStats(){
-  const posts = document.getElementById('adm-posts');
-  const users = document.getElementById('adm-users');
-  const rpts  = document.getElementById('adm-reports');
-  const bnnd  = document.getElementById('adm-banned');
-  if(rpts) rpts.textContent = reportsList.length;
-  if(bnnd) bnnd.textContent = bannedUsers.length;
-  if(!db) return;
-  try{
-    const snap = await db.collection('forum').get();
-    if(posts) posts.textContent = snap.size;
-  }catch(e){}
-  try{
-    const usnap = await db.collection('users').get();
-    if(users) users.textContent = usnap.size;
-  }catch(e){}
+
+// ──────────────────────────────────────────────
+//  NPV / IRR
+// ──────────────────────────────────────────────
+function calcNPV(rate) {
+  const r = rate / 100;
+  let npv = S.cf0, t = 1;
+  for (let i = 0; i < S.cfC.length; i++) {
+    const freq = S.cfF[i] || 1;
+    for (let j = 0; j < freq; j++) npv += S.cfC[i] / Math.pow(1 + r, t++);
+  }
+  return npv;
 }
- 
-function admTab(tab, btn){
-  currentAdmTab = tab;
-  document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('on'));
-  if(btn) btn.classList.add('on');
-  const el = document.getElementById('adm-content');
-  if(!el) return;
-  if(tab==='posts') loadAdmPosts();
-  else if(tab==='reports') loadAdmReports();
-  else if(tab==='banned') loadAdmBanned();
-  else if(tab==='notify') showAdmNotify();
-  else if(tab==='tips') showAdmTips();
+
+function calcIRR() {
+  let r = 0.1;
+  for (let i = 0; i < 300; i++) {
+    const f  = calcNPV(r * 100);
+    const df = (calcNPV((r + 1e-7) * 100) - f) / 1e-7;
+    if (Math.abs(df) < 1e-15) break;
+    const r1 = r - f / df;
+    if (Math.abs(r1 - r) < 1e-12) { r = r1; break; }
+    r = r1;
+  }
+  return r * 100;
 }
- 
-async function loadAdmPosts(){
-  const el = document.getElementById('adm-content'); if(!el) return;
-  el.innerHTML = '<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">⏳ جاري التحميل...</div>';
-  if(!db){ el.innerHTML = '<div style="text-align:center;color:#aaa;padding:16px;">Firebase غير متصل</div>'; return; }
-  try{
-    const snap = await db.collection('forum').orderBy('ts','desc').limit(50).get();
-    if(!snap.size){ el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا توجد منشورات</div>'; return; }
-    el.innerHTML = snap.docs.map(doc => {
-      const p = {id:doc.id, ...doc.data()};
-      const pinned = p.pinned||false;
-      return '<div class="admin-post-row">'+
-        '<div class="admin-post-meta">'+p.author+' · '+p.week+' · '+(new Date(p.ts).toLocaleDateString('ar'))+'</div>'+
-        '<div class="admin-post-body">'+p.text.substring(0,120)+(p.text.length>120?'...':'')+'</div>'+
-        '<div class="admin-btns">'+
-          '<button class="abtn abtn-del" data-pid="'+p.id+'" onclick="admDelete(this.dataset.pid)">🗑 حذف</button>'+
-          '<button class="abtn abtn-pin" data-pid="'+p.id+'" data-pinned="'+pinned+'" onclick="admPin(this.dataset.pid,this.dataset.pinned)">'+(pinned?'📌 إلغاء تثبيت':'📌 تثبيت')+'</button>'+
-          '<button class="abtn abtn-ban" data-uid="'+p.uid+'" onclick="admBan(this.dataset.uid)">🚫 حظر</button>'+
-        '</div>'+
-      '</div>';
-    }).join('');
-  }catch(e){ el.innerHTML='<div style="color:red;font-size:10px;padding:10px;">'+e.message+'</div>'; }
-}
- 
-async function admDelete(postId){
-  if(!confirm('حذف المنشور؟')) return;
-  try{
-    await db.collection('forum').doc(postId).delete();
-    forumPosts = forumPosts.filter(p=>p.id!==postId);
-    loadAdmPosts(); loadAdmStats();
-    alert('✅ تم الحذف');
-  }catch(e){ alert('خطأ: '+e.message); }
-}
- 
-async function admPin(postId, pinned){
-  const newPin = pinned === 'true' ? false : true;
-  try{
-    await db.collection('forum').doc(postId).update({pinned: newPin});
-    const p = forumPosts.find(x=>x.id===postId);
-    if(p) p.pinned = newPin;
-    loadAdmPosts();
-    alert(newPin ? '📌 تم التثبيت' : '✅ تم إلغاء التثبيت');
-  }catch(e){ alert('خطأ: '+e.message); }
-}
- 
-function admBan(uid){
-  if(!uid || uid===ADMIN_UID){ alert('مش تقدر تحظر نفسك 😄'); return; }
-  if(!bannedUsers.includes(uid)){
-    bannedUsers.push(uid);
-    save('bannedUsers', bannedUsers);
-    document.getElementById('adm-banned').textContent = bannedUsers.length;
-    alert('✅ تم حظر المستخدم');
+
+// ──────────────────────────────────────────────
+//  TRIG HELPERS
+// ──────────────────────────────────────────────
+function toRad(v) { return v * Math.PI / 180; }
+function trig(fn, v) {
+  if (S.hyp) {
+    if (S.inv) {
+      if (fn==='sin') return Math.asinh(v);
+      if (fn==='cos') return Math.acosh(v);
+      if (fn==='tan') return Math.atanh(v);
+    } else {
+      if (fn==='sin') return Math.sinh(v);
+      if (fn==='cos') return Math.cosh(v);
+      if (fn==='tan') return Math.tanh(v);
+    }
+  } else if (S.inv) {
+    if (fn==='sin') return Math.asin(v) * 180 / Math.PI;
+    if (fn==='cos') return Math.acos(v) * 180 / Math.PI;
+    if (fn==='tan') return Math.atan(v) * 180 / Math.PI;
   } else {
-    alert('المستخدم ده محظور بالفعل');
+    if (fn==='sin') return Math.sin(toRad(v));
+    if (fn==='cos') return Math.cos(toRad(v));
+    if (fn==='tan') return Math.tan(toRad(v));
   }
 }
- 
-function loadAdmReports(){
-  const el=document.getElementById('adm-content'); if(!el) return;
-  if(!reportsList.length){
-    el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا توجد بلاغات 🎉</div>';
-    return;
-  }
-  el.innerHTML = reportsList.map((r,i)=>
-    '<div class="admin-post-row">'+
-    '<div class="admin-post-meta">بلاغ #'+(i+1)+' — '+new Date(r.ts).toLocaleDateString('ar')+'</div>'+
-    '<div class="admin-post-body">Post ID: '+r.postId+'</div>'+
-    '<div class="admin-btns">'+
-      '<button class="abtn abtn-ok" onclick="admClearReport('+i+')">✓ تم المراجعة</button>'+
-      '<button class="abtn abtn-del" data-pid="'+r.postId+'" onclick="admDelete(this.dataset.pid);admClearReport('+i+')">🗑 احذف المنشور</button>'+
-    '</div></div>'
-  ).join('');
+
+function factorial(n) {
+  n = Math.round(Math.abs(n));
+  if (n > 170) return Infinity;
+  let f = 1; for (let i = 2; i <= n; i++) f *= i;
+  return f;
 }
- 
-function admClearReport(idx){
-  reportsList.splice(idx,1);
-  save('reportsList', reportsList);
-  document.getElementById('adm-reports').textContent = reportsList.length;
-  loadAdmReports();
-}
- 
-function loadAdmBanned(){
-  const el=document.getElementById('adm-content'); if(!el) return;
-  if(!bannedUsers.length){
-    el.innerHTML='<div style="text-align:center;color:#aaa;padding:16px;font-size:11px;">لا يوجد محظورون</div>';
-    return;
-  }
-  el.innerHTML = bannedUsers.map((uid,i)=>
-    '<div class="admin-post-row">'+
-    '<div class="admin-post-body" style="font-size:10px;word-break:break-all;">'+uid+'</div>'+
-    '<div class="admin-btns"><button class="abtn abtn-ok" onclick="admUnban('+i+')">✓ رفع الحظر</button></div>'+
-    '</div>'
-  ).join('');
-}
- 
-function admUnban(idx){
-  bannedUsers.splice(idx,1);
-  save('bannedUsers', bannedUsers);
-  document.getElementById('adm-banned').textContent = bannedUsers.length;
-  loadAdmBanned();
-  alert('✅ تم رفع الحظر');
-}
- 
-function showAdmNotify(){
-  const el=document.getElementById('adm-content'); if(!el) return;
-  const notifDiv = document.createElement('div');
-  notifDiv.innerHTML = '<div style="font-size:10px;color:#888;margin-bottom:8px;">الرسالة دي هتظهر لكل المستخدمين لما يفتحوا التطبيق</div>';
-  const ta = document.createElement('textarea');
-  ta.className='admin-notify-input'; ta.id='adm-notif-text'; ta.placeholder='اكتب إشعار للمستخدمين...';
-  const btn = document.createElement('button');
-  btn.textContent='📢 إرسال الإشعار';
-  btn.onclick=sendAdmNotif;
-  btn.style.cssText='background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;width:100%;';
-  el.innerHTML='';
-  el.appendChild(notifDiv); el.appendChild(ta); el.appendChild(btn);
-  if(systemNotif){
-    const cur=document.createElement('div');
-    cur.style.cssText='margin-top:10px;background:#e8f5e9;border-radius:10px;padding:8px;font-size:10px;color:#2e7d32;';
-    cur.textContent='✅ الإشعار الحالي: '+systemNotif;
-    el.appendChild(cur);
-  }
-}
- 
-async function sendAdmNotif(){
-  const text = document.getElementById('adm-notif-text').value.trim();
-  if(!text){ alert('اكتب نص الإشعار'); return; }
-  systemNotif = text;
-  save('systemNotif', systemNotif);
-  if(db){
-    try{
-      await db.collection('system').doc('notification').set({text, ts:Date.now()});
-    }catch(e){}
-  }
-  alert('✅ تم إرسال الإشعار');
-  showAdmNotify();
-}
- 
-function showAdmTips(){
-  const el=document.getElementById('adm-content'); if(!el) return;
-  const lbl=document.createElement('div');
-  lbl.style.cssText='font-size:10px;color:#888;margin-bottom:8px;';
-  lbl.textContent='عدّل نصيحة أسبوع معين';
-  const sel=document.createElement('select');
-  sel.className='admin-week-select'; sel.id='adm-week-num';
-  for(let i=1;i<=40;i++){const o=document.createElement('option');o.value=i;o.textContent='الأسبوع '+i;sel.appendChild(o);}
-  const ta=document.createElement('textarea');
-  ta.className='admin-week-input'; ta.id='adm-week-tip'; ta.placeholder='اكتب النصيحة...';
-  const btn=document.createElement('button');
-  btn.textContent='💾 حفظ النصيحة';
-  btn.onclick=saveAdmTip;
-  btn.style.cssText='background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:12px;padding:10px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;width:100%;';
-  el.innerHTML=''; el.appendChild(lbl); el.appendChild(sel); el.appendChild(ta); el.appendChild(btn);
-}
- 
-async function saveAdmTip(){
-  const week = document.getElementById('adm-week-num').value;
-  const tip = document.getElementById('adm-week-tip').value.trim();
-  if(!tip){ alert('اكتب النصيحة'); return; }
-  if(db){
-    try{
-      await db.collection('system').doc('tips').set({['w'+week]:tip},{merge:true});
-      alert('✅ تم حفظ نصيحة الأسبوع '+week);
-    }catch(e){ alert('خطأ: '+e.message); }
-  }
-}
- 
- 
-// ===== FORUM =====
-let forumPosts = [];
-let forumFilter = 'all';
-let forumUID = 0;
-let forumImgData = null;
-let currentPostType = 'text';
- 
-const TYPE_LABELS = {question:'❓ سؤال', tip:'💡 نصيحة', experience:'📖 تجربة', symptom:'🤒 عرض'};
-const REACTIONS = ['❤️','💗','🤗','😮','👍'];
- 
-// ===== POST TYPE =====
-function setPostType(type){
-  currentPostType = type;
-  document.querySelectorAll('.post-type-btn').forEach(b=>b.classList.remove('active'));
-  const btn = document.getElementById('ptype-'+type);
-  if(btn) btn.classList.add('active');
-  const photo = document.getElementById('photo-section');
-  const poll = document.getElementById('poll-section');
-  const ta = document.getElementById('forum-input');
-  if(photo) photo.style.display = type==='photo'?'block':'none';
-  if(poll) poll.style.display = type==='poll'?'block':'none';
-  if(ta) ta.placeholder = type==='poll'?'اكتبي سؤال الاستفتاء...':'اكتبي هنا... (هويتك هتبقى مخفية)';
-}
- 
-function addPollOption(){
-  const c2 = document.getElementById('poll-options-container');
-  if(!c2) return;
-  const n = c2.querySelectorAll('.poll-option-row').length;
-  if(n>=5){alert('الحد الأقصى 5 خيارات');return;}
-  const row = document.createElement('div');
-  row.className='poll-option-row';
-  row.innerHTML='<input class="poll-option-input" placeholder="خيار '+(n+1)+'"/><button class="poll-remove-btn" onclick="removePollOption(this)">✕</button>';
-  c2.appendChild(row);
-}
- 
-function removePollOption(btn){
-  const c2=document.getElementById('poll-options-container');
-  if(!c2||c2.querySelectorAll('.poll-option-row').length<=2){alert('لازم يكون فيه خيارين على الأقل');return;}
-  btn.parentElement.remove();
-}
- 
-function getPollOptions(){
-  return Array.from(document.querySelectorAll('.poll-option-input'))
-    .map(i=>i.value.trim()).filter(v=>v.length>0);
-}
- 
-// ===== IMAGE =====
-function previewForumImg(e){
-  const file=e.target.files[0]; if(!file) return;
-  if(file.size>500000){alert('الصورة كبيرة — اختاري أقل من 500KB'); return;}
-  const reader=new FileReader();
-  reader.onload=ev=>{
-    forumImgData=ev.target.result;
-    const prev=document.getElementById('forum-img-preview');
-    const clr=document.getElementById('forum-img-clear');
-    if(prev){prev.src=forumImgData;prev.style.display='block';}
-    if(clr) clr.style.display='inline';
-  };
-  reader.readAsDataURL(file);
-}
- 
-function clearForumImg(){
-  forumImgData=null;
-  const prev=document.getElementById('forum-img-preview');
-  const clr=document.getElementById('forum-img-clear');
-  const inp=document.getElementById('forum-img-input');
-  if(prev){prev.src='';prev.style.display='none';}
-  if(clr) clr.style.display='none';
-  if(inp) inp.value='';
-}
- 
-// ===== FILTER =====
-function filterForum(type,btn){
-  forumFilter=type;
-  document.querySelectorAll('.ftag').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  renderForumPosts();
-}
- 
-// ===== LOAD =====
-async function loadForumPosts(){
-  if(!db){ renderForumPosts(); return; }
-  try{
-    const snap = await db.collection('forum').orderBy('ts','desc').limit(100).get();
-    forumPosts = snap.docs.map(d=>({id:d.id,...d.data()}));
-    renderForumPosts();
-  }catch(e){
-    console.log('Load error:',e);
-    renderForumPosts();
-  }
-}
- 
-// ===== ADD POST =====
-async function addForumPost(){
-  const textEl = document.getElementById('forum-input');
-  const typeEl = document.getElementById('forum-type');
-  if(!textEl||!typeEl) return;
-  
-  const text = textEl.value.trim();
-  const type = typeEl.value;
-  
-  if(!text){ alert('اكتبي نصاً للمنشور'); return; }
- 
-  let pollData = null;
-  if(currentPostType==='poll'){
-    const opts = getPollOptions();
-    if(opts.length<2){ alert('أضيفي خيارين على الأقل'); return; }
-    pollData = {options:opts, votes:opts.map(()=>0), votedBy:[]};
-  }
- 
-  const post = {
-    text, type,
-    postType: currentPostType,
-    img: currentPostType==='photo' ? (forumImgData||null) : null,
-    poll: pollData,
-    author: getDisplayName(),
-    week: getWeekLabel(),
-    ts: Date.now(),
-    likes: 0, likedBy: [],
-    reactions: {}, comments: [],
-    views: 0, pinned: false,
-    uid: currentUser ? currentUser.uid : 'anon'
-  };
- 
-  // 1. Clear form
-  textEl.value = '';
-  clearForumImg();
-  setPostType('text');
- 
-  // 2. Save to Firebase
-  if(db){
-    try{
-      const ref = await db.collection('forum').add(post);
-      post.id = ref.id;
-      console.log('Post saved:', ref.id);
-    }catch(e){
-      console.log('Firebase error:', e);
-      post.id = 'local_'+(forumUID++);
+
+function nPr(n, r) { return factorial(n) / factorial(n - r); }
+function nCr(n, r) { return factorial(n) / (factorial(r) * factorial(n - r)); }
+
+// ──────────────────────────────────────────────
+//  KEY HANDLER
+// ──────────────────────────────────────────────
+function handle(key) {
+  const sec = S.second;
+  if (key !== '2ND') { S.second = false; }
+
+  // ── Digits ──
+  if (/^[0-9]$/.test(key)) {
+    if (S.newEntry) { S.entry = key; S.newEntry = false; }
+    else {
+      if (S.entry === '0' || S.entry === '-0') S.entry = S.entry.replace('0', key);
+      else if (S.entry.replace(/[-\.]/g, '').length < 10) S.entry += key;
     }
-  } else {
-    post.id = 'local_'+(forumUID++);
-  }
- 
-  // 3. Add to local array and render
-  forumPosts.unshift(post);
-  renderForumPosts();
-}
- 
-// ===== LIKE =====
-async function likePost(postId){
-  const post = forumPosts.find(p=>p.id===postId); if(!post) return;
-  const uid = currentUser?currentUser.uid:'anon';
-  const liked = (post.likedBy||[]).includes(uid);
-  if(liked){ post.likes=Math.max(0,(post.likes||0)-1); post.likedBy=post.likedBy.filter(u=>u!==uid); }
-  else { post.likes=(post.likes||0)+1; post.likedBy=[...(post.likedBy||[]),uid]; }
-  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).update({likes:post.likes,likedBy:post.likedBy}).catch(e=>e);
-  renderForumPosts();
-}
- 
-// ===== REACT =====
-async function reactPost(postId,emoji){
-  const post=forumPosts.find(p=>p.id===postId); if(!post) return;
-  const uid=currentUser?currentUser.uid:'anon';
-  if(!post.reactions) post.reactions={};
-  if(!post.reactions[emoji]) post.reactions[emoji]=[];
-  const idx=post.reactions[emoji].indexOf(uid);
-  if(idx>=0) post.reactions[emoji].splice(idx,1);
-  else post.reactions[emoji].push(uid);
-  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).update({reactions:post.reactions}).catch(e=>e);
-  renderForumPosts();
-}
- 
-// ===== VOTE POLL =====
-async function voteInPoll(postId,optionIdx){
-  const post=forumPosts.find(p=>p.id===postId); if(!post||!post.poll) return;
-  const uid=currentUser?currentUser.uid:'anon';
-  if((post.poll.votedBy||[]).includes(uid)){alert('صوتِ بالفعل');return;}
-  if(!post.poll.votes) post.poll.votes=post.poll.options.map(()=>0);
-  if(!post.poll.votedBy) post.poll.votedBy=[];
-  post.poll.votes[optionIdx]=(post.poll.votes[optionIdx]||0)+1;
-  post.poll.votedBy.push(uid);
-  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).update({poll:post.poll}).catch(e=>e);
-  renderForumPosts();
-}
- 
-// ===== DELETE =====
-async function deletePost(postId){
-  if(!confirm('حذف المنشور؟')) return;
-  forumPosts=forumPosts.filter(p=>p.id!==postId);
-  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).delete().catch(e=>e);
-  renderForumPosts();
-}
- 
-// ===== PIN =====
-async function pinPost(postId){
-  const post=forumPosts.find(p=>p.id===postId); if(!post) return;
-  post.pinned=!post.pinned;
-  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).update({pinned:post.pinned}).catch(e=>e);
-  renderForumPosts();
-}
- 
-// ===== REPORT =====
-function reportPost(postId){
-  if(confirm('تبلغي عن هذا المنشور؟')){
-    reportsList.push({postId,ts:Date.now()});
-    save('reportsList',reportsList);
-    alert('شكراً — تم الإبلاغ ✅');
-  }
-}
- 
-// ===== COMMENTS =====
-function toggleComments(id){
-  const el=document.getElementById('comments_'+id);
-  if(el) el.style.display=el.style.display==='none'?'block':'none';
-}
- 
-async function addComment(postId){
-  const inp=document.getElementById('cinp_'+postId);
-  const text=inp?inp.value.trim():''; if(!text) return;
-  const post=forumPosts.find(p=>p.id===postId); if(!post) return;
-  const comment={text,author:getDisplayName(),ts:Date.now()};
-  post.comments=[...(post.comments||[]),comment];
-  inp.value='';
-  if(db&&!postId.startsWith('local_')) db.collection('forum').doc(postId).update({comments:post.comments}).catch(e=>e);
-  renderForumPosts();
-  setTimeout(()=>{const el=document.getElementById('comments_'+postId);if(el)el.style.display='block';},50);
-}
- 
-// ===== LIGHTBOX =====
-function openLightbox(src){
-  const lb=document.getElementById('forum-lightbox');
-  const img=document.getElementById('lightbox-img');
-  if(lb&&img){img.src=src;lb.style.display='flex';}
-}
-function closeLightbox(){
-  const lb=document.getElementById('forum-lightbox');
-  if(lb) lb.style.display='none';
-}
- 
-// ===== HELPERS =====
-function getDisplayName(){ return userName?userName.charAt(0).toUpperCase()+'***':'أم 🌸'; }
-function getWeekLabel(){ return 'الأسبوع '+(Math.floor(totalDays/7)||'?'); }
-function fmtForumTime(ts){
-  const d=new Date(ts),now=new Date(),diff=Math.floor((now-d)/60000);
-  if(diff<1)return 'الآن'; if(diff<60)return 'منذ '+diff+' دقيقة';
-  if(diff<1440)return 'منذ '+Math.floor(diff/60)+' ساعة';
-  return d.getDate()+' '+['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'][d.getMonth()];
-}
- 
-// ===== POLL HTML =====
-function renderPollHTML(p,uid){
-  if(!p.poll||!p.poll.options) return '';
-  const votes=p.poll.votes||p.poll.options.map(()=>0);
-  const total=votes.reduce((a,b)=>a+b,0);
-  const hasVoted=(p.poll.votedBy||[]).includes(uid);
-  let html='<div class="poll-container">';
-  p.poll.options.forEach((opt,i)=>{
-    const pct=total>0?Math.round(votes[i]/total*100):0;
-    html+='<div class="poll-option-display'+(hasVoted?' voted':'')+'"'+
-      (!hasVoted?' data-pid="'+p.id+'" data-idx="'+i+'" onclick="voteInPoll(this.dataset.pid,parseInt(this.dataset.idx))"':'')+'>'+
-      '<div class="poll-bar" style="width:'+(hasVoted?pct:0)+'%"></div>'+
-      '<div class="poll-option-text"><span>'+opt+'</span>'+(hasVoted?'<span class="poll-pct">'+pct+'%</span>':'')+
-      '</div></div>';
-  });
-  html+='<div class="poll-total">'+(hasVoted?total+' صوت':'اضغطي للتصويت 📊')+'</div></div>';
-  return html;
-}
- 
-// ===== RENDER =====
-function renderForumPosts(){
-  const el=document.getElementById('forum-posts'); if(!el) return;
-  const uid=currentUser?currentUser.uid:'anon';
-  let filtered=forumFilter==='all'?[...forumPosts]:forumPosts.filter(p=>p.type===forumFilter);
-  filtered.sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0)||(b.ts-a.ts));
-  
-  if(!filtered.length){
-    el.innerHTML='<div class="forum-empty">لا توجد مشاركات بعد 🌸<br><span style="font-size:9px;">كوني أول من يشارك!</span></div>';
+    showDisplay(S.entry + (S.entry.includes('.') ? '' : ''));
     return;
   }
-  
-  el.innerHTML=filtered.map(p=>{
-    const liked=(p.likedBy||[]).includes(uid);
-    const comments=p.comments||[];
-    const isOwner=p.uid===uid;
-    const reactions=p.reactions||{};
-    const reactRow=REACTIONS.map(e=>{
-      const arr=reactions[e]||[];
-      return '<button class="react-btn '+(arr.includes(uid)?'reacted':'')+'" data-pid="'+p.id+'" data-e="'+e+'" onclick="reactPost(this.dataset.pid,this.dataset.e)">'+e+(arr.length?'<span class="react-count">'+arr.length+'</span>':'')+' </button>';
-    }).join('');
- 
-    return '<div class="forum-post'+(p.pinned?' pinned-post':'')+'">'+
-      '<div class="forum-post-header">'+
-        '<div class="forum-avatar">'+p.author.charAt(0)+'</div>'+
-        '<div class="forum-meta">'+
-          '<div style="display:flex;align-items:center;gap:5px;">'+
-            '<span class="forum-username">'+p.author+'</span>'+
-            (p.pinned?'<span class="pin-badge">📌 مثبت</span>':'')+
-          '</div>'+
-          '<div style="display:flex;gap:5px;align-items:center;margin-top:2px;">'+
-            '<span class="forum-week-badge">'+p.week+'</span>'+
-            '<span class="forum-time">'+fmtForumTime(p.ts)+'</span>'+
-          '</div>'+
-        '</div>'+
-        '<span style="font-size:9px;background:#fce4ec;color:#c2185b;padding:2px 7px;border-radius:8px;font-weight:700;">'+(TYPE_LABELS[p.type]||'')+'</span>'+
-      '</div>'+
-      '<div class="forum-content">'+p.text+'</div>'+
-      (p.img?'<img class="forum-img" src="'+p.img+'" onclick="openLightbox(this.src)" alt="صورة"/>':'')+
-      (p.poll?renderPollHTML(p,uid):'')+
-      '<div class="forum-reactions">'+reactRow+'</div>'+
-      '<div class="forum-actions" style="margin-top:8px;">'+
-        '<button class="forum-like-btn '+(liked?'liked':'')+'" data-pid="'+p.id+'" onclick="likePost(this.dataset.pid)">❤️ '+(p.likes||0)+'</button>'+
-        '<button class="forum-comment-btn" data-pid="'+p.id+'" onclick="toggleComments(this.dataset.pid)">💬 '+comments.length+' تعليق</button>'+
-        (isOwner?'<button class="delete-btn-forum" data-pid="'+p.id+'" onclick="deletePost(this.dataset.pid)">🗑 حذف</button>':'')+
-        (typeof ADMIN_UID!=="undefined"&&uid===ADMIN_UID?'<button class="delete-btn-forum" style="background:#fff3e0;border-color:#ffb74d;color:#e65100;" data-pid="'+p.id+'" onclick="pinPost(this.dataset.pid)">'+(p.pinned?'📌 إلغاء':'📌 تثبيت')+'</button>':'')+
-        '<button class="report-btn" data-pid="'+p.id+'" onclick="reportPost(this.dataset.pid)">⚑ إبلاغ</button>'+
-      '</div>'+
-      '<div id="comments_'+p.id+'" style="display:none;">'+
-        '<div class="forum-comments">'+
-          (comments.length?comments.map(cm=>'<div class="forum-comment"><div class="forum-comment-user">'+cm.author+'</div><div class="forum-comment-text">'+cm.text+'</div></div>').join(''):
-          '<div style="font-size:10px;color:#aaa;text-align:center;padding:6px;">لا توجد تعليقات بعد</div>')+
-        '</div>'+
-        '<div class="forum-comment-input">'+
-          '<button data-pid="'+p.id+'" onclick="addComment(this.dataset.pid)" style="background:linear-gradient(135deg,#e91e8c,#1976d2);border:none;border-radius:50%;width:30px;height:30px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;">'+
-            '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>'+
-          '</button>'+
-          '<input id="cinp_'+p.id+'" placeholder="اكتبي تعليقك..." data-pid="'+p.id+'" onkeydown="if(event.keyCode===13)addComment(this.dataset.pid)"/>'+
-        '</div>'+
-      '</div>'+
-    '</div>';
-  }).join('');
-}
- 
-// ===== AI CHAT =====
-let aiHistory = [];
-const AI_SYSTEM = 'أنت Pregnamate AI، مساعد ذكي متخصص في صحة الحمل والأمومة. تحدثي بالعربية المصرية بطريقة ودودة وبسيطة. تخصصك فقط في الحمل وصحة الأم والجنين. إجاباتك مش تتعدى 150 كلمة. دايماً نبّهي إن المعلومات للتوعية وليست بديلاً عن الطبيبة.';
-function sendAIMsg(){const input=document.getElementById('ai-input');const msg=input.value.trim();if(!msg)return;input.value='';askAI(msg);}
-async function askAI(msg){
-  const messagesEl=document.getElementById('ai-messages');
-  messagesEl.innerHTML+='<div class="ai-msg ai-msg-user">'+msg+'</div>';
-  const loadId='load-'+Date.now();
-  messagesEl.innerHTML+='<div class="ai-msg ai-msg-bot loading" id="'+loadId+'">⏳ جاري التفكير...</div>';
-  messagesEl.scrollTop=messagesEl.scrollHeight;
-  aiHistory.push({role:'user',content:msg});
-  if(aiHistory.length>10)aiHistory=aiHistory.slice(-10);
-  try{
-    const response=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:400,system:AI_SYSTEM,messages:aiHistory})
-    });
-    const data=await response.json();
-    const reply=data.content&&data.content[0]?data.content[0].text:'عذراً، محتاجة API Key. راجعي إعدادات التطبيق.';
-    const loadEl=document.getElementById(loadId);
-    if(loadEl){loadEl.className='ai-msg ai-msg-bot';loadEl.textContent=reply;}
-    aiHistory.push({role:'assistant',content:reply});
-  }catch(e){
-    const loadEl=document.getElementById(loadId);
-    if(loadEl)loadEl.textContent='⚠️ خطأ في الاتصال. تأكدي من الإنترنت.';
-  }
-  messagesEl.scrollTop=messagesEl.scrollHeight;
-}
- 
- 
-// ===== EDIT MEDICINE =====
-function openEditMed(id){
-  const m=customMeds.find(x=>x.id===id);if(!m)return;
-  document.getElementById('edit-med-id').value=id;
-  document.getElementById('edit-med-name').value=m.name||'';
-  document.getElementById('edit-med-dose').value=m.dose||'';
-  document.getElementById('edit-med-date').value=m.startDate||'';
-  document.getElementById('edit-med-times').value=m.timesPerDay||1;
-  document.getElementById('edit-med-status').value=m.status||'on';
-  document.getElementById('edit-med-stopdate').value=m.stopDate||'';
-  document.getElementById('stop-date-field').style.display=m.status==='off'?'block':'none';
-  const eov=document.getElementById('edit-med-overlay');if(eov){eov.style.display='flex';eov.style.alignItems='flex-end';eov.style.justifyContent='center';}
-}
-function closeEditMed(){const eov=document.getElementById('edit-med-overlay');if(eov)eov.style.display='none';}
-function toggleStopDate(){
-  const isOff=document.getElementById('edit-med-status').value==='off';
-  document.getElementById('stop-date-field').style.display=isOff?'block':'none';
-  if(isOff&&!document.getElementById('edit-med-stopdate').value)
-    document.getElementById('edit-med-stopdate').value=new Date().toISOString().split('T')[0];
-}
-function saveEditMed(){
-  const id=parseInt(document.getElementById('edit-med-id').value);
-  const m=customMeds.find(x=>x.id===id);if(!m)return;
-  m.name=document.getElementById('edit-med-name').value.trim()||m.name;
-  m.dose=document.getElementById('edit-med-dose').value.trim();
-  m.startDate=document.getElementById('edit-med-date').value;
-  m.timesPerDay=parseInt(document.getElementById('edit-med-times').value)||1;
-  m.status=document.getElementById('edit-med-status').value;
-  m.stopDate=m.status==='off'?document.getElementById('edit-med-stopdate').value:'';
-  save('customMeds',customMeds);saveToCloud();renderMeds();closeEditMed();showToast();
-}
- 
- 
- 
-// ===== PROFILE =====
-let userProfile = load('userProfile', {name:'',dob:'',phone:'',email:''});
-function openProfile(){
-  document.getElementById('prof-name').value=userProfile.name||userName||'';
-  document.getElementById('prof-dob').value=userProfile.dob||'';
-  document.getElementById('prof-phone').value=userProfile.phone||'';
-  document.getElementById('prof-email').value=userProfile.email||(currentUser?currentUser.email:'');
-  const n=userProfile.name||userName||'—';
-  document.getElementById('profile-name-big').textContent=n;
-  document.getElementById('profile-email-sm').textContent=currentUser?currentUser.email:'';
-  document.getElementById('profile-avatar').textContent=n.charAt(0).toUpperCase()||'👤';
-  // Show admin button only for admin
-  const adminBtn=document.getElementById('admin-access-btn');
-  if(adminBtn) adminBtn.style.display=(currentUser&&currentUser.uid===ADMIN_UID)?'block':'none';
-  document.getElementById('profile-overlay').classList.add('show');
-}
-function closeProfile(){document.getElementById('profile-overlay').classList.remove('show');}
-function saveProfile(){
-  const name=document.getElementById('prof-name').value.trim();
-  const dob=document.getElementById('prof-dob').value;
-  const phone=document.getElementById('prof-phone').value.trim();
-  const email=document.getElementById('prof-email').value.trim();
-  const errEl=document.getElementById('prof-err');
-  if(phone&&!/^01[0-9]{9}$/.test(phone)){errEl.textContent='⚠️ رقم الموبايل لازم يبدأ بـ 01 ويكون 11 رقم';errEl.style.display='block';return;}
-  if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){errEl.textContent='⚠️ الإيميل مش صح';errEl.style.display='block';return;}
-  errEl.style.display='none';
-  userProfile={name,dob,phone,email};
-  save('userProfile',userProfile);
-  if(name&&name!==userName){userName=name;save('userName',userName);const el=document.getElementById('disp-name');if(el)el.textContent=userName;}
-  saveToCloud();closeProfile();showToast();
-}
- 
-// ===== REMINDERS =====
-let reminders = load('reminders', {});
-let notifPermission = false;
-let reminderInterval = null;
-function toggleNotifications(){
-  if(!('Notification' in window)){alert('متصفحك مش بيدعم التنبيهات');return;}
-  if(Notification.permission==='granted'){notifPermission=true;renderReminders();return;}
-  Notification.requestPermission().then(p=>{
-    notifPermission=p==='granted';
-    if(notifPermission){document.getElementById('notif-toggle-btn').textContent='✅ التنبيهات مفعلة';document.getElementById('notif-toggle-btn').className='notif-btn notif-on';startReminderCheck();renderReminders();}
-    else alert('محتاج تسمح بالتنبيهات من إعدادات المتصفح');
-  });
-}
-function addReminderTime(medId){
-  medId=parseInt(medId)||medId;
-  const time=prompt('ادخل وقت التنبيه (مثال: 08:00)');
-  if(!time||!time.match(/^[0-2][0-9]:[0-5][0-9]$/)){if(time)alert('الوقت لازم يكون بالشكل HH:MM');return;}
-  if(!reminders[medId])reminders[medId]=[];
-  if(!reminders[medId].includes(time)){reminders[medId].push(time);reminders[medId].sort();save('reminders',reminders);renderReminders();}
-}
-function removeReminderTime(medId,time){medId=parseInt(medId)||medId;if(!reminders[medId])return;reminders[medId]=reminders[medId].filter(t=>t!==time);save('reminders',reminders);renderReminders();}
-function renderReminders(){
-  const el=document.getElementById('reminder-list');if(!el)return;
-  const active=customMeds.filter(m=>m.status==='on');
-  if(!notifPermission&&typeof Notification!=='undefined'&&Notification.permission!=='granted'){el.innerHTML='<div style="font-size:11px;color:#aaa;text-align:center;padding:8px;">فعّل التنبيهات لإضافة مواعيد الجرعات</div>';return;}
-  notifPermission=true;
-  const btn=document.getElementById('notif-toggle-btn');
-  if(btn){btn.textContent='✅ التنبيهات مفعلة';btn.className='notif-btn notif-on';}
-  startReminderCheck();
-  if(!active.length){el.innerHTML='<div style="font-size:11px;color:#aaa;text-align:center;padding:8px;">مفيش أدوية نشطة</div>';return;}
-  const today=getTodayKey();const todayData=doseLog[today]||{};
-  el.innerHTML=active.map(m=>{
-    const times=reminders[m.id]||[];
-    return '<div class="reminder-row"><div class="reminder-med-name">💊 '+m.name+'</div>'+
-      '<div class="reminder-times">'+times.map(t=>'<div class="time-chip active" data-mid="'+m.id+'" data-t="'+t+'" onclick="removeReminderTime(this.dataset.mid,this.dataset.t)">🔔 '+t+' ✕</div>').join('')+
-      '<button class="add-time-btn" onclick="addReminderTime('+m.id+')">+ وقت</button></div></div>';
-  }).join('');
-}
-function startReminderCheck(){if(reminderInterval)return;reminderInterval=setInterval(checkReminders,30000);checkReminders();}
-function checkReminders(){
-  if(!customMeds||!reminders)return;
-  const now=new Date();
-  const t=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-  customMeds.filter(m=>m.status==='on').forEach(m=>{
-    if((reminders[m.id]||[]).includes(t)){
-      const key='notif_'+m.id+'_'+t+'_'+now.toDateString();
-      if(!sessionStorage.getItem(key)){sessionStorage.setItem(key,'1');sendNotif(m.name,'حان وقت جرعة '+m.name+' 💊');}
-    }
-  });
-}
-function sendNotif(title,body){
-  if(typeof Notification!=='undefined'&&Notification.permission==='granted')
-    new Notification('Pregnamate 🤰 - '+title,{body,tag:title});
-}
-// ===== START =====
-// Auth handled by Firebase
-</script>
- 
-<script>
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(e=>e));
-}
-</script>
- 
- 
- 
- 
-<script>
-let auth = null, db = null, currentUser = null;
-function hideApp(){
-  const inner=document.querySelector('.inner');
-  const bnav=document.querySelector('.bnav');
-  const onboard=document.getElementById('onboard');
-  if(inner) inner.style.display='none';
-  if(bnav) bnav.style.display='none';
-  if(onboard) onboard.style.display='none';
-}
-function showApp(){
-  const inner=document.querySelector('.inner');
-  const bnav=document.querySelector('.bnav');
-  if(inner) inner.style.display='block';
-  if(bnav) bnav.style.display='flex';
-}
- 
-function setAuthErr(msg){ const el=document.getElementById('auth-err'); if(el) el.textContent=msg; }
-function setAuthLoading(v){
-  const btn=document.getElementById('auth-btn');
-  const load=document.getElementById('auth-loading');
-  if(load) load.style.display=v?'block':'none';
-  if(btn) btn.disabled=v;
-}
-function switchAuthTab(tab){
-  const tl=document.getElementById('tab-login');
-  const ts=document.getElementById('tab-signup');
-  const nf=document.getElementById('auth-name-field');
-  const btn=document.getElementById('auth-btn');
-  if(tl) tl.className='auth-tab'+(tab==='login'?' on':'');
-  if(ts) ts.className='auth-tab'+(tab==='signup'?' on':'');
-  if(nf) nf.style.display=tab==='signup'?'block':'none';
-  if(btn) btn.textContent=tab==='login'?'دخول 🚀':'إنشاء حساب ✨';
-}
-function handleAuth(){
-  if(!auth){
-    // Firebase not ready yet - wait up to 5 seconds
-    let attempts = 0;
-    const tryAgain = setInterval(()=>{
-      attempts++;
-      if(auth){
-        clearInterval(tryAgain);
-        setAuthErr('');
-        handleAuth();
-      } else if(attempts > 25){
-        clearInterval(tryAgain);
-        setAuthErr('⚠️ تأكد من الإنترنت وأعد تحميل الصفحة');
+
+  switch (key) {
+
+    // ── 2ND toggle ──
+    case '2ND':
+      S.second = !sec;
+      showDisplay();
+      break;
+
+    // ── Decimal ──
+    case 'DOT':
+      if (S.newEntry) { S.entry = '0.'; S.newEntry = false; }
+      else if (!S.entry.includes('.')) S.entry += '.';
+      showDisplay(S.entry);
+      break;
+
+    // ── Negate ──
+    case 'NEG':
+      if (sec) {
+        // RESET
+        S.tvm = {N:null,IY:null,PV:null,PMT:null,FV:null};
+        S.op = null; S.opnd = null; S.entry = '0'; S.newEntry = true;
+        S.cf0 = 0; S.cfC = []; S.cfF = []; S.mem = 0; S.bgn = false;
+        S.reg = ''; showDisplay('0.', ''); break;
       }
-    }, 200);
-    return;
-  }
-  const email=document.getElementById('auth-email').value.trim();
-  const pass=document.getElementById('auth-password').value;
-  const isSignup=document.getElementById('auth-name-field').style.display!=='none';
-  setAuthErr('');
-  if(!email||!pass){ setAuthErr('⚠️ ادخل الإيميل وكلمة السر'); return; }
-  if(pass.length<6){ setAuthErr('⚠️ كلمة السر 6 حروف على الأقل'); return; }
-  setAuthLoading(true);
-  if(isSignup){
-    const name=document.getElementById('auth-name').value.trim();
-    if(!name){ setAuthErr('⚠️ ادخل اسمك'); setAuthLoading(false); return; }
-    auth.createUserWithEmailAndPassword(email,pass)
-      .then(cred=>{
-        currentUser=cred.user; userName=name;
-        setAuthLoading(false);
-        document.getElementById('auth-screen').style.display='none';
-        showApp();
-        document.getElementById('onboard').style.display='flex';
-      })
-      .catch(e=>{ setAuthErr(authErrMsg(e.code)); setAuthLoading(false); });
-  } else {
-    auth.signInWithEmailAndPassword(email,pass)
-      .then(cred=>{ currentUser=cred.user; loadFromCloud(); })
-      .catch(e=>{ setAuthErr(authErrMsg(e.code)); setAuthLoading(false); });
-  }
-}
- 
-function handleGoogle(){
-  if(!auth){ setAuthErr('⚠️ انتظري لحظة...'); setTimeout(handleGoogle,500); return; }
-  const provider=new firebase.auth.GoogleAuthProvider();
-  provider.setCustomParameters({'prompt':'select_account'});
-  auth.signInWithPopup(provider)
-    .then(result=>{
-      currentUser=result.user;
-      if(result.additionalUserInfo.isNewUser){
-        document.getElementById('auth-screen').style.display='none';
-        showApp();
-        document.getElementById('onboard').style.display='flex';
+      if (S.entry === '0' || S.entry === 'Error   ') break;
+      S.entry = S.entry.startsWith('-') ? S.entry.slice(1) : '-' + S.entry;
+      showDisplay(S.entry + (S.entry.includes('.') ? '' : '.'));
+      break;
+
+    // ── Clear ──
+    case 'CEC':
+      if (sec) {
+        // MEM display
+        S.entry = fmt(S.mem); S.newEntry = true;
+        showDisplay(S.entry, 'M ='); break;
+      }
+      if (!S.newEntry && S.entry !== '0') {
+        S.entry = '0'; showDisplay('0.');
       } else {
-        document.getElementById('auth-screen').style.display='none';
-        loadFromCloud();
+        S.entry = '0'; S.op = null; S.opnd = null;
+        S.newEntry = true; S.reg = ''; showDisplay('0.', '');
       }
-    })
-    .catch(e=>{ if(e.code!=='auth/popup-closed-by-user') setAuthErr(authErrMsg(e.code)); });
-}
- 
-function authErrMsg(code){
-  const msgs={
-    'auth/email-already-in-use':'الإيميل ده مسجل قبل كده',
-    'auth/invalid-email':'إيميل مش صح',
-    'auth/weak-password':'كلمة السر ضعيفة',
-    'auth/user-not-found':'مفيش حساب بالإيميل ده',
-    'auth/wrong-password':'كلمة السر غلط',
-    'auth/invalid-credential':'إيميل أو كلمة سر غلط',
-    'auth/too-many-requests':'محاولات كتير — استنى شوية',
-    'auth/configuration-not-found':'تأكد من تفعيل Email/Password في Firebase',
-    'auth/unauthorized-domain':'الدومين مش مضاف في Firebase Authorized Domains',
-  };
-  return msgs[code]||'خطأ: '+code;
-}
- 
-function logOut(){
-  if(!confirm('عايزة تخرجي؟')) return;
-  if(auth) auth.signOut().catch(e=>e);
-  currentUser=null;
-  hideApp();
-  document.getElementById('auth-screen').style.display='flex';
-  document.getElementById('auth-email').value='';
-  document.getElementById('auth-password').value='';
-  setAuthErr('');
-}
- 
-function saveToCloud(){
-  if(!db||!currentUser) return;
-  const data={
-    userName, totalDays,
-    homeNotes:homeNotes||[], customMeds:customMeds||[],
-    pastAppts:pastAppts||[], futureAppts:futureAppts||[],
-    symptoms:symptoms||[], momWeights:momWeights||[],
-    fetWeights:fetWeights||[], doseLog:doseLog||{},
-    userProfile:userProfile||{}, uid:uid||0,
-    updatedAt:firebase.firestore.FieldValue.serverTimestamp()
-  };
-  db.collection('users').doc(currentUser.uid).set(data,{merge:true}).catch(e=>console.log(e));
-}
- 
-function loadFromCloud(){
-  if(!db||!currentUser){ setAuthLoading(false); return; }
-  db.collection('users').doc(currentUser.uid).get()
-    .then(doc=>{
-      setAuthLoading(false);
-      document.getElementById('auth-screen').style.display='none';
-      showApp();
-      if(doc.exists){
-        const d=doc.data();
-        userName=d.userName||''; totalDays=d.totalDays||0;
-        homeNotes=d.homeNotes||[]; customMeds=d.customMeds||[];
-        pastAppts=d.pastAppts||[]; futureAppts=d.futureAppts||[];
-        symptoms=d.symptoms||[]; momWeights=d.momWeights||[];
-        fetWeights=d.fetWeights||[]; doseLog=d.doseLog||{};
-        userProfile=d.userProfile||{}; uid=d.uid||0;
-        if(!userName){ document.getElementById('onboard').style.display='flex'; }
-        else { initApp(); }
-      } else {
-        document.getElementById('onboard').style.display='flex';
-      }
-    })
-    .catch(e=>{ setAuthLoading(false); setAuthErr('خطأ في التحميل'); console.log(e); });
-}
- 
-// Init Firebase on page load
-document.addEventListener('DOMContentLoaded',function(){
-  try{
-    if(!firebase.apps.length){
-      firebase.initializeApp({
-        apiKey:"AIzaSyB6fdavCzp6uXlcDmombfvK-12WOvKPTgs",
-        authDomain:"pregnamate-84ae7.firebaseapp.com",
-        projectId:"pregnamate-84ae7",
-        storageBucket:"pregnamate-84ae7.firebasestorage.app",
-        messagingSenderId:"768070478277",
-        appId:"1:768070478277:web:5d70cd7c722b9ef04503ac"
-      });
+      break;
+
+    // ── Arithmetic operators ──
+    case 'ADD': case 'SUB': case 'MUL': case 'DIV': {
+      applyOp();
+      S.opnd = parseFloat(S.entry);
+      S.op = {ADD:'+',SUB:'-',MUL:'*',DIV:'/'}[key];
+      S.newEntry = true;
+      showDisplay(fmt(S.opnd));
+      break;
     }
-    auth=firebase.auth();
-    db=firebase.firestore();
-    hideApp();
-    auth.onAuthStateChanged(user=>{
-      if(user&&!currentUser){
-        currentUser=user;
-        document.getElementById('auth-screen').style.display='none';
-        loadFromCloud();
-      } else if(!user&&!currentUser){
-        document.getElementById('auth-screen').style.display='flex';
-        hideApp();
+
+    // ── Equals ──
+    case 'EQ': case 'EQ2':
+      if (sec && key === 'EQ2') {
+        // ANS
+        S.entry = fmt(S.lastAns); S.newEntry = true;
+        showDisplay(S.entry, 'ANS ='); break;
       }
-    });
-  }catch(e){
-    console.log('Firebase error:',e);
-    document.getElementById('auth-screen').style.display='flex';
-    hideApp();
+      applyOp();
+      S.reg = '';
+      showDisplay(S.entry.includes('.') ? S.entry : S.entry + '.');
+      S.newEntry = true;
+      break;
+
+    // ── Math functions ──
+    case 'SQRT': {
+      const v = parseFloat(S.entry);
+      if (v < 0) { errFlash(); showDisplay('Error   '); break; }
+      S.entry = fmt(Math.sqrt(v)); S.newEntry = true;
+      showDisplay(S.entry); break;
+    }
+    case 'SQ': {
+      const v = parseFloat(S.entry);
+      S.entry = fmt(v * v); S.newEntry = true;
+      showDisplay(S.entry); break;
+    }
+    case 'RECIP': {
+      const v = parseFloat(S.entry);
+      if (v === 0) { errFlash(); showDisplay('Error   '); break; }
+      S.entry = fmt(1 / v); S.newEntry = true;
+      showDisplay(S.entry); break;
+    }
+    case 'LN': {
+      const v = parseFloat(S.entry);
+      if (sec) {
+        // eˣ
+        S.entry = fmt(Math.exp(v)); S.newEntry = true;
+        showDisplay(S.entry); break;
+      }
+      if (v <= 0) { errFlash(); showDisplay('Error   '); break; }
+      S.entry = fmt(Math.log(v)); S.newEntry = true;
+      showDisplay(S.entry); break;
+    }
+    case 'PCT': {
+      const v = parseFloat(S.entry);
+      if (sec) {
+        // delta percent: (new-old)/old * 100 — use operand as old
+        if (S.opnd !== null) {
+          S.entry = fmt((v - S.opnd) / Math.abs(S.opnd) * 100);
+          S.op = null; S.opnd = null;
+        }
+      } else {
+        S.entry = S.opnd !== null ? fmt(S.opnd * v / 100) : fmt(v / 100);
+      }
+      S.newEntry = true; showDisplay(S.entry); break;
+    }
+    case 'YX':
+      if (sec) {
+        // x!
+        const v = parseFloat(S.entry);
+        S.entry = fmt(factorial(v)); S.newEntry = true;
+        showDisplay(S.entry); break;
+      }
+      applyOp();
+      S.opnd = parseFloat(S.entry);
+      S.op = '^'; S.newEntry = true;
+      showDisplay(S.entry); break;
+
+    // ── Trig ──
+    case 'SIN': case 'COS': case 'TAN': {
+      if (sec && key === 'SIN') { S.hyp = !S.hyp; showDisplay(); break; }
+      if (sec && key === 'COS') { S.inv = !S.inv; showDisplay(); break; }
+      const v = parseFloat(S.entry);
+      const fn = key.toLowerCase();
+      const res = trig(fn, v);
+      S.hyp = false; S.inv = false;
+      if (!isFinite(res)) { errFlash(); showDisplay('Error   '); break; }
+      S.entry = fmt(res); S.newEntry = true;
+      showDisplay(S.entry); break;
+    }
+
+    // ── nPr / nCr ──
+    case 'SUB':
+      if (sec) {
+        // nPr — expects n already set as opnd via yˣ-like pattern
+        applyOp();
+        S.opnd = parseFloat(S.entry);
+        S.op = 'npr'; S.newEntry = true;
+        showDisplay(S.entry); break;
+      }
+      applyOp();
+      S.opnd = parseFloat(S.entry); S.op = '-'; S.newEntry = true;
+      showDisplay(fmt(S.opnd)); break;
+
+    case 'ADD':
+      if (sec) {
+        applyOp();
+        S.opnd = parseFloat(S.entry);
+        S.op = 'ncr'; S.newEntry = true;
+        showDisplay(S.entry); break;
+      }
+      // already handled above — duplicate case guard
+      break;
+
+    // ── STO / RCL ──
+    case 'STO':
+      if (sec) break; // DEPR not impl
+      S.mem = parseFloat(S.entry); S.newEntry = true;
+      showDisplay(S.entry, 'STO →'); break;
+    case 'RCL':
+      if (sec) {
+        // CLR WRK
+        S.tvm = {N:null,IY:null,PV:null,PMT:null,FV:null};
+        S.cf0=0; S.cfC=[]; S.cfF=[];
+        S.entry='0'; S.newEntry=true; S.reg='';
+        showDisplay('0.',''); break;
+      }
+      S.entry = fmt(S.mem); S.newEntry = true;
+      showDisplay(S.entry, '← RCL'); break;
+
+    // ── TVM registers ──
+    case 'N': case 'IY': case 'PV': case 'PMT': case 'FV': {
+      const label = key === 'IY' ? 'I/Y' : key;
+      if (key === 'PMT' && sec) {
+        // BGN toggle
+        S.bgn = !S.bgn;
+        showDisplay(undefined, S.bgn ? 'BGN' : 'END');
+        S.newEntry = true; break;
+      }
+      if (key === 'FV' && sec) {
+        // CLR TVM
+        S.tvm = {N:null,IY:null,PV:null,PMT:null,FV:null};
+        showDisplay('0.', 'CLR TVM'); S.newEntry = true; break;
+      }
+      if (!S.newEntry) {
+        // Store value
+        const val = parseFloat(S.entry);
+        S.tvm[key] = val; S.reg = label + ' =';
+        showDisplay(fmt(val), S.reg);
+        S.newEntry = true;
+      } else {
+        // Recall value
+        const val = S.tvm[key];
+        S.entry = val !== null ? fmt(val) : '0.';
+        S.reg = label + ' =';
+        showDisplay(S.entry, S.reg);
+      }
+      break;
+    }
+
+    // ── CPT ──
+    case 'CPT': {
+      if (sec) break; // QUIT
+      const nulls = Object.keys(S.tvm).filter(k => S.tvm[k] === null);
+      if (nulls.length !== 1) {
+        errFlash();
+        showDisplay('Error   ', nulls.length === 0 ? '5 vars set' : 'Need 4 vars');
+        break;
+      }
+      const solve = nulls[0];
+      const result = solveTVM(solve);
+      const label = solve === 'IY' ? 'I/Y' : solve;
+      if (result === null || !isFinite(result)) {
+        errFlash(); showDisplay('Error   ', label + ' ='); break;
+      }
+      S.tvm[solve] = result;
+      S.entry = fmt(result); S.reg = label + ' =';
+      showDisplay(S.entry, S.reg); S.newEntry = true;
+      break;
+    }
+
+    // ── CF worksheet ──
+    case 'CF': {
+      if (sec) break; // xP/Y
+      if (!S.newEntry) {
+        // Store CF0
+        S.cf0 = parseFloat(S.entry); S.cfStep = 0;
+        showDisplay(fmt(S.cf0), 'CF0 ='); S.newEntry = true;
+      } else {
+        showDisplay(fmt(S.cf0), 'CF0 =');
+      }
+      break;
+    }
+
+    case 'NPV': {
+      if (sec) {
+        // P/Y
+        if (!S.newEntry) { S.PY = Math.max(1, Math.round(parseFloat(S.entry))); }
+        showDisplay(fmt(S.PY), 'P/Y ='); S.newEntry = true; break;
+      }
+      if (S.tvm.IY === null) {
+        showDisplay('Set I/Y', 'NPV'); break;
+      }
+      const npv = calcNPV(S.tvm.IY);
+      S.entry = fmt(npv); S.reg = 'NPV =';
+      showDisplay(S.entry, S.reg); S.newEntry = true;
+      break;
+    }
+
+    case 'IRR': {
+      if (sec) break; // AMORT
+      const irr = calcIRR();
+      if (!isFinite(irr)) { errFlash(); showDisplay('Error   ','IRR ='); break; }
+      S.entry = fmt(irr); S.reg = 'IRR =';
+      showDisplay(S.entry, S.reg); S.newEntry = true;
+      break;
+    }
+
+    // ── ENTER (worksheet nav) ──
+    case 'ENTER':
+      if (sec) break; // SET
+      // In CF mode: advance through CF0 → C01 → F01 → C02 → F02...
+      if (!S.newEntry) {
+        const val = parseFloat(S.entry);
+        if (S.cfStep === 0) { S.cf0 = val; S.cfStep = 1; showDisplay(fmt(S.cf0),'CF0 ='); }
+        else {
+          const idx = Math.floor((S.cfStep - 1) / 2);
+          if ((S.cfStep - 1) % 2 === 0) {
+            S.cfC[idx] = val;
+            showDisplay(fmt(val), 'C0' + (idx+1) + ' =');
+          } else {
+            S.cfF[idx] = Math.max(1, Math.round(val));
+            showDisplay(fmt(S.cfF[idx]), 'F0' + (idx+1) + ' =');
+          }
+          S.cfStep++;
+        }
+      } else {
+        S.cfStep++;
+        const idx = Math.floor((S.cfStep - 1) / 2);
+        if (S.cfStep === 1) showDisplay(fmt(S.cf0), 'CF0 =');
+        else if ((S.cfStep - 1) % 2 === 0) showDisplay(fmt(S.cfC[idx] || 0), 'C0' + (idx+1) + ' =');
+        else showDisplay(fmt(S.cfF[idx-1] || 1), 'F0' + (idx) + ' =');
+      }
+      S.newEntry = true;
+      break;
+
+    // ── Navigation ──
+    case 'UP':   S.cfStep = Math.max(0, S.cfStep - 1); break;
+    case 'DOWN': S.cfStep++; break;
+    case 'ARROW':
+      if (sec) {
+        // CLR TVM
+        S.tvm = {N:null,IY:null,PV:null,PMT:null,FV:null};
+        showDisplay('0.','CLR TVM'); S.newEntry=true;
+      }
+      break;
+    case 'ONOFF': break; // cosmetic
+
+    default: break;
   }
+}
+
+// ── applyOp extended for nPr/nCr ──
+const _orig = applyOp;
+applyOp = function() {
+  if (S.op === 'npr' || S.op === 'ncr') {
+    const r = parseFloat(S.entry);
+    const n = S.opnd;
+    S.entry = S.op === 'npr' ? fmt(nPr(n,r)) : fmt(nCr(n,r));
+    S.op = null; S.opnd = null; S.newEntry = true;
+    return;
+  }
+  _orig();
+};
+
+// ──────────────────────────────────────────────
+//  EVENTS
+// ──────────────────────────────────────────────
+document.querySelectorAll('.key').forEach(btn => {
+  btn.addEventListener('pointerdown', e => {
+    e.preventDefault();
+    btn.classList.add('p');
+    handle(btn.dataset.k);
+  });
+  btn.addEventListener('pointerup',    () => btn.classList.remove('p'));
+  btn.addEventListener('pointercancel',() => btn.classList.remove('p'));
+  btn.addEventListener('pointerleave', () => btn.classList.remove('p'));
 });
+
+// Keyboard shortcuts
+const KBD = {
+  '0':'0','1':'1','2':'2','3':'3','4':'4',
+  '5':'5','6':'6','7':'7','8':'8','9':'9',
+  '.':'DOT','+':'ADD','-':'SUB','*':'MUL','/':'DIV',
+  '=':'EQ','Enter':'EQ','Backspace':'CEC','Escape':'CEC',
+  'n':'N','i':'IY','p':'PV','m':'PMT','f':'FV',
+  'c':'CPT','s':'SQRT','l':'LN','r':'RCL','t':'STO',
+};
+document.addEventListener('keydown', e => {
+  if (KBD[e.key]) { e.preventDefault(); handle(KBD[e.key]); }
+});
+
+// Init
+showDisplay('0.', '');
 </script>
 </body>
 </html>
